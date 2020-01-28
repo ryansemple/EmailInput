@@ -101,12 +101,8 @@ export default class EmailInput extends React.PureComponent<IEmailInputProps, IE
         const email: string = event.currentTarget.value;
 
         this.setState({ email });
-
         this.handleSuggestions(email);
-
-        setTimeout(() => {
-            this.setState({ showSuggestions: true });
-        }, 300); 
+        this.setState({ showSuggestions: true });
 
         for (let i: number = 0; i < this.rules.length; i++)
         {
@@ -122,33 +118,66 @@ export default class EmailInput extends React.PureComponent<IEmailInputProps, IE
         this.setState({ emailMessage: "" });
     };
 
-    handleSuggestions = (email: string) => {
-
-        // this.setState((previousState: IEmailInputState) => ({
-        //     emailSuggestions: [
-        //         ...previousState.emailSuggestions, 
-        //         "a"
-        //     ]
-        // }));
-
-
+    handleSuggestions = (email: string) => 
+    {
         let newEmailSuggestions: string[] = [];
 
         for(let i = 0; i < this.popularEmailDomains.length; i++) 
         {
             let suggestedEmail: string = "";
+            const popularEmailDomain = this.popularEmailDomains[i];
 
             if(!email.includes(atCharacter))
             {
-                suggestedEmail = `${email}@${this.popularEmailDomains[i]}.com`;
+                suggestedEmail = `${email}@${popularEmailDomain}.com`;
             }
 
             if(email.includes(atCharacter))
             {
-                suggestedEmail = `${email}${this.popularEmailDomains[i]}.com`;
+                const emailSplitByAtCharacter: string[] = email.split(atCharacter);
+                const emailCharactersAfterAtCharacter: string = emailSplitByAtCharacter[1];
+                const emailCharactersBeforeAtCharacter: string = emailSplitByAtCharacter[0];
+                
+                if(emailCharactersAfterAtCharacter.length === 0)
+                {
+                    suggestedEmail = `${email}${popularEmailDomain}.com`;
+                } 
+                else 
+                {
+                    const popularEmailDomainCharacters: string[] = popularEmailDomain.split("");
+                    let popularEmailMatch: boolean = true;
+                    
+                    for (let i2 = 0; i2 < emailCharactersAfterAtCharacter.length; i2++)
+                    {
+                        if 
+                        (
+                            popularEmailDomainCharacters[i2] &&
+                            popularEmailDomainCharacters[i2] !== emailCharactersAfterAtCharacter[i2]
+                        )
+                        {
+                            popularEmailMatch = false;
+                            break;
+                        }
+                    }
+
+                    if(popularEmailMatch)
+                    {
+                        suggestedEmail = `${emailCharactersBeforeAtCharacter}@${popularEmailDomain}.com`;
+                    }
+
+                    // for (let i2 = 0; i2 < this.popularEmailDomains.length; i2++)
+                    // {
+                    //     const popularEmailDomain: string = this.popularEmailDomains[i2];
+                    //     const popularEmailDomainCharacters: string[] = popularEmailDomain.split("");
+                    // }
+                }    
             }
             
-            newEmailSuggestions.push(suggestedEmail);
+            if(suggestedEmail)
+            {
+                newEmailSuggestions.push(suggestedEmail);
+            }
+            
         }
 
         if(email)
@@ -184,6 +213,7 @@ export default class EmailInput extends React.PureComponent<IEmailInputProps, IE
             <div className="container">
                 <div className="text_align_center">
                     <div className="Email clear_children_float margin_top_40 inline_block">
+
                     <p className="margin_top_10 error text_align_center margin_bottom_20">{this.state.emailMessage ? this.state.emailMessage : null}</p>
                         <label className="Email_Label block float_left">Enter Email:</label>
                         <br />
@@ -194,13 +224,10 @@ export default class EmailInput extends React.PureComponent<IEmailInputProps, IE
                         /> 
                         <br />
                         <div
-                            style={{ 
-                                maxHeight: 36 * this.state.emailSuggestions.length,
-                                display: this.state.showSuggestions ? 
-                                "block" : 
-                                "none"
-                            }}
-                            className="Email_Suggestions float_left">
+                            // style={{ 
+                            //     opacity: this.state.showSuggestions ?  "1" : "0"
+                            // }}
+                            className={`${this.state.showSuggestions ? "show" : ""} Email_Suggestions float_left`}>
                             <ul>
                             {this.state.emailSuggestions
                             .map
