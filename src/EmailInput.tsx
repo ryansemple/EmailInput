@@ -7,27 +7,36 @@ interface IEmailInputState {
     email: string
 }
 
-interface IEmailInputProps {
-}
+interface IEmailInputProps {}
 
 interface IValidator {
     validationFunctionToPass: (email: string) => boolean
     errorMessageIfFailed: string;
 }
 
-const allKeyboardKeysRegex : RegExp = new RegExp(/^[a-zA-Z0-9~`!@#\$%\^&\*\(\)_\-\+={\[\}\]\|\\:;"'<,>\.\?\/  ]*$/);
+interface IEmailSuggestion {
+    emailDomain: string,
+    selected: boolean,
+    visible: boolean
+}
+
+const allKeyboardKeysRegex: RegExp = new RegExp(/^[a-zA-Z0-9~`!@#\$%\^&\*\(\)_\-\+={\[\}\]\|\\:;"'<,>\.\?\/  ]*$/);
+
+const isAlphaNumericRegex: RegExp = new RegExp(/^[a-z0-9]+$/i);
 
 const atCharacter : string = "@";
 
-export default class EmailInput extends React.PureComponent<IEmailInputProps, IEmailInputState> {
-
+export default class EmailInput extends 
+React.PureComponent<IEmailInputProps, IEmailInputState> 
+{
     popularEmailDomains : string[] =
     [
         "yahoo",
         "gmail",
         "hotmail",
         "live",
-        "outlook"
+        "outlook",
+        "aol"
     ];
 
     constructor(props: IEmailInputProps){
@@ -118,14 +127,47 @@ export default class EmailInput extends React.PureComponent<IEmailInputProps, IE
         this.setState({ emailMessage: "" });
     };
 
-    handleSuggestions = (email: string) => 
+    checkForDomainToMatchEmail = (
+        emailCharactersAfterAtCharacter: string, 
+        popularEmailDomain: string,
+        emailCharactersBeforeAtCharacter: string
+    ): string => 
+    {
+        let suggestedEmail: string = "";
+        const popularEmailDomainCharacters: string[] = popularEmailDomain.split("");
+        let popularEmailMatch: boolean = true;
+        
+        for (let i2 = 0; i2 < emailCharactersAfterAtCharacter.length; i2++)
+        {
+            if 
+            (
+                popularEmailDomainCharacters[i2] &&
+                popularEmailDomainCharacters[i2] !== emailCharactersAfterAtCharacter[i2]
+            )
+            {
+                popularEmailMatch = false;
+                break;
+            }
+        }
+
+        if(popularEmailMatch)
+        {
+            suggestedEmail = `${emailCharactersBeforeAtCharacter}@${popularEmailDomain}.com`;
+        }
+
+        return suggestedEmail;
+    }
+
+    isAlphaNumeric = (input: string): boolean => isAlphaNumericRegex.test(input);
+
+    handleSuggestions = (email: string): void => 
     {
         let newEmailSuggestions: string[] = [];
 
         for(let i = 0; i < this.popularEmailDomains.length; i++) 
         {
             let suggestedEmail: string = "";
-            const popularEmailDomain = this.popularEmailDomains[i];
+            const popularEmailDomain: string = this.popularEmailDomains[i];
 
             if(!email.includes(atCharacter))
             {
@@ -137,6 +179,16 @@ export default class EmailInput extends React.PureComponent<IEmailInputProps, IE
                 const emailSplitByAtCharacter: string[] = email.split(atCharacter);
                 const emailCharactersAfterAtCharacter: string = emailSplitByAtCharacter[1];
                 const emailCharactersBeforeAtCharacter: string = emailSplitByAtCharacter[0];
+
+
+                if
+                (
+                    emailCharactersAfterAtCharacter && 
+                    !this.isAlphaNumeric(emailCharactersAfterAtCharacter)
+                )
+                {
+                    continue;
+                }
                 
                 if(emailCharactersAfterAtCharacter.length === 0)
                 {
@@ -144,36 +196,21 @@ export default class EmailInput extends React.PureComponent<IEmailInputProps, IE
                 } 
                 else 
                 {
-                    const popularEmailDomainCharacters: string[] = popularEmailDomain.split("");
-                    let popularEmailMatch: boolean = true;
-                    
-                    for (let i2 = 0; i2 < emailCharactersAfterAtCharacter.length; i2++)
-                    {
-                        if 
-                        (
-                            popularEmailDomainCharacters[i2] &&
-                            popularEmailDomainCharacters[i2] !== emailCharactersAfterAtCharacter[i2]
-                        )
-                        {
-                            popularEmailMatch = false;
-                            break;
-                        }
-                    }
+                    suggestedEmail = this.checkForDomainToMatchEmail
+                    (
+                        emailCharactersAfterAtCharacter,
+                        popularEmailDomain,
+                        emailCharactersBeforeAtCharacter
+                    );
 
-                    if(popularEmailMatch)
+                    if(suggestedEmail == "")
                     {
-                        suggestedEmail = `${emailCharactersBeforeAtCharacter}@${popularEmailDomain}.com`;
+                        continue;
                     }
-
-                    // for (let i2 = 0; i2 < this.popularEmailDomains.length; i2++)
-                    // {
-                    //     const popularEmailDomain: string = this.popularEmailDomains[i2];
-                    //     const popularEmailDomainCharacters: string[] = popularEmailDomain.split("");
-                    // }
                 }    
             }
             
-            if(suggestedEmail)
+            if(suggestedEmail && suggestedEmail !== "")
             {
                 newEmailSuggestions.push(suggestedEmail);
             }
