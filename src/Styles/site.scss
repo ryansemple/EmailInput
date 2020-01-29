@@ -1,5 +1,134 @@
-$pink: pink;
+@import "reset";
+@import "sass";
 
 body {
-    background: $pink;
+  font-family: 'Open Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+label {
+	font-size: 20px;
+	font-weight: 400;
+	margin-bottom: 8px;
+}
+
+*, *:before, *:after {
+	box-sizing: border-box;
+}
+
+.margin_top_10 {
+	margin-top: 10px;
+}
+
+.App-header {
+	height: $header-height;
+	color: white;
+	text-align: center;
+    background-color: $brand-off-black;
+  }
+  
+  .App-header h1 {
+	line-height: $header-height;
+	font-size: 30px;
+  }
+  
+  .Email {
+	text-align: center;
+	margin-top: 20px;
+	display: block;
+	margin: 0 auto;
+  }
+  
+  .Email_Input {
+	height: 36px;
+	line-height: 36px;
+	border-radius: 3px;
+	border: 1px solid $border-grey;
+	padding: 0px 7px;
+	font-size: 16px;
+  }
+
+  .Email_Input,
+  .Email_Suggestions
+   {
+	width: 300px;
+  }
+  
+  .error {
+	color: $danger-red;
+    border: 1px solid $danger-red;
+    padding: 20px;
+  }
+
+  .block {
+	  display: block;
+  }
+
+  .float_left {
+	  float: left;
+  }
+
+  .container {
+	width: 1200px;
+    display: block;
+    margin: 0 auto;
+  }
+
+  .clear_children_float:after {
+	content: "";
+    display: table;
+    clear: both;
+  }
+
+  .margin_top_20 {
+	  margin-top: 20px;
+  }
+
+  .margin_top_40 {
+	  margin-top: 40px;
+  }
+
+  .margin_bottom_20 {
+	  margin-bottom: 20px;
+  }
+
+  .clear_left {
+	  clear: left;
+  }
+
+  .inline_block {
+	  display: inline-block;
+  }
+
+  .center { 
+	  margin: 0 auto;
+  }
+
+  .text_align_center {
+	  text-align: center;
+  }
+
+  .App-header {
+	border-bottom: 5px solid $brand-orange;
+  }
+
+/* Suggestions --------------------------------*/
+
+.Email_Suggestions {
+	background-color: $off-white;
+	opacity: 0;
+}
+
+.Email_Suggestions_Suggestion {
+	cursor: pointer;
+	padding: 10px 5px;
+	text-decoration: underline;
+	color: blue;
+}
+
+/* Suggestions --------------------------------*/
+
+.show {
+	opacity: 1;
 }
