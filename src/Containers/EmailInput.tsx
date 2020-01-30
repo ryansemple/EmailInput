@@ -233,17 +233,7 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
 
     delay = (ms: number): any => new Promise(res => setTimeout(res, ms));
 
-    // emailSuggestionClickEvent = (event: React.MouseEvent<HTMLLIElement, MouseEvent>): void => 
-    // {
-    //     this.setState((previousState: IEmailInputState) => ({
-    //         email: ""
-    //     }));
-    // }
-
-    emailSuggestionClickEvent = (email: string): void => 
-    {
-        this.setState(({ email }));
-    }
+    emailSuggestionClickEvent = (email: string): void => this.setState(({ email }));
 
     render(){
         return(
