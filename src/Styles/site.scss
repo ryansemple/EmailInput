@@ -1,123 +1,150 @@
 @import "reset";
 @import "sass";
+@import "skeleton";
 
-body {
-  font-family: 'Open Sans', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-label {
-	font-size: 20px;
-	font-weight: 400;
-	margin-bottom: 8px;
-}
+/* General ------------------------------------*/
 
 *, *:before, *:after {
 	box-sizing: border-box;
 }
 
+.error {
+    color: $danger-red;
+    border: 1px solid $danger-red;
+    padding: 20px;
+    border-radius: $box-border-radius;
+}
+
+.block {
+    display: block;
+}
+
+.float_left {
+    float: left;
+}
+
+.container {
+    width: 1200px;
+    display: block;
+    margin: 0 auto;
+}
+
+.clear_children_float:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.clear_left {
+    clear: left;
+}
+
+.inline_block {
+    display: inline-block;
+}
+
+.center { 
+    margin: 0 auto;
+}
+
+.text_align_center {
+    text-align: center;
+}
+
+/* General ------------------------------------*/
+
+/* Spacing ------------------------------------*/
+
 .margin_top_10 {
 	margin-top: 10px;
 }
 
-.App-header {
-	height: $header-height;
-	color: white;
-	text-align: center;
-    background-color: $brand-off-black;
-  }
-  
-  .App-header h1 {
-	line-height: $header-height;
-	font-size: 30px;
-  }
-  
-  .Email {
-	text-align: center;
-	margin-top: 20px;
-	display: block;
-	margin: 0 auto;
-  }
-  
-  .Email_Input {
-	height: 36px;
-	line-height: 36px;
-	border-radius: 3px;
-	border: 1px solid $border-grey;
-	padding: 0px 7px;
-	font-size: 16px;
-  }
+.margin_top_20 {
+    margin-top: 20px;
+}
 
-  .Email_Input,
-  .Email_Suggestions
-   {
-	width: 300px;
-  }
-  
-  .error {
-	color: $danger-red;
-    border: 1px solid $danger-red;
-    padding: 20px;
-  }
+.margin_top_40 {
+    margin-top: 40px;
+}
 
-  .block {
-	  display: block;
-  }
+.margin_bottom_20 {
+    margin-bottom: 20px;
+}
 
-  .float_left {
-	  float: left;
-  }
+.margin_bottom_40 {
+    margin-bottom: 40px;
+}
 
-  .container {
-	width: 1200px;
+.full_width {
+    width: 100%;
+}
+
+/* Spacing ------------------------------------*/
+
+/* Font ---------------------------------------*/
+
+body {
+    font: $body-font;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Font ---------------------------------------*/
+
+/* Form ---------------------------------------*/
+
+label {
+	font-size: 20px;
+	font-weight: 400;
+    margin-bottom: 8px;
+    text-align: left;
+}
+
+.Email {
+    text-align: center;
+    margin-top: 20px;
     display: block;
     margin: 0 auto;
-  }
+}
 
-  .clear_children_float:after {
-	content: "";
-    display: table;
-    clear: both;
-  }
+.form_input {
+    height: $input-height;
+    line-height: $input-height;
+    border-radius: $box-border-radius;
+    border: 1px solid $border-grey;
+    padding: 0px 7px;
+    font: $body-font;
+}
 
-  .margin_top_20 {
-	  margin-top: 20px;
-  }
+.Email_Suggestions
+{
+    width: 300px;
+}
 
-  .margin_top_40 {
-	  margin-top: 40px;
-  }
+/* Form ---------------------------------------*/
 
-  .margin_bottom_20 {
-	  margin-bottom: 20px;
-  }
+/* Header -------------------------------------*/
 
-  .clear_left {
-	  clear: left;
-  }
+.Header {
+    border-bottom: 5px solid $brand-orange;
+    height: $header-height;
+    color: white;
+    text-align: center;
+    background-color: $brand-off-black;
+}
+  
+.Header h1 {
+    line-height: $header-height;
+    font-size: 30px;
+}
 
-  .inline_block {
-	  display: inline-block;
-  }
-
-  .center { 
-	  margin: 0 auto;
-  }
-
-  .text_align_center {
-	  text-align: center;
-  }
-
-  .App-header {
-	border-bottom: 5px solid $brand-orange;
-  }
+/* Header -------------------------------------*/
 
 /* Suggestions --------------------------------*/
 
 .Email_Suggestions {
 	background-color: $off-white;
-	opacity: 0;
+    opacity: 0;
 }
 
 .Email_Suggestions_Suggestion {

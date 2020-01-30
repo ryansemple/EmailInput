@@ -7,7 +7,7 @@ interface IHeaderProps {
 export default class Header extends PureComponent<IHeaderProps> 
 {
     render = () => 
-    <header className="App-header">
+    <header className="Header margin_bottom_40">
         <h1>{this.props.title}</h1>
     </header>
 }

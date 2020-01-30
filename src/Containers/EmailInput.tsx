@@ -239,21 +239,16 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
         return(
             <div className="container">
                 <div className="text_align_center">
-                    <div className="Email clear_children_float margin_top_40 inline_block">
-
-                    <p className="margin_top_10 error text_align_center margin_bottom_20">{this.state.emailMessage ? this.state.emailMessage : null}</p>
+                    <div className="Email clear_children_float margin_top_40 col-sm-12 float_left">
                         <label className="Email_Label block float_left">Enter Email:</label>
                         <br />
                         <input 
-                            className="Email_Input block float_left clear_left" 
+                            className="form_input block float_left clear_left full_width"
                             onChange={this.handleEmailInputChanged}
                             value={this.state.email}
                         /> 
                         <br />
                         <div
-                            // style={{ 
-                            //     opacity: this.state.showSuggestions ?  "1" : "0"
-                            // }}
                             className={`${this.state.showSuggestions ? "show" : ""} Email_Suggestions float_left`}>
                             <ul>
                             {this.state.emailSuggestions
@@ -269,6 +264,21 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
                             )}
                             </ul>
                         </div>
+                    </div>
+                    <div className="col-sm-12 float_left">
+
+                        <label className="block float_left">
+                            Enter Email:
+                        </label>
+                        <p 
+                            className="error margin_bottom_20 block float_left full_width">
+                            {
+                            this.state.emailMessage ? 
+                            this.state.emailMessage : 
+                            null
+                            }
+                        </p>
+
                     </div>
                 </div>
             </div>
