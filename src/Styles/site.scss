@@ -98,6 +98,7 @@ label {
 	font-weight: 400;
     margin-bottom: 8px;
     text-align: left;
+    font-weight: 600;
 }
 
 .Email {
@@ -114,14 +115,27 @@ label {
     border: 1px solid $border-grey;
     padding: 0px 7px;
     font: $body-font;
-}
-
-.Email_Suggestions
-{
-    width: 300px;
+    //width: calc(100% - 138.5px);
+    //border-right: none;
+    //border-top-right-radius: 0;
+    //border-bottom-right-radius: 0;
 }
 
 /* Form ---------------------------------------*/
+
+/* Button -------------------------------------*/
+
+.Button {
+    background-color: $brand-orange;
+    font: $body-font;
+    border: none;
+    color: white;
+    height: $input-height;
+    padding: 0 14px;
+    //margin-top: 10.5px;
+}
+
+/* Button -------------------------------------*/
 
 /* Header -------------------------------------*/
 
@@ -145,6 +159,7 @@ label {
 .Email_Suggestions {
 	background-color: $off-white;
     opacity: 0;
+    width: 80%;
 }
 
 .Email_Suggestions_Suggestion {

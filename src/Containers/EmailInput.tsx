@@ -1,4 +1,5 @@
-import React from 'react';
+import React from "react";
+import Suggestions from "../Components/Suggestions";
 
 interface IEmailInputState {
     emailMessage?: string;
@@ -231,44 +232,42 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
         }
     }
 
-    delay = (ms: number): any => new Promise(res => setTimeout(res, ms));
-
-    emailSuggestionClickEvent = (email: string): void => this.setState(({ email }));
+    emailSuggestionClickEvent = (email: string): void => 
+        this.setState(({ email }));
 
     render(){
         return(
             <div className="container">
                 <div className="text_align_center">
                     <div className="Email clear_children_float margin_top_40 col-sm-12 float_left">
-                        <label className="Email_Label block float_left">Enter Email:</label>
-                        <br />
-                        <input 
-                            className="form_input block float_left clear_left full_width"
-                            onChange={this.handleEmailInputChanged}
-                            value={this.state.email}
-                        /> 
-                        <br />
-                        <div
-                            className={`${this.state.showSuggestions ? "show" : ""} Email_Suggestions float_left`}>
-                            <ul>
-                            {this.state.emailSuggestions
-                            .map
-                            (
-                                (emailSuggestion: string, i: number) => 
-                                <li 
-                                    onClick={() => this.emailSuggestionClickEvent(emailSuggestion)}
-                                    key={emailSuggestion}
-                                    className="Email_Suggestions_Suggestion">
-                                    {emailSuggestion}
-                                </li>
-                            )}
-                            </ul>
+                        <div className="col-sm-18">
+                            <label className="Email_Label block float_left">Enter Email:</label>
+                            <br />
+                            <input 
+                                className="form_input block float_left clear_left full_width"
+                                onChange={this.handleEmailInputChanged}
+                                value={this.state.email}
+                            />
+                            <br />
+                            <Suggestions 
+                                showSuggestions={this.state.showSuggestions}
+                                emailSuggestions={this.state.emailSuggestions}
+                                emailSuggestionClickEvent={this.emailSuggestionClickEvent}
+                            />
+                        </div>
+                        <div className="col-sm-6">
+                            <label className="block">
+                                &nbsp;
+                            </label>
+                            <button className="Button">
+                                Submit
+                            </button>
                         </div>
                     </div>
                     <div className="col-sm-12 float_left">
 
                         <label className="block float_left">
-                            Enter Email:
+                            Information:
                         </label>
                         <p 
                             className="error margin_bottom_20 block float_left full_width">
@@ -285,3 +284,5 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
         );
     };
 };
+
+//delay = (ms: number): any => new Promise(res => setTimeout(res, ms));
