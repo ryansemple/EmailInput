@@ -239,29 +239,31 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
         return(
             <div className="container">
                 <div className="text_align_center">
-                    <div className="Email clear_children_float margin_top_40 col-sm-12 float_left">
-                        <div className="col-sm-18">
-                            <label className="Email_Label block float_left">Enter Email:</label>
-                            <br />
-                            <input 
-                                className="form_input block float_left clear_left full_width"
-                                onChange={this.handleEmailInputChanged}
-                                value={this.state.email}
-                            />
-                            <br />
-                            <Suggestions 
-                                showSuggestions={this.state.showSuggestions}
-                                emailSuggestions={this.state.emailSuggestions}
-                                emailSuggestionClickEvent={this.emailSuggestionClickEvent}
-                            />
-                        </div>
-                        <div className="col-sm-6">
-                            <label className="block">
-                                &nbsp;
-                            </label>
-                            <button className="Button">
-                                Submit
-                            </button>
+                    <div className="col-sm-12 float_left">
+                        <div className="row">
+                            <div className="col-sm-18">
+                                <label className="Email_Label block float_left">Enter Email:</label>
+                                <br />
+                                <input 
+                                    className="form_input block float_left clear_left full_width"
+                                    onChange={this.handleEmailInputChanged}
+                                    value={this.state.email}
+                                />
+                                <br />
+                                <Suggestions 
+                                    showSuggestions={this.state.showSuggestions}
+                                    emailSuggestions={this.state.emailSuggestions}
+                                    emailSuggestionClickEvent={this.emailSuggestionClickEvent}
+                                />
+                            </div>
+                            <div className="col-sm-6">
+                                <label className="block">
+                                    &nbsp;
+                                </label>
+                                <button className="Button">
+                                    Submit
+                                </button>
+                            </div>
                         </div>
                     </div>
                     <div className="col-sm-12 float_left">

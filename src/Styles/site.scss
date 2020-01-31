@@ -30,9 +30,7 @@
 }
 
 .clear_children_float:after {
-    content: "";
-    display: table;
-    clear: both;
+    @include clear-children-float();
 }
 
 .clear_left {
@@ -101,24 +99,13 @@ label {
     font-weight: 600;
 }
 
-.Email {
-    text-align: center;
-    margin-top: 20px;
-    display: block;
-    margin: 0 auto;
-}
-
 .form_input {
     height: $input-height;
     line-height: $input-height;
     border-radius: $box-border-radius;
     border: 1px solid $border-grey;
-    padding: 0px 7px;
+    padding: 0px 10px;
     font: $body-font;
-    //width: calc(100% - 138.5px);
-    //border-right: none;
-    //border-top-right-radius: 0;
-    //border-bottom-right-radius: 0;
 }
 
 /* Form ---------------------------------------*/
@@ -171,6 +158,10 @@ label {
 
 /* Suggestions --------------------------------*/
 
+/* Keep Last ----------------------------------*/
+
 .show {
 	opacity: 1;
 }
+
+/* Keep Last ----------------------------------*/

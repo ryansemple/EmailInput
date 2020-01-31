@@ -1,7 +1,9 @@
+$gutter-padding: 15px;
+
 .col-sm-12,
 .col-sm-6,
 .col-sm-18 {
-    padding: 0 15px;
+    padding: 0 $gutter-padding;
     float: left;
 }
 
@@ -15,4 +17,9 @@
 
 .col-sm-18 {
     width: 75%;   
+}
+
+.row {
+    margin-left: -#{$gutter-padding};
+    margin-right: -#{$gutter-padding};
 }

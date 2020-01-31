@@ -1,3 +1,13 @@
+/* General ------------------------------------*/
+
+@mixin clear-children-float() {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* General ------------------------------------*/
+
 /* Color --------------------------------------*/
 
 $danger-red: #d01919;
