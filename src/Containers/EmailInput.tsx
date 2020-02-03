@@ -1,5 +1,10 @@
 import React from "react";
 import Suggestions from "../Components/Suggestions";
+import {
+    allKeyboardKeysRegex,
+    isAlphaNumericRegex,
+    isValidEmailRegex
+} from "../Repository/Regex"
 
 interface IEmailInputState {
     emailMessage?: string;
@@ -21,10 +26,6 @@ interface IEmailSuggestion {
     visible: boolean
 }
 
-const allKeyboardKeysRegex: RegExp = new RegExp(/^[a-zA-Z0-9~`!@#\$%\^&\*\(\)_\-\+={\[\}\]\|\\:;"'<,>\.\?\/  ]*$/);
-
-const isAlphaNumericRegex: RegExp = new RegExp(/^[a-z0-9]+$/i);
-
 const atCharacter : string = "@";
 
 export default class EmailInput extends 
@@ -40,7 +41,8 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
         "aol"
     ];
 
-    constructor(props: IEmailInputProps){
+    constructor(props: IEmailInputProps)
+    {
         super(props);
         this.state = { 
             emailMessage: "",
@@ -48,7 +50,6 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
             showSuggestions: false,
             email: ""
         };
-        this.handleEmailInputChanged = this.handleEmailInputChanged.bind(this);
     }
 
     rules: IValidator[] = 
@@ -80,7 +81,8 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
         // }
     ];
 
-    isDomainInEmail = (email : string) : boolean => {
+    isDomainInEmail = (email : string) : boolean => 
+    {
         let emailSplitOnAtCharacter : string[] = email.split(atCharacter);
 
         if(emailSplitOnAtCharacter.length < 2)
@@ -91,10 +93,9 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
         return true;
     }
 
-    IsEmailValid = (email : string) : boolean => {
-        let regexPattern : RegExp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
-
-        return regexPattern.test(email.toLowerCase());
+    IsEmailValid = (email : string) : boolean => 
+    {
+        return isValidEmailRegex.test(email.toLowerCase());
     };
 
     // isBeginningPartOfEmailValid = (email : string) : boolean => {
@@ -103,7 +104,8 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
     //     return regexPattern.test(email.toLowerCase());
     // }
 
-    doesEmailHaveDomain = (email : string): boolean => {
+    doesEmailHaveDomain = (email : string): boolean => 
+    {
         return email.split(atCharacter)[1].includes(".");
     }
 
