@@ -5,6 +5,7 @@ import {
     isAlphaNumericRegex,
     isValidEmailRegex
 } from "../Repository/Regex"
+import axios, { AxiosError} from 'axios';
 
 interface IEmailInputState {
     emailMessage?: string;
@@ -112,9 +113,9 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
     handleEmailInputChanged = (event: React.FormEvent<HTMLInputElement>) : void => {       
         const email: string = event.currentTarget.value;
 
-        this.setState({ email });
+        //this.setState({ email });
         this.handleSuggestions(email);
-        this.setState({ showSuggestions: true });
+        this.setState({ showSuggestions: true, email });
 
         for (let i: number = 0; i < this.rules.length; i++)
         {
@@ -234,6 +235,23 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
         }
     }
 
+    checkEmail = () => 
+    { 
+        debugger
+        const url: string = `https://api.kickbox.com/v2/verify?email=${this.state.email}&apikey={{test_a0a295517414130d5d1a624ceecc76bedcd17468e8d08d8ae4e13924020c613e}}`;
+        
+        axios.get
+        (
+            //url
+            `http://localhost:3001/VerifyEmail?email=${this.state.email}`
+        )
+        .then((response: any) =>
+        {
+            debugger
+            console.log(response);
+        });
+    }
+
     emailSuggestionClickEvent = (email: string): void => 
         this.setState(({ email }));
 
@@ -262,7 +280,16 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
                                 <label className="block">
                                     &nbsp;
                                 </label>
-                                <button className="Button">
+                                <button 
+                                    onClick={this.checkEmail}
+                                    disabled={(
+                                        this.state.emailMessage !== null && 
+                                        this.state.emailMessage !== undefined && 
+                                        this.state.emailMessage !== "" && 
+                                        this.state.emailMessage.length > 0
+                                    )}
+                                    className="Button">
+                                        
                                     Submit
                                 </button>
                             </div>

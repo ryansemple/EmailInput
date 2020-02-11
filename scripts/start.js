@@ -15,6 +15,7 @@ process.on('unhandledRejection', err => {
 require('../config/env');
 
 
+const cors = require('cors');
 const fs = require('fs');
 const chalk = require('react-dev-utils/chalk');
 const webpack = require('webpack');
@@ -31,6 +32,7 @@ const openBrowser = require('react-dev-utils/openBrowser');
 const paths = require('../config/paths');
 const configFactory = require('../config/webpack.config');
 const createDevServerConfig = require('../config/webpackDevServer.config');
+const express = require('express');
 
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;
@@ -61,6 +63,22 @@ if (process.env.HOST) {
   console.log();
 }
 
+const setupAPIServer = () => {
+  const app = express();
+
+  app.listen(3001, () => {
+    console.log('listening on port 3001');
+  });
+
+  app.use(cors());
+
+  app.get('/VerifyEmail', (req, res) => {
+    console.log(req);
+    console.table(req);
+    res.send("aaaaaaa");
+  });
+}
+
 // We require that you explicitly set browsers and do not fall back to
 // browserslist defaults.
 const { checkBrowsers } = require('react-dev-utils/browsersHelper');
@@ -75,6 +93,9 @@ checkBrowsers(paths.appPath, isInteractive)
       // We have not found a port.
       return;
     }
+
+    setupAPIServer();
+
     const config = configFactory('development');
     const protocol = process.env.HTTPS === 'true' ? 'https' : 'http';
     const appName = require(paths.appPackageJson).name;
