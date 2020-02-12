@@ -33,9 +33,12 @@ const paths = require('../config/paths');
 const configFactory = require('../config/webpack.config');
 const createDevServerConfig = require('../config/webpackDevServer.config');
 const express = require('express');
+const axios = require('axios');
 
 const useYarn = fs.existsSync(paths.yarnLockFile);
 const isInteractive = process.stdout.isTTY;
+const KickboxAPIKey = "test_a0a295517414130d5d1a624ceecc76bedcd17468e8d08d8ae4e13924020c613e";
+const kickbox = require('kickbox').client(KickboxAPIKey).kickbox(); 
 
 // Warn and crash if required files are missing
 if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
@@ -72,10 +75,12 @@ const setupAPIServer = () => {
 
   app.use(cors());
 
-  app.get('/VerifyEmail', (req, res) => {
-    console.log(req);
-    console.table(req);
-    res.send("aaaaaaa");
+  app.get('/VerifyEmail', (req, res) => 
+  {
+    kickbox.verify(req.query.email, (err, response) => 
+    {
+      res.send(response.body);
+    });
   });
 }
 

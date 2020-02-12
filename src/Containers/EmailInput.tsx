@@ -11,7 +11,8 @@ interface IEmailInputState {
     emailMessage?: string;
     emailSuggestions: string[],
     showSuggestions: boolean,
-    email: string
+    email: string,
+    isEmailVerified: boolean
 }
 
 interface IEmailInputProps {}
@@ -49,7 +50,8 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
             emailMessage: "",
             emailSuggestions: [],
             showSuggestions: false,
-            email: ""
+            email: "",
+            isEmailVerified: false
         };
     }
 
@@ -236,19 +238,16 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
     }
 
     checkEmail = () => 
-    { 
-        debugger
-        const url: string = `https://api.kickbox.com/v2/verify?email=${this.state.email}&apikey={{test_a0a295517414130d5d1a624ceecc76bedcd17468e8d08d8ae4e13924020c613e}}`;
-        
+    {       
         axios.get
         (
-            //url
             `http://localhost:3001/VerifyEmail?email=${this.state.email}`
         )
         .then((response: any) =>
         {
-            debugger
-            console.log(response);
+            this.setState({
+                isEmailVerified: response.data && response.data.success
+            })
         });
     }
 
@@ -288,9 +287,11 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
                                         this.state.emailMessage !== "" && 
                                         this.state.emailMessage.length > 0
                                     )}
-                                    className="Button">
-                                        
-                                    Submit
+                                    style={{
+                                        background: this.state.isEmailVerified ? "green" : "#FF6600"
+                                    }}
+                                    className="Button">    
+                                    {this.state.isEmailVerified ? "Verified!" : "Verify"}
                                 </button>
                             </div>
                         </div>
@@ -315,5 +316,3 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
         );
     };
 };
-
-//delay = (ms: number): any => new Promise(res => setTimeout(res, ms));
