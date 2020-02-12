@@ -5,7 +5,12 @@ import {
     isAlphaNumericRegex,
     isValidEmailRegex
 } from "../Repository/Regex"
-import axios, { AxiosError} from 'axios';
+import axios, { AxiosError } from "axios";
+import { 
+    KickBoxResponse, 
+    KickBoxData, 
+    EmailReasonType 
+} from "../Repository/Kickbox"
 
 interface IEmailInputState {
     emailMessage?: string;
@@ -239,14 +244,33 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
 
     checkEmail = () => 
     {       
+        // axios.request<KickBoxData>
+        // ({
+        //     url: `http://localhost:3001/VerifyEmail?email=${this.state.email}`,
+        //     transformResponse: (response: KickBoxResponse) => response.data
+        // })
+        // .then((response) =>
+        // {
+        //     debugger
+        //     //const successfullySent: boolean = response.data.success;
+        //     this.setState({
+        //         isEmailVerified: true,
+        //         emailMessage: response.data.reason
+        //     })
+        // });
+        
         axios.get
         (
             `http://localhost:3001/VerifyEmail?email=${this.state.email}`
         )
-        .then((response: any) =>
+        .then((response: KickBoxResponse) =>
         {
+            const successfullySent: boolean = response.data.success;
+            console.log(successfullySent);
+            
             this.setState({
-                isEmailVerified: response.data && response.data.success
+                isEmailVerified: successfullySent,
+                emailMessage: successfullySent ? "" : response.data.reason
             })
         });
     }
