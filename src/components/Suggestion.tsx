@@ -5,16 +5,13 @@ interface ISuggestionProps {
     emailSuggestionClickEvent: any
 }
 
-const Suggestions = (props: ISuggestionProps) => 
-{
-	return (
-		<li
-			onClick={() => props.emailSuggestionClickEvent(props.emailSuggestion)}
-			key={props.emailSuggestion}
-			className="Email_Suggestions_Suggestion">
-			{props.emailSuggestion}
-		</li>
-	)
-}
+const Suggestions = (props: ISuggestionProps) => (
+	<li
+		onClick={() => props.emailSuggestionClickEvent(props.emailSuggestion)}
+		key={props.emailSuggestion}
+		className="Email_Suggestions_Suggestion">
+		{props.emailSuggestion}
+	</li>
+)
 
 export default Suggestions;
