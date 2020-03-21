@@ -4,9 +4,9 @@ import {
 	allKeyboardKeysRegex,
 	isAlphaNumericRegex,
 	isValidEmailRegex
-} from "../repository/Regex"
+} from "../repository/Regex";
 import axios, { AxiosError } from "axios";
-import { KickBoxResponse } from "../repository/Kickbox"
+import { KickBoxResponse } from "../repository/Kickbox";
 import InformationDisplay from "../components/InformationDisplay";
 
 interface IEmailInputState {
@@ -139,7 +139,7 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
 			emailCharactersAfterAtCharacter: string, 
 			popularEmailDomain: string,
 			emailCharactersBeforeAtCharacter: string
-    ): string => 
+    ): string =>
     {
 			let suggestedEmail: string = "";
 			const popularEmailDomainCharacters: string[] = popularEmailDomain.split("");

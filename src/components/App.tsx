@@ -1,4 +1,4 @@
-import EmailInput from "./EmailInput";
+import MainContent from "./MainContent";
 import Header from "./Header";
 import React from "react";
 
@@ -6,7 +6,7 @@ const App = () => (
   <div>
     <Header title={"📧 Email input challenge"} />
     <main>
-      <EmailInput />
+      <MainContent />
     </main>   
   </div>
 )
