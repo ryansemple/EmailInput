@@ -6,7 +6,8 @@ import {
 	isValidEmailRegex
 } from "../repository/Regex"
 import axios, { AxiosError } from "axios";
-import {  KickBoxResponse } from "../repository/Kickbox"
+import { KickBoxResponse } from "../repository/Kickbox"
+import InformationDisplay from "../components/InformationDisplay";
 
 interface IEmailInputState {
 	emailMessage?: string;
@@ -237,22 +238,7 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
     }
 
     checkEmail = () => 
-    {       
-        // axios.request<KickBoxData>
-        // ({
-        //     url: `http://localhost:3001/VerifyEmail?email=${this.state.email}`,
-        //     transformResponse: (response: KickBoxResponse) => response.data
-        // })
-        // .then((response) =>
-        // {
-        //     debugger
-        //     //const successfullySent: boolean = response.data.success;
-        //     this.setState({
-        //         isEmailVerified: true,
-        //         emailMessage: response.data.reason
-        //     })
-        // });
-        
+    {
 			axios.get
 			(
 				`http://localhost:3001/VerifyEmail?email=${this.state.email}`
@@ -280,7 +266,7 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
 						<div className="col-sm-12 float_left">
 							<div className="row">
 								<div className="col-sm-18">
-									<label className="Email_Label block float_left">Enter Email:</label>
+									<label className="block float_left">Enter Email:</label>
 									<br />
 									<input 
 										className="form_input block float_left clear_left full_width"
@@ -316,17 +302,9 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
 							</div>
 						</div>
 						<div className="col-sm-12 float_left">
-							<label className="block float_left">
-									Information:
-							</label>
-							<p 
-								className="error margin_bottom_20 block float_left full_width">
-								{
-								this.state.emailMessage ? 
-								this.state.emailMessage : 
-								null
-								}
-							</p>
+							<InformationDisplay 
+								emailMessage={this.state.emailMessage} 
+							/>
 						</div>
 					</div>
 				</div>
