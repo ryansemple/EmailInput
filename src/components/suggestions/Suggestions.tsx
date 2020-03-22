@@ -1,24 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Suggestion from "./Suggestion";
-import { isAlphaNumericRegex } from "../repository/Regex";
+import { isAlphaNumericRegex } from "../../utility/Regex";
 import clsx from "clsx";
+import { atCharacter } from "../../utility/String";
+import { popularEmailDomains } from "../../utility/Email";
 
 interface ISuggestionsProps {
 	setEmail: (email: string) => void,
 	email: string
 }
-
-const popularEmailDomains : string[] =
-[
-	"yahoo",
-	"gmail",
-	"hotmail",
-	"live",
-	"outlook",
-	"aol"
-];
-
-const atCharacter : string = "@";
 
 const EmailSuggestions = (props: ISuggestionsProps) => 
 {
@@ -43,12 +33,15 @@ const EmailSuggestions = (props: ISuggestionsProps) =>
 		const popularEmailDomainCharacters: string[] = popularEmailDomain.split("");
 		let popularEmailMatch: boolean = true;
 		
-		for (let i2 = 0; i2 < emailCharactersAfterAtCharacter.length; i2++)
+		for (let i: number = 0; i < emailCharactersAfterAtCharacter.length; i++)
 		{
+			const currentEmailCharacterAfterAtCharacter: string = emailCharactersAfterAtCharacter[i];
+			const currentPopularEmailDomainCharacter: string = popularEmailDomainCharacters[i];
+			
 			if 
 			(
-				popularEmailDomainCharacters[i2] &&
-				popularEmailDomainCharacters[i2] !== emailCharactersAfterAtCharacter[i2]
+				currentPopularEmailDomainCharacter &&
+				currentPopularEmailDomainCharacter !== currentEmailCharacterAfterAtCharacter
 			)
 			{
 				popularEmailMatch = false;
@@ -56,7 +49,7 @@ const EmailSuggestions = (props: ISuggestionsProps) =>
 			}
 		}
 
-		if(popularEmailMatch)
+		if (popularEmailMatch)
 		{
 			suggestedEmail = `${emailCharactersBeforeAtCharacter}@${popularEmailDomain}.com`;
 		}
@@ -68,7 +61,7 @@ const EmailSuggestions = (props: ISuggestionsProps) =>
 	{
 		let newEmailSuggestions: string[] = [];
 
-		for (let i = 0; i < popularEmailDomains.length; i++) 
+		for (let i: number = 0; i < popularEmailDomains.length; i++) 
 		{
 			let suggestedEmail: string = "";
 			const popularEmailDomain: string = popularEmailDomains[i];

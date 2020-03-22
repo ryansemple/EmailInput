@@ -1,14 +1,14 @@
 import React from "react";
 import Label from "./form/Label";
 import Input from "./form/Input";
-import {
-	allKeyboardKeysRegex
-} from "../repository/Regex";
+import { allKeyboardKeysRegex } from "../utility/Regex";
+import { atCharacter } from "../utility/String";
 
 interface IEmailValidationForm {
 	setEmail: (email: string) => void,
 	setEmailMessage: (emailMessage: string) => void,
-	email: string
+	email: string,
+	setEmailIsValid: (emailIsValid: boolean) => void
 }
 
 interface IValidator {
@@ -16,20 +16,18 @@ interface IValidator {
 	errorMessageIfFailed: string;
 }
 
-const atCharacter : string = "@";
-
-const doesEmailHaveDomain = (email : string): boolean => 
+const doesEmailHaveDomain = (email : string): boolean =>
 {
 	return email.split(atCharacter)[1].includes(".");
 }
 
-const isDomainInEmail = (email : string) : boolean => 
+const isDomainInEmail = (email : string) : boolean =>
 {
-	let emailSplitOnAtCharacter : string[] = email.split(atCharacter);
+	const emailSplitOnAtCharacter : string[] = email.split(atCharacter);
 
-	if(emailSplitOnAtCharacter.length < 2)
+	if (emailSplitOnAtCharacter.length < 2)
 	{
-			return false;
+		return false;
 	}
 	
 	return true;
@@ -57,11 +55,6 @@ const rules: IValidator[] =
 		validationFunctionToPass: (email: string) => isDomainInEmail(email),
 		errorMessageIfFailed: "Email doesn't contain a domain"
 	}
-	// ,
-	// {
-	//     validationFunctionToPass: (email: string) => this.IsEmailValid(email),
-	//     errorMessageIfFailed: "this email isn't valid"
-	// }
 ];
 
 const EmailValidationForm = (props: IEmailValidationForm) => 
@@ -72,13 +65,16 @@ const EmailValidationForm = (props: IEmailValidationForm) =>
 		{
 			const rule: IValidator = rules[i];
 
-			if(!rule.validationFunctionToPass(email))
+			if (!rule.validationFunctionToPass(email))
 			{
+				props.setEmailIsValid(false);
 				props.setEmailMessage(rule.errorMessageIfFailed);
 				return;
 			}
 		}
 
+		//email passed all validation tests
+		props.setEmailIsValid(true);
 		props.setEmailMessage("Email appears to be valid");
 	}
 	
@@ -92,6 +88,7 @@ const EmailValidationForm = (props: IEmailValidationForm) =>
 		} 
 		else 
 		{
+			props.setEmailIsValid(false);
 			props.setEmailMessage("");
 		}	
 	}

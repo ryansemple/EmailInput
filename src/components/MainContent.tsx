@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import EmailValidationForm from "./EmailValidationForm";
-import EmailSuggestions from "./Suggestions2";
+import EmailSuggestions from "./suggestions/Suggestions";
 import Label from "./form/Label";
 import axios, { AxiosError } from "axios";
-import { KickBoxResponse } from "../repository/Kickbox";
+import { KickBoxResponse } from "../utility/Kickbox";
 import { brandOrange, green } from "../styles/sass.scss";
 import InformationDisplay from "./InformationDisplay";
+import { isNetworkError } from "../utility/Network";
+import { returnNewUuid } from "../utility/Uuid";
+import usePrevious from "../hooks/usePrevious";
+import { 
+	NotificationInstance, 
+	NotificationType
+} from "../types/Notification";
+import Notifications from "./notifications/Notifications";
+import Button from "./form/Button";
 
 const serverDomainUrl: string = "http://localhost:3001";
 
@@ -14,6 +23,8 @@ const MainContent = () =>
 	const [email, setEmail] = useState("");
 	const [emailIsVerified, setEmailIsVerified] = useState(false);
 	const [emailMessage, setEmailMessage] = useState("");
+	const [emailIsValid, setEmailIsValid] = useState(false);
+	const [notifications, setNotifications] = useState<NotificationInstance[]>([]);
 
 	const checkEmail = () => 
 	{
@@ -29,8 +40,70 @@ const MainContent = () =>
 		})
 		.catch((error: AxiosError) => 
     {
+			if(isNetworkError(error))
+			{
+				const notificationInstance: NotificationInstance = {
+					text: "There was a network error, please check your internet connection and try again.",
+					uuid: returnNewUuid(),
+					notificationType: NotificationType.Error
+				}
+				setNotifications([
+					...notifications,
+					notificationInstance
+				]);
+			}
     });
 	}
+
+	const testButtonClick = (event: any) => 
+	{
+		const newNotificationInstance: NotificationInstance = {
+			text: "There was a network error, please check your internet connection and try again.",
+			uuid: returnNewUuid(),
+			notificationType: NotificationType.Error
+		};
+
+		setNotifications([
+			...notifications,
+			newNotificationInstance
+		]);
+	};
+
+	const previousProps = usePrevious({notifications});
+	const notificationsReference: 
+	React.MutableRefObject<NotificationInstance[]> = useRef(notifications);
+
+	useEffect(() => 
+	{
+		if(previousProps?.notifications.length !== notifications.length) 
+		{
+			const newNotifications = notifications
+			.filter((notificationInstance: NotificationInstance) => {
+
+				return previousProps?.notifications
+				.findIndex((perviousNotificationInstance: NotificationInstance) =>
+					perviousNotificationInstance.uuid === notificationInstance.uuid
+				) === -1;
+
+				//return notificationInstance.uuid !== null;
+			});
+
+			for (let i: number = 0; i < newNotifications.length; i++)
+			{
+				const newNotificationInstance: NotificationInstance = newNotifications[i];
+				
+				setTimeout(() => 
+				{
+					const notificationsWithNewNotificationRemoved: NotificationInstance[] = notificationsReference.current
+					.filter((notificationInstance: NotificationInstance) => 
+							notificationInstance.uuid !== newNotificationInstance.uuid
+					);
+		
+					setNotifications(notificationsWithNewNotificationRemoved);
+				}, 3000);
+			}
+		}
+	}, [notifications]);
 
 	return (
 		<div className="container">
@@ -42,6 +115,7 @@ const MainContent = () =>
 								setEmail={(email: string) => setEmail(email)}
 								email={email}
 								setEmailMessage={(emailMessage: string) => setEmailMessage(emailMessage)}
+								setEmailIsValid={(emailIsValid: boolean) => setEmailIsValid(emailIsValid)}
 							/>
 							<br />
 							<EmailSuggestions
@@ -54,20 +128,15 @@ const MainContent = () =>
 								className="block"
 								text="&nbsp;"
 							/>
-							<button
+							<Button 
 								onClick={checkEmail}
-								disabled={(
-									emailMessage !== null && 
-									emailMessage !== undefined && 
-									emailMessage !== "" && 
-									emailMessage.length > 0
-								)}
-								style={{
-									background: emailIsVerified ? green : brandOrange
-								}}
-								className="Button">    
-								{emailIsVerified ? "Verified!" : "Verify"}
-							</button>
+								disabled={!emailIsValid}
+								text={emailIsVerified ? "Verified!" : "Verify"}
+								style={{background: emailIsVerified ? green : brandOrange}}
+							/>
+							<button
+								onClick={testButtonClick}
+							>Test add notification</button>
 						</div>
 					</div>
 				</div>
@@ -77,6 +146,9 @@ const MainContent = () =>
 					/>
 				</div>
 			</div>
+			<Notifications 
+				notifications={notifications}
+			/>
 		</div>
 	)
 }
