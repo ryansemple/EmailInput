@@ -41,6 +41,7 @@ const MainContent = () =>
 							<EmailValidationForm
 								setEmail={(email: string) => setEmail(email)}
 								email={email}
+								setEmailMessage={(emailMessage: string) => setEmailMessage(emailMessage)}
 							/>
 							<br />
 							<EmailSuggestions
@@ -49,25 +50,25 @@ const MainContent = () =>
 							/>
 						</div>
 						<div className="col-sm-6">
-								<Label 
-									className="block"
-									text="&nbsp;"
-								/>
-								<button
-									onClick={checkEmail}
-									disabled={(
-										emailMessage !== null && 
-										emailMessage !== undefined && 
-										emailMessage !== "" && 
-										emailMessage.length > 0
-									)}
-									style={{
-										background: emailIsVerified ? green : brandOrange
-									}}
-									className="Button">    
-									{emailIsVerified ? "Verified!" : "Verify"}
-								</button>
-							</div>
+							<Label 
+								className="block"
+								text="&nbsp;"
+							/>
+							<button
+								onClick={checkEmail}
+								disabled={(
+									emailMessage !== null && 
+									emailMessage !== undefined && 
+									emailMessage !== "" && 
+									emailMessage.length > 0
+								)}
+								style={{
+									background: emailIsVerified ? green : brandOrange
+								}}
+								className="Button">    
+								{emailIsVerified ? "Verified!" : "Verify"}
+							</button>
+						</div>
 					</div>
 				</div>
 				<div className="col-sm-12 float_left">

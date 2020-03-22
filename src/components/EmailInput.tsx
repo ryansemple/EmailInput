@@ -5,7 +5,7 @@ import {
 	isAlphaNumericRegex,
 	isValidEmailRegex
 } from "../repository/Regex";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
 import { KickBoxResponse } from "../repository/Kickbox";
 import InformationDisplay from "../components/InformationDisplay";
 
@@ -90,18 +90,18 @@ React.PureComponent<IEmailInputProps, IEmailInputState>
 	{
 		let emailSplitOnAtCharacter : string[] = email.split(atCharacter);
 
-		if(emailSplitOnAtCharacter.length < 2)
+		if (emailSplitOnAtCharacter.length < 2)
 		{
-				return false;
+			return false;
 		}
 		
 		return true;
 	}
 
-	IsEmailValid = (email : string) : boolean => 
-	{
-		return isValidEmailRegex.test(email.toLowerCase());
-	};
+	// IsEmailValid = (email : string) : boolean => 
+	// {
+	// 	return isValidEmailRegex.test(email.toLowerCase());
+	// };
 
 	// isBeginningPartOfEmailValid = (email : string) : boolean => {
 	//     //let localPartOfEmail : any = email.split(atCharacter).shift();

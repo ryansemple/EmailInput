@@ -4,9 +4,6 @@ import { isAlphaNumericRegex } from "../repository/Regex";
 import clsx from "clsx";
 
 interface ISuggestionsProps {
-	// showSuggestions: boolean,
-	// emailSuggestions: string[],
-	// emailSuggestionClickEvent: any
 	setEmail: (email: string) => void,
 	email: string
 }
@@ -127,26 +124,37 @@ const EmailSuggestions = (props: ISuggestionsProps) =>
 
 	useEffect(() => {
 		setSuggestionsAfterEmailChanges(props.email);
+
+		if(props.email)
+		{
+			setShowEmailSuggestions(true);
+		} 
+		else 
+		{
+			setShowEmailSuggestions(false);
+		}
 	}, [props.email]);
 	
 	return (
 		<div
-			className={clsx(
-				showEmailSuggestions && "show", 
-				"Email_Suggestions", 
-				"float_left")}>
+			className={
+				clsx
+				(
+					"Email_Suggestions", 
+					"float_left"
+				)
+			}>
+			{showEmailSuggestions &&
 			<ul>
-				{
-				emailSuggestions.map
-				((emailSuggestion: string, index: number) => 
+				{emailSuggestions.map((emailSuggestion: string) => 
 					<Suggestion
 						key={emailSuggestion}
 						emailSuggestion={emailSuggestion}
 						emailSuggestionClickEvent={emailSuggestionsClickEvent}
 					/>
-				)
-				}
+				)}
 			</ul>
+			}
 		</div>
 	)
 }

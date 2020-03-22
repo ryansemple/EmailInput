@@ -1,8 +1,8 @@
 import React from "react";
 
 interface ISuggestionProps {
-    emailSuggestion: string,
-    emailSuggestionClickEvent: any
+	emailSuggestion: string,
+	emailSuggestionClickEvent: any
 }
 
 const Suggestions = (props: ISuggestionProps) => (

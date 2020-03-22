@@ -9,44 +9,44 @@
 }
 
 .error {
-    color: $danger-red;
-    border: 1px solid $danger-red;
-    padding: 20px;
-    border-radius: $box-border-radius;
+	color: $danger-red;
+	border: 1px solid $danger-red;
+	padding: 20px;
+	border-radius: $box-border-radius;
 }
 
 .block {
-    display: block;
+	display: block;
 }
 
 .float_left {
-    float: left;
+	float: left;
 }
 
 .container {
-    width: 1200px;
-    display: block;
-    margin: 0 auto;
+	width: 1200px;
+	display: block;
+	margin: 0 auto;
 }
 
 .clear_children_float:after {
-    @include clear-children-float();
+	@include clear-children-float();
 }
 
 .clear_left {
-    clear: left;
+	clear: left;
 }
 
 .inline_block {
-    display: inline-block;
+	display: inline-block;
 }
 
 .center { 
-    margin: 0 auto;
+	margin: 0 auto;
 }
 
 .text_align_center {
-    text-align: center;
+	text-align: center;
 }
 
 /* General ------------------------------------*/
@@ -58,23 +58,23 @@
 }
 
 .margin_top_20 {
-    margin-top: 20px;
+	margin-top: 20px;
 }
 
 .margin_top_40 {
-    margin-top: 40px;
+	margin-top: 40px;
 }
 
 .margin_bottom_20 {
-    margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .margin_bottom_40 {
-    margin-bottom: 40px;
+	margin-bottom: 40px;
 }
 
 .full_width {
-    width: 100%;
+	width: 100%;
 }
 
 /* Spacing ------------------------------------*/
@@ -82,9 +82,9 @@
 /* Font ---------------------------------------*/
 
 body {
-    font: $body-font;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+	font: $body-font;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
 }
 
 /* Font ---------------------------------------*/
@@ -100,12 +100,12 @@ body {
 }
 
 .form_input {
-    height: $input-height;
-    line-height: $input-height;
-    border-radius: $box-border-radius;
-    border: 1px solid $border-grey;
-    padding: 0 10px;
-    font: $body-font;
+	height: $input-height;
+	line-height: $input-height;
+	border-radius: $box-border-radius;
+	border: 1px solid $border-grey;
+	padding: 0 10px;
+	font: $body-font;
 }
 
 /* Form ---------------------------------------*/
@@ -113,13 +113,12 @@ body {
 /* Button -------------------------------------*/
 
 .Button {
-    background-color: $brand-orange;
-    font: $body-font;
-    border: none;
-    color: white;
-    height: $input-height;
-    padding: 0 14px;
-    //margin-top: 10.5px;
+	background-color: $brand-orange;
+	font: $body-font;
+	border: none;
+	color: white;
+	height: $input-height;
+	padding: 0 14px;
 }
 
 /* Button -------------------------------------*/
@@ -127,16 +126,16 @@ body {
 /* Header -------------------------------------*/
 
 .Header {
-    border-bottom: 5px solid $brand-orange;
-    height: $header-height;
-    color: white;
-    text-align: center;
-    background-color: $brand-off-black;
+	border-bottom: 5px solid $brand-orange;
+	height: $header-height;
+	color: white;
+	text-align: center;
+	background-color: $brand-off-black;
 }
   
 .Header h1 {
-    line-height: $header-height;
-    font-size: 30px;
+	line-height: $header-height;
+	font-size: 30px;
 }
 
 /* Header -------------------------------------*/
@@ -145,19 +144,18 @@ body {
 
 .Email_Suggestions {
 	background-color: $off-white;
-    opacity: 0;
-    width: 80%;
+	width: 80%;
 }
 
 .Email_Suggestions_Suggestion {
 	cursor: pointer;
 	padding: 10px 5px;
 	text-decoration: underline;
-    color: blue;
-    
-    &:hover {
-        background-color: darken($off-white, 7%);
-    }
+	color: $link-blue;
+	
+	&:hover {
+			background-color: darken($off-white, 7%);
+	}
 }
 
 /* Suggestions --------------------------------*/
@@ -165,7 +163,7 @@ body {
 /* Keep Last ----------------------------------*/
 
 .show {
-	opacity: 1;
+	display: block;
 }
 
 /* Keep Last ----------------------------------*/
