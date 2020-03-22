@@ -4,12 +4,12 @@ import EmailSuggestions from "./Suggestions2";
 import Label from "./form/Label";
 import axios, { AxiosError } from "axios";
 import { KickBoxResponse } from "../repository/Kickbox";
-import { brandOrange } from "../styles/sass.scss";
+import { brandOrange, green } from "../styles/sass.scss";
 import InformationDisplay from "./InformationDisplay";
 
 const serverDomainUrl: string = "http://localhost:3001";
 
-const MainContent = (props: {}) => 
+const MainContent = () => 
 {
 	const [email, setEmail] = useState("");
 	const [emailIsVerified, setEmailIsVerified] = useState(false);
@@ -62,7 +62,7 @@ const MainContent = (props: {}) =>
 										emailMessage.length > 0
 									)}
 									style={{
-										background: emailIsVerified ? "green" : brandOrange
+										background: emailIsVerified ? green : brandOrange
 									}}
 									className="Button">    
 									{emailIsVerified ? "Verified!" : "Verify"}

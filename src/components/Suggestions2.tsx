@@ -109,7 +109,7 @@ const EmailSuggestions = (props: ISuggestionsProps) =>
 						emailCharactersBeforeAtCharacter
 					);
 
-					if(suggestedEmail == "")
+					if(suggestedEmail === "")
 					{
 						continue;
 					}
@@ -131,7 +131,10 @@ const EmailSuggestions = (props: ISuggestionsProps) =>
 	
 	return (
 		<div
-			className={clsx(showEmailSuggestions && "show", "Email_Suggestions", "float_left")}>
+			className={clsx(
+				showEmailSuggestions && "show", 
+				"Email_Suggestions", 
+				"float_left")}>
 			<ul>
 				{
 				emailSuggestions.map
