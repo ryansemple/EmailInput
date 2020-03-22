@@ -35,3 +35,7 @@ $body-font-size: 18px;
 $body-font: $body-font-size $body-font-family;
 
 /* Font ---------------------------------------*/
+
+:export {
+	brandOrange: $brand-orange;
+}

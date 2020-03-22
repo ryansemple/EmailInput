@@ -4,10 +4,12 @@ import EmailSuggestions from "./Suggestions2";
 import Label from "./form/Label";
 import axios, { AxiosError } from "axios";
 import { KickBoxResponse } from "../repository/Kickbox";
+import { brandOrange } from "../styles/sass.scss";
+import InformationDisplay from "./InformationDisplay";
 
-interface IMainContentProps {}
+const serverDomainUrl: string = "http://localhost:3001";
 
-const MainContent = (props: IMainContentProps) => 
+const MainContent = (props: {}) => 
 {
 	const [email, setEmail] = useState("");
 	const [emailIsVerified, setEmailIsVerified] = useState(false);
@@ -17,18 +19,13 @@ const MainContent = (props: IMainContentProps) =>
 	{
 		axios.get
 		(
-			`http://localhost:3001/VerifyEmail?email=${email}`
+			`${serverDomainUrl}/VerifyEmail?email=${email}`
 		)
 		.then((response: KickBoxResponse) =>
 		{
 			const successfullySent: boolean = response.data.success;	
 			setEmailIsVerified(successfullySent);
 			setEmailMessage(successfullySent ? "" : response.data.reason);
-
-			// this.setState({
-			// 	isEmailVerified: successfullySent,
-			// 	emailMessage: successfullySent ? "" : response.data.reason
-			// })
 		})
 		.catch((error: AxiosError) => 
     {
@@ -52,29 +49,31 @@ const MainContent = (props: IMainContentProps) =>
 							/>
 						</div>
 						<div className="col-sm-6">
-								{/* <label className="block">
-									&nbsp;
-								</label> */}
 								<Label 
 									className="block"
 									text="&nbsp;"
 								/>
-								{/* <button
+								<button
 									onClick={checkEmail}
 									disabled={(
-										this.state.emailMessage !== null && 
-										this.state.emailMessage !== undefined && 
-										this.state.emailMessage !== "" && 
-										this.state.emailMessage.length > 0
+										emailMessage !== null && 
+										emailMessage !== undefined && 
+										emailMessage !== "" && 
+										emailMessage.length > 0
 									)}
 									style={{
-										background: this.state.isEmailVerified ? "green" : "#FF6600"
+										background: emailIsVerified ? "green" : brandOrange
 									}}
 									className="Button">    
-									{this.state.isEmailVerified ? "Verified!" : "Verify"}
-								</button> */}
+									{emailIsVerified ? "Verified!" : "Verify"}
+								</button>
 							</div>
 					</div>
+				</div>
+				<div className="col-sm-12 float_left">
+					<InformationDisplay 
+						emailMessage={emailMessage} 
+					/>
 				</div>
 			</div>
 		</div>
