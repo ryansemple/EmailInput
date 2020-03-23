@@ -24,13 +24,7 @@ const doesEmailHaveDomain = (email : string): boolean =>
 const isDomainInEmail = (email : string) : boolean =>
 {
 	const emailSplitOnAtCharacter : string[] = email.split(atCharacter);
-
-	if (emailSplitOnAtCharacter.length < 2)
-	{
-		return false;
-	}
-	
-	return true;
+	return emailSplitOnAtCharacter.length >= 2;
 }
 
 const rules: Validator[] = 

@@ -25,6 +25,9 @@ const MainContent = () =>
 	const [emailMessage, setEmailMessage] = useState("");
 	const [emailIsValid, setEmailIsValid] = useState(false);
 	const [notifications, setNotifications] = useState<NotificationInstance[]>([]);
+	const previousProps = usePrevious({notifications});
+	const notificationsReference: 
+	React.MutableRefObject<NotificationInstance[]> = useRef(notifications);
 
 	const checkEmail = () => 
 	{
@@ -64,47 +67,70 @@ const MainContent = () =>
 			notificationType: NotificationType.Error
 		};
 
+		console.log(`new notification uuid: ${newNotificationInstance.uuid}`);
+
 		setNotifications([
 			...notifications,
 			newNotificationInstance
 		]);
+
+		setTimeout(() => 
+		{
+			console.log(`notification uuid to be removed: ${newNotificationInstance.uuid}`);
+			
+			// const notificationsWithNewNotificationRemoved: NotificationInstance[] =
+			// notificationsReference.current
+			// .filter((notificationInstance: NotificationInstance) => 
+			// 		notificationInstance.uuid !== newNotificationInstance.uuid
+			// );
+
+			setNotifications(notifications => {
+
+				const notificationsWithNewNotificationRemoved: NotificationInstance[] =
+				notifications
+				.filter((notificationInstance: NotificationInstance) => 
+						notificationInstance.uuid !== newNotificationInstance.uuid
+				);
+
+				return notificationsWithNewNotificationRemoved;
+				//notificationsWithNewNotificationRemoved
+			});
+		}, 7000);
 	};
 
-	const previousProps = usePrevious({notifications});
-	const notificationsReference: 
-	React.MutableRefObject<NotificationInstance[]> = useRef(notifications);
+	// useEffect(() => 
+	// {
+	// 	if(previousProps?.notifications.length !== notifications.length) 
+	// 	{
+	// 		const newNotifications = notifications
+	// 		.filter((notificationInstance: NotificationInstance) => {
 
-	useEffect(() => 
-	{
-		if(previousProps?.notifications.length !== notifications.length) 
-		{
-			const newNotifications = notifications
-			.filter((notificationInstance: NotificationInstance) => {
+	// 			return previousProps?.notifications
+	// 			.findIndex((perviousNotificationInstance: NotificationInstance) =>
+	// 				perviousNotificationInstance.uuid === notificationInstance.uuid
+	// 			) === -1;
 
-				return previousProps?.notifications
-				.findIndex((perviousNotificationInstance: NotificationInstance) =>
-					perviousNotificationInstance.uuid === notificationInstance.uuid
-				) === -1;
+	// 			//return notificationInstance.uuid !== null;
+	// 		});
 
-				//return notificationInstance.uuid !== null;
-			});
+	// 		for (let i: number = 0; i < newNotifications.length; i++)
+	// 		{
+	// 			const newNotificationInstance: NotificationInstance = newNotifications[i];
 
-			for (let i: number = 0; i < newNotifications.length; i++)
-			{
-				const newNotificationInstance: NotificationInstance = newNotifications[i];
-				
-				setTimeout(() => 
-				{
-					const notificationsWithNewNotificationRemoved: NotificationInstance[] = notificationsReference.current
-					.filter((notificationInstance: NotificationInstance) => 
-							notificationInstance.uuid !== newNotificationInstance.uuid
-					);
+	// 			setTimeout(() => 
+	// 			{
+	// 				console.log(`notification uuid to be removed: ${newNotificationInstance.uuid}`);
+					
+	// 				const notificationsWithNewNotificationRemoved: NotificationInstance[] = notificationsReference.current
+	// 				.filter((notificationInstance: NotificationInstance) => 
+	// 						notificationInstance.uuid !== newNotificationInstance.uuid
+	// 				);
 		
-					setNotifications(notificationsWithNewNotificationRemoved);
-				}, 3000);
-			}
-		}
-	}, [notifications]);
+	// 				setNotifications(notificationsWithNewNotificationRemoved);
+	// 			}, 5000);
+	// 		}
+	// 	}
+	// }, [notifications]);
 
 	return (
 		<div className="container">
