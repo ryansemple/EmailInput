@@ -1,10 +1,12 @@
+import ObjectWithId from "../types/ObjectWithId";
+
 export enum NotificationType {
 	Success,
 	Error
 }
 
-export interface NotificationInstance {
+export interface NotificationInstance extends ObjectWithId {
 	text: string,
-	uuid: string,
+	id: string,
 	notificationType: NotificationType
 }

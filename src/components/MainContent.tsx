@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import EmailValidationForm from "./EmailValidationForm";
 import EmailSuggestions from "./suggestions/Suggestions";
 import Label from "./form/Label";
@@ -8,7 +8,6 @@ import { brandOrange, green } from "../styles/sass.scss";
 import InformationDisplay from "./InformationDisplay";
 import { isNetworkError } from "../utility/Network";
 import { returnNewUuid } from "../utility/Uuid";
-import usePrevious from "../hooks/usePrevious";
 import { 
 	NotificationInstance, 
 	NotificationType
@@ -25,9 +24,7 @@ const MainContent = () =>
 	const [emailMessage, setEmailMessage] = useState("");
 	const [emailIsValid, setEmailIsValid] = useState(false);
 	const [notifications, setNotifications] = useState<NotificationInstance[]>([]);
-	const previousProps = usePrevious({notifications});
-	const notificationsReference: 
-	React.MutableRefObject<NotificationInstance[]> = useRef(notifications);
+	const [testCount, setTestCount] = useState(1);
 
 	const checkEmail = () => 
 	{
@@ -47,7 +44,7 @@ const MainContent = () =>
 			{
 				const notificationInstance: NotificationInstance = {
 					text: "There was a network error, please check your internet connection and try again.",
-					uuid: returnNewUuid(),
+					id: returnNewUuid(),
 					notificationType: NotificationType.Error
 				}
 
@@ -59,78 +56,24 @@ const MainContent = () =>
     });
 	}
 
+	//`~TEST
 	const testButtonClick = (event: any) => 
 	{
 		const newNotificationInstance: NotificationInstance = {
-			text: "There was a network error, please check your internet connection and try again.",
-			uuid: returnNewUuid(),
-			notificationType: NotificationType.Error
+			text: `${testCount} There was a network error, please check your internet connection and try again.`,
+			id: returnNewUuid(),
+			notificationType: NotificationType.Success
 		};
 
-		console.log(`new notification uuid: ${newNotificationInstance.uuid}`);
+		console.log(`new notification uuid: ${newNotificationInstance.id}`);
+
+		setTestCount(testCount + 1);
 
 		setNotifications([
 			...notifications,
 			newNotificationInstance
 		]);
-
-		setTimeout(() => 
-		{
-			console.log(`notification uuid to be removed: ${newNotificationInstance.uuid}`);
-			
-			// const notificationsWithNewNotificationRemoved: NotificationInstance[] =
-			// notificationsReference.current
-			// .filter((notificationInstance: NotificationInstance) => 
-			// 		notificationInstance.uuid !== newNotificationInstance.uuid
-			// );
-
-			setNotifications(notifications => {
-
-				const notificationsWithNewNotificationRemoved: NotificationInstance[] =
-				notifications
-				.filter((notificationInstance: NotificationInstance) => 
-						notificationInstance.uuid !== newNotificationInstance.uuid
-				);
-
-				return notificationsWithNewNotificationRemoved;
-				//notificationsWithNewNotificationRemoved
-			});
-		}, 7000);
 	};
-
-	// useEffect(() => 
-	// {
-	// 	if(previousProps?.notifications.length !== notifications.length) 
-	// 	{
-	// 		const newNotifications = notifications
-	// 		.filter((notificationInstance: NotificationInstance) => {
-
-	// 			return previousProps?.notifications
-	// 			.findIndex((perviousNotificationInstance: NotificationInstance) =>
-	// 				perviousNotificationInstance.uuid === notificationInstance.uuid
-	// 			) === -1;
-
-	// 			//return notificationInstance.uuid !== null;
-	// 		});
-
-	// 		for (let i: number = 0; i < newNotifications.length; i++)
-	// 		{
-	// 			const newNotificationInstance: NotificationInstance = newNotifications[i];
-
-	// 			setTimeout(() => 
-	// 			{
-	// 				console.log(`notification uuid to be removed: ${newNotificationInstance.uuid}`);
-					
-	// 				const notificationsWithNewNotificationRemoved: NotificationInstance[] = notificationsReference.current
-	// 				.filter((notificationInstance: NotificationInstance) => 
-	// 						notificationInstance.uuid !== newNotificationInstance.uuid
-	// 				);
-		
-	// 				setNotifications(notificationsWithNewNotificationRemoved);
-	// 			}, 5000);
-	// 		}
-	// 	}
-	// }, [notifications]);
 
 	return (
 		<div className="container">
@@ -174,10 +117,11 @@ const MainContent = () =>
 						emailMessage={emailMessage} 
 					/>
 				</div>
-				<Notifications 
-					notifications={notifications}
-				/>
 			</div>
+			<Notifications 
+				notifications={notifications}
+				setNotifications={setNotifications}
+			/>
 		</div>
 	)
 }

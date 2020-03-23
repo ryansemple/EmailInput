@@ -9,8 +9,8 @@
 }
 
 .error {
-	color: $danger-red;
-	border: 1px solid $danger-red;
+	color: $red;
+	border: 1px solid $red;
 	padding: 20px;
 	border-radius: $box-border-radius;
 }
@@ -21,6 +21,10 @@
 
 .flex {
 	display: flex;
+}
+
+.absolute {
+	position: absolute;
 }
 
 .container {
@@ -44,8 +48,10 @@
 
 /* Positioning --------------------------------*/
 
-.horizontal_center {
+.horizontal_center_flex {
 	justify-content: center;
+	align-items: center;
+	flex-direction: column;
 }
 
 .text_align_center {
@@ -165,11 +171,39 @@ body {
 	color: $link-blue;
 	
 	&:hover {
-			background-color: darken($off-white, 7%);
+			background-color: darken($off-white, $lightness-delta);
 	}
 }
 
 /* Suggestions --------------------------------*/
+
+/* Notifications ------------------------------*/
+
+.Notifications {
+	left: 0;
+	right: 0;
+	bottom: 20px;
+	flex-wrap: wrap;
+}
+
+.Notifications_Notification {
+	max-width: 500px;
+	border-radius: $box-border-radius;
+	margin-top: $small-spacing;
+	color: white;
+	text-align: center;
+	padding: $small-spacing;
+}
+
+.Notifications_Notification-Error {
+	background-color: $red;
+}
+
+.Notifications_Notification-Success {
+	background-color: $green;
+}
+
+/* Notifications ------------------------------*/
 
 /* Keep Last ----------------------------------*/
 

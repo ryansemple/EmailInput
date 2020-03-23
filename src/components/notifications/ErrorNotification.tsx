@@ -8,7 +8,7 @@ interface ErrorNotificationProps {
 const ErrorNotification = (props: ErrorNotificationProps) => (
 	<Notification 
 		text={props.text}
-		className="Notification-Error"
+		className="Notifications_Notification-Error"
 	/>
 )
 

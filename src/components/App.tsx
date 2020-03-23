@@ -5,7 +5,7 @@ import React from "react";
 const App = () => (
   <>
     <Header title={"📧 Email input challenge"} />
-    <main className="flex horizontal_center">
+    <main className="flex horizontal_center_flex">
       <MainContent />
     </main>
   </>

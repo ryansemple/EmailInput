@@ -11,15 +11,17 @@ interface SuggestionsProps {
 
 const EmailSuggestions = (props: SuggestionsProps) => 
 {
+	const { email, setEmail } = props;
 	const [emailSuggestions, setEmailSuggestions] = useState([""]);
 	const [showEmailSuggestions, setShowEmailSuggestions] = useState(false);
 
-	const emailSuggestionsClickEvent = (email: string): void => 
+	const emailSuggestionsClickEvent = (suggestedEmail: string): void => 
 	{
-		props.setEmail(email);
+		setEmail(suggestedEmail);
 	}
 
-	const isAlphaNumeric = (input: string): boolean => isAlphaNumericRegex.test(input);
+	const isAlphaNumeric = (input: string): boolean => 
+		isAlphaNumericRegex.test(input);
 
 	const checkForDomainToMatchEmail = 
 	(
@@ -29,7 +31,8 @@ const EmailSuggestions = (props: SuggestionsProps) =>
 	): string => 
 	{
 		let suggestedEmail: string = "";
-		const popularEmailDomainCharacters: string[] = popularEmailDomain.split("");
+		const popularEmailDomainCharacters: string[] =
+			popularEmailDomain.split("");
 		let popularEmailMatch: boolean = true;
 		
 		for (let i: number = 0; i < emailCharactersAfterAtCharacter.length; i++)
@@ -56,7 +59,7 @@ const EmailSuggestions = (props: SuggestionsProps) =>
 		return suggestedEmail;
 	}
 
-	const setSuggestionsAfterEmailChanges = (email: string): void =>
+	const setSuggestionsAfterEmailChanges = (): void =>
 	{
 		let newEmailSuggestions: string[] = [];
 
@@ -105,7 +108,7 @@ const EmailSuggestions = (props: SuggestionsProps) =>
 				}    
 			}
 				
-			if(suggestedEmail && suggestedEmail !== "")
+			if (suggestedEmail && suggestedEmail !== "")
 			{
 				newEmailSuggestions.push(suggestedEmail);
 			}     
@@ -115,9 +118,9 @@ const EmailSuggestions = (props: SuggestionsProps) =>
 	}
 
 	useEffect(() => {
-		setSuggestionsAfterEmailChanges(props.email);
+		setSuggestionsAfterEmailChanges();
 
-		if(props.email)
+		if(email)
 		{
 			setShowEmailSuggestions(true);
 		} 
@@ -125,7 +128,12 @@ const EmailSuggestions = (props: SuggestionsProps) =>
 		{
 			setShowEmailSuggestions(false);
 		}
-	}, [props.email]);
+	}, 
+	[
+		email,
+		setSuggestionsAfterEmailChanges,
+		setShowEmailSuggestions
+	]);
 	
 	return (
 		<div className="Email_Suggestions">

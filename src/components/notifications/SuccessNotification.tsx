@@ -8,7 +8,7 @@ interface SuccessNotificationProps {
 const SuccessNotification = (props: SuccessNotificationProps) => (
 	<Notification 
 		text={props.text}
-		className="Notification-Success"
+		className="Notifications_Notification-Success"
 	/>
 )
 

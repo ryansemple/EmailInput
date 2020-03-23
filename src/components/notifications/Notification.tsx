@@ -8,7 +8,7 @@ interface NotificationProps {
 
 const Notification = (props: NotificationProps) => (
 	<div 
-		className={clsx("Notification", props.className)} 
+		className={clsx("Notifications_Notification", props.className)} 
 		role="alert">
 		<p>{props.text}</p>
 	</div>
