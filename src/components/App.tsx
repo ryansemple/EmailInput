@@ -3,12 +3,12 @@ import Header from "./Header";
 import React from "react";
 
 const App = () => (
-  <div>
+  <>
     <Header title={"📧 Email input challenge"} />
-    <main>
+    <main className="flex horizontal_center">
       <MainContent />
-    </main>   
-  </div>
+    </main>
+  </>
 )
 
 export default App;

@@ -8,11 +8,11 @@ interface IInformationDisplay {
 const InformationDisplay = (props: IInformationDisplay) => (
 	<>
 		<Label
-			className="block float_left"
+			className="block"
 			text="Information:"
 		/>
 		<p 
-			className="error margin_bottom_20 block float_left full_width">
+			className="error margin_bottom_20 block full_width">
 			{props.emailMessage}
 		</p>
 	</>

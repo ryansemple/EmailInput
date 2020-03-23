@@ -47,6 +47,7 @@ const MainContent = () =>
 					uuid: returnNewUuid(),
 					notificationType: NotificationType.Error
 				}
+
 				setNotifications([
 					...notifications,
 					notificationInstance
@@ -107,44 +108,42 @@ const MainContent = () =>
 
 	return (
 		<div className="container">
-			<div className="text_align_center">
-				<div className="col-sm-12 float_left">
-					<div className="row">
-						<div className="col-sm-18">
-							<EmailValidationForm
-								setEmail={(email: string) => setEmail(email)}
-								email={email}
-								setEmailMessage={(emailMessage: string) => setEmailMessage(emailMessage)}
-								setEmailIsValid={(emailIsValid: boolean) => setEmailIsValid(emailIsValid)}
-							/>
-							<br />
-							<EmailSuggestions
-								email={email}
-								setEmail={(email: string) => setEmail(email)}
-							/>
-						</div>
-						<div className="col-sm-6">
-							<Label 
-								className="block"
-								text="&nbsp;"
-							/>
-							<Button 
-								onClick={checkEmail}
-								disabled={!emailIsValid}
-								text={emailIsVerified ? "Verified!" : "Verify"}
-								style={{background: emailIsVerified ? green : brandOrange}}
-							/>
-							<button
-								onClick={testButtonClick}
-							>Test add notification</button>
-						</div>
+			<div className="col-sm-12">
+				<div className="row">
+					<div className="col-sm-18">
+						<EmailValidationForm
+							setEmail={(email: string) => setEmail(email)}
+							email={email}
+							setEmailMessage={(emailMessage: string) => setEmailMessage(emailMessage)}
+							setEmailIsValid={(emailIsValid: boolean) => setEmailIsValid(emailIsValid)}
+						/>
+						<br />
+						<EmailSuggestions
+							email={email}
+							setEmail={(email: string) => setEmail(email)}
+						/>
+					</div>
+					<div className="col-sm-6">
+						<Label 
+							className="block"
+							text="&nbsp;"
+						/>
+						<Button 
+							onClick={checkEmail}
+							disabled={!emailIsValid}
+							text={emailIsVerified ? "Verified!" : "Verify"}
+							style={{background: emailIsVerified ? green : brandOrange}}
+						/>
+						<button
+							onClick={testButtonClick}
+						>Test add notification</button>
 					</div>
 				</div>
-				<div className="col-sm-12 float_left">
-					<InformationDisplay 
-						emailMessage={emailMessage} 
-					/>
-				</div>
+			</div>
+			<div className="col-sm-12">
+				<InformationDisplay 
+					emailMessage={emailMessage} 
+				/>
 			</div>
 			<Notifications 
 				notifications={notifications}

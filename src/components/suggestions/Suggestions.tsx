@@ -129,14 +129,7 @@ const EmailSuggestions = (props: ISuggestionsProps) =>
 	}, [props.email]);
 	
 	return (
-		<div
-			className={
-				clsx
-				(
-					"Email_Suggestions", 
-					"float_left"
-				)
-			}>
+		<div className="Email_Suggestions">
 			{showEmailSuggestions &&
 			<ul>
 				{emailSuggestions.map((emailSuggestion: string) => 
