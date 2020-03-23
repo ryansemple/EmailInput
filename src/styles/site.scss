@@ -126,6 +126,10 @@ body {
 	color: white;
 	height: $input-height;
 	padding: 0 14px;
+
+	&:disabled {
+		opacity: .6;
+	}
 }
 
 /* Button -------------------------------------*/
