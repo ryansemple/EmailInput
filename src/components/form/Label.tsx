@@ -1,11 +1,11 @@
 import React from "react";
 
-interface ILabelProps {
+interface LabelProps {
 	className: string,
 	text: string
 }
 
-const Label = (props: ILabelProps) => (
+const Label = (props: LabelProps) => (
 	<label className={`form_label ${props.className}`}>
 		{props.text}
 	</label>

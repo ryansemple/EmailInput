@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Suggestion from "./Suggestion";
 import { isAlphaNumericRegex } from "../../utility/Regex";
-import clsx from "clsx";
 import { atCharacter } from "../../utility/String";
 import { popularEmailDomains } from "../../utility/Email";
 
-interface ISuggestionsProps {
+interface SuggestionsProps {
 	setEmail: (email: string) => void,
 	email: string
 }
 
-const EmailSuggestions = (props: ISuggestionsProps) => 
+const EmailSuggestions = (props: SuggestionsProps) => 
 {
 	const [emailSuggestions, setEmailSuggestions] = useState([""]);
 	const [showEmailSuggestions, setShowEmailSuggestions] = useState(false);

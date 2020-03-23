@@ -4,14 +4,14 @@ import Input from "./form/Input";
 import { allKeyboardKeysRegex } from "../utility/Regex";
 import { atCharacter } from "../utility/String";
 
-interface IEmailValidationForm {
+interface EmailValidationForm {
 	setEmail: (email: string) => void,
 	setEmailMessage: (emailMessage: string) => void,
 	email: string,
 	setEmailIsValid: (emailIsValid: boolean) => void
 }
 
-interface IValidator {
+interface Validator {
 	validationFunctionToPass: (email: string) => boolean
 	errorMessageIfFailed: string;
 }
@@ -33,7 +33,7 @@ const isDomainInEmail = (email : string) : boolean =>
 	return true;
 }
 
-const rules: IValidator[] = 
+const rules: Validator[] = 
 [
 	{
 		validationFunctionToPass: (email: string) => allKeyboardKeysRegex.test(email),
@@ -57,13 +57,13 @@ const rules: IValidator[] =
 	}
 ];
 
-const EmailValidationForm = (props: IEmailValidationForm) => 
+const EmailValidationForm = (props: EmailValidationForm) => 
 {
 	const handleSettingEmailMessage = (email: string) => 
 	{
 		for (let i: number = 0; i < rules.length; i++)
 		{
-			const rule: IValidator = rules[i];
+			const rule: Validator = rules[i];
 
 			if (!rule.validationFunctionToPass(email))
 			{

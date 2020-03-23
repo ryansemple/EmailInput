@@ -1,11 +1,11 @@
 import React from "react";
 import Label from "./form/Label";
 
-interface IInformationDisplay {
+interface InformationDisplay {
 	emailMessage?: string
 }
 
-const InformationDisplay = (props: IInformationDisplay) => (
+const InformationDisplay = (props: InformationDisplay) => (
 	<>
 		<Label
 			className="block"
