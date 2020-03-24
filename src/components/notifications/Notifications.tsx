@@ -17,28 +17,33 @@ interface NotificationsProps {
 
 const notificationTimeout: number = 6000;
 
-const Notifications = (props: NotificationsProps) => {
-
-	const previousProps = usePrevious({notifications: props.notifications});
-	const previousNotifications: NotificationInstance[] | undefined = previousProps?.notifications;
-
-	const destroyNotificationAfterTimeoutEnds = (noticationToBeDestroyed: NotificationInstance) => 
-	{
-		setTimeout(() => 
-		{
-			props.setNotifications(notifications =>	{
-				return notifications
-				.filter((notificationInstance: NotificationInstance) => 
-						notificationInstance.id !== noticationToBeDestroyed.id
-				);
-			});
-		}, notificationTimeout);
-	};
-
+const useDestroyNewNotificationsAfterTimeout =
+(
+	notifications: NotificationInstance[],
+	setNotifications: 
+		React.Dispatch<React.SetStateAction<NotificationInstance[]>>,
+	previousNotifications: NotificationInstance[] | undefined
+): void =>
+{
 	useEffect(() =>
-	{	
+	{
+		const destroyNotificationAfterTimeoutEnds = (
+			noticationToBeDestroyed: NotificationInstance
+		) => 
+		{
+			setTimeout(() => 
+			{
+				setNotifications(_notifications =>	{
+					return _notifications
+					.filter((notificationInstance: NotificationInstance) => 
+							notificationInstance.id !== noticationToBeDestroyed.id
+					);
+				});
+			}, notificationTimeout);
+		};
+		
 		const notificationPropsHaveUpdated = previousNotifications?.length !==
-		props.notifications.length;
+		notifications.length;
 		
 		if (notificationPropsHaveUpdated) 
 		{
@@ -46,13 +51,13 @@ const Notifications = (props: NotificationsProps) => {
 
 			if(!previousNotifications || previousNotifications.length === 0)
 			{
-				newNotifications = props.notifications;
+				newNotifications = notifications;
 			} 
 			else 
 			{
 				newNotifications = returnItemsInArrayNotInAnotherArrayById
 				(
-					props.notifications,
+					notifications,
 					previousNotifications!
 				);
 			}
@@ -64,15 +69,28 @@ const Notifications = (props: NotificationsProps) => {
 		}
 	}, 
 	[
-		props.notifications, 
-		previousNotifications, 
-		destroyNotificationAfterTimeoutEnds
+		notifications,
+		setNotifications, 
+		previousNotifications
 	]);
+}
+
+const Notifications = (props: NotificationsProps) => {
+
+	const { notifications, setNotifications } = props;
+	const previousProps = usePrevious({ notifications });
+	const previousNotifications: NotificationInstance[] | undefined = previousProps?.notifications;
+
+	useDestroyNewNotificationsAfterTimeout(
+		notifications,
+		setNotifications,
+		previousNotifications
+	);
 
 	return (
 		<div 
 			className="Notifications absolute flex horizontal_center_flex full_width">
-			{props.notifications
+			{notifications
 			.map((notificationInstance: NotificationInstance) => 
 			{
 				switch(notificationInstance.notificationType)
@@ -83,14 +101,21 @@ const Notifications = (props: NotificationsProps) => {
 								text={notificationInstance.text}
 								key={notificationInstance.id}
 							/>
-						)
+						);
 					case NotificationType.Success:
 						return (
 							<SuccessNotification 
 								text={notificationInstance.text}
 								key={notificationInstance.id}
 							/>
-						)
+						);
+					default:
+						return (
+							<SuccessNotification 
+								text={notificationInstance.text}
+								key={notificationInstance.id}
+							/>
+						);
 				}
 			})}
 		</div>

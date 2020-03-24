@@ -20,9 +20,6 @@ const EmailSuggestions = (props: SuggestionsProps) =>
 		setEmail(suggestedEmail);
 	}
 
-	const isAlphaNumeric = (input: string): boolean => 
-		isAlphaNumericRegex.test(input);
-
 	const checkForDomainToMatchEmail = 
 	(
 		emailCharactersAfterAtCharacter: string, 
@@ -59,65 +56,69 @@ const EmailSuggestions = (props: SuggestionsProps) =>
 		return suggestedEmail;
 	}
 
-	const setSuggestionsAfterEmailChanges = (): void =>
-	{
-		let newEmailSuggestions: string[] = [];
+	useEffect(() => {
 
-		for (let i: number = 0; i < popularEmailDomains.length; i++) 
+		const isAlphaNumeric = (input: string): boolean => 
+		isAlphaNumericRegex.test(input);
+
+		const setSuggestionsAfterEmailChanges = (): void =>
 		{
-			let suggestedEmail: string = "";
-			const popularEmailDomain: string = popularEmailDomains[i];
-
-			if (!email.includes(atCharacter))
+			let newEmailSuggestions: string[] = [];
+	
+			for (let i: number = 0; i < popularEmailDomains.length; i++) 
 			{
-					suggestedEmail = `${email}@${popularEmailDomain}.com`;
-			}
-
-			if(email.includes(atCharacter))
-			{
-				const emailSplitByAtCharacter: string[] = email.split(atCharacter);
-				const emailCharactersAfterAtCharacter: string = emailSplitByAtCharacter[1];
-				const emailCharactersBeforeAtCharacter: string = emailSplitByAtCharacter[0];
-
-				if 
-				(
-					emailCharactersAfterAtCharacter &&
-					!isAlphaNumeric(emailCharactersAfterAtCharacter)
-				)
+				let suggestedEmail: string = "";
+				const popularEmailDomain: string = popularEmailDomains[i];
+	
+				if (!email.includes(atCharacter))
 				{
-						continue;
+						suggestedEmail = `${email}@${popularEmailDomain}.com`;
 				}
-				
-				if (emailCharactersAfterAtCharacter.length === 0)
+	
+				if(email.includes(atCharacter))
 				{
-					suggestedEmail = `${email}${popularEmailDomain}.com`;
-				} 
-				else 
-				{
-					suggestedEmail = checkForDomainToMatchEmail
+					const emailSplitByAtCharacter: string[] = email.split(atCharacter);
+					const emailCharactersAfterAtCharacter: string = emailSplitByAtCharacter[1];
+					const emailCharactersBeforeAtCharacter: string = emailSplitByAtCharacter[0];
+	
+					if 
 					(
-						emailCharactersAfterAtCharacter,
-						popularEmailDomain,
-						emailCharactersBeforeAtCharacter
-					);
-
-					if(suggestedEmail === "")
+						emailCharactersAfterAtCharacter &&
+						!isAlphaNumeric(emailCharactersAfterAtCharacter)
+					)
 					{
-						continue;
+							continue;
 					}
-				}    
+					
+					if (emailCharactersAfterAtCharacter.length === 0)
+					{
+						suggestedEmail = `${email}${popularEmailDomain}.com`;
+					} 
+					else 
+					{
+						suggestedEmail = checkForDomainToMatchEmail
+						(
+							emailCharactersAfterAtCharacter,
+							popularEmailDomain,
+							emailCharactersBeforeAtCharacter
+						);
+	
+						if(suggestedEmail === "")
+						{
+							continue;
+						}
+					}    
+				}
+					
+				if (suggestedEmail && suggestedEmail !== "")
+				{
+					newEmailSuggestions.push(suggestedEmail);
+				}     
 			}
-				
-			if (suggestedEmail && suggestedEmail !== "")
-			{
-				newEmailSuggestions.push(suggestedEmail);
-			}     
+	
+			setEmailSuggestions(newEmailSuggestions);
 		}
 
-		setEmailSuggestions(newEmailSuggestions);
-	}
-
-	useEffect(() => {
 		setSuggestionsAfterEmailChanges();
 
 		if(email)
@@ -131,7 +132,6 @@ const EmailSuggestions = (props: SuggestionsProps) =>
 	}, 
 	[
 		email,
-		setSuggestionsAfterEmailChanges,
 		setShowEmailSuggestions
 	]);
 	
