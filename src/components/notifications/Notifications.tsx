@@ -17,19 +17,23 @@ interface NotificationsProps {
 
 const notificationTimeout: number = 6000;
 
+/**
+ * Sets a timeout for newly added notifications that will destroy the newly added 
+ * notitications after a given amount of time has passed.
+ * @param notifications - the current collection of notifications.
+ * @param setNotifications - hook that sets the collection of notifications.
+ * @param previousNotifications - the collection of notifications before the last update.
+ */
 const useDestroyNewNotificationsAfterTimeout =
 (
 	notifications: NotificationInstance[],
-	setNotifications: 
-		React.Dispatch<React.SetStateAction<NotificationInstance[]>>,
+	setNotifications: React.Dispatch<React.SetStateAction<NotificationInstance[]>>,
 	previousNotifications: NotificationInstance[] | undefined
 ): void =>
 {
 	useEffect(() =>
 	{
-		const destroyNotificationAfterTimeoutEnds = (
-			noticationToBeDestroyed: NotificationInstance
-		) => 
+		const destroyNotificationAfterTimeoutEnds = (noticationToBeDestroyed: NotificationInstance) => 
 		{
 			setTimeout(() => 
 			{
@@ -42,14 +46,13 @@ const useDestroyNewNotificationsAfterTimeout =
 			}, notificationTimeout);
 		};
 		
-		const notificationPropsHaveUpdated = previousNotifications?.length !==
-		notifications.length;
+		const notificationPropsHaveUpdated = previousNotifications?.length !== notifications.length;
 		
 		if (notificationPropsHaveUpdated) 
 		{
 			let newNotifications: NotificationInstance[] = [];
 
-			if(!previousNotifications || previousNotifications.length === 0)
+			if (!previousNotifications || previousNotifications.length === 0)
 			{
 				newNotifications = notifications;
 			} 
@@ -88,34 +91,23 @@ const Notifications = (props: NotificationsProps) => {
 	);
 
 	return (
-		<div 
-			className="Notifications absolute flex horizontal_center_flex full_width">
+		<div className="Notifications absolute flex horizontal_center_flex full_width">
 			{notifications
 			.map((notificationInstance: NotificationInstance) => 
 			{
+				const sharedProperties = {
+					text: notificationInstance.text,
+					key: notificationInstance.id
+				};
+				
 				switch(notificationInstance.notificationType)
 				{
 					case NotificationType.Error:
-						return (
-							<ErrorNotification 
-								text={notificationInstance.text}
-								key={notificationInstance.id}
-							/>
-						);
+						return <ErrorNotification {...sharedProperties} />;
 					case NotificationType.Success:
-						return (
-							<SuccessNotification 
-								text={notificationInstance.text}
-								key={notificationInstance.id}
-							/>
-						);
+						return <SuccessNotification {...sharedProperties} />;
 					default:
-						return (
-							<SuccessNotification 
-								text={notificationInstance.text}
-								key={notificationInstance.id}
-							/>
-						);
+						return <SuccessNotification {...sharedProperties} />;
 				}
 			})}
 		</div>

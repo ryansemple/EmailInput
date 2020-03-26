@@ -27,7 +27,7 @@ const isDomainInEmail = (email : string) : boolean =>
 	return emailSplitOnAtCharacter.length >= 2;
 }
 
-const rules: Validator[] = 
+const validationRules: Validator[] = 
 [
 	{
 		validationFunctionToPass: (email: string) => allKeyboardKeysRegex.test(email),
@@ -55,14 +55,17 @@ const EmailValidationForm = (props: EmailValidationForm) =>
 {
 	const handleSettingEmailMessage = (email: string) => 
 	{
-		for (let i: number = 0; i < rules.length; i++)
+		for (let i: number = 0; i < validationRules.length; i++)
 		{
-			const rule: Validator = rules[i];
+			const validationRule: Validator = validationRules[i];
 
-			if (!rule.validationFunctionToPass(email))
+			const validationRulePassed: boolean = validationRule
+				.validationFunctionToPass(email);
+
+			if (!validationRulePassed)
 			{
 				props.setEmailIsValid(false);
-				props.setEmailMessage(rule.errorMessageIfFailed);
+				props.setEmailMessage(validationRule.errorMessageIfFailed);
 				return;
 			}
 		}
@@ -87,17 +90,20 @@ const EmailValidationForm = (props: EmailValidationForm) =>
 		}	
 	}
 	
+	const inputName: string = "EmailValidator";
+
 	return (
 		<>
-			<Label 
-				className="block float_left"
+			<Label
+				className="block"
 				text="Enter Email"
+				htmlFor={inputName}
 			/>
-			<br />
 			<Input
-				className="block float_left clear_left full_width"
+				className="block full_width"
 				onChange={emailChangedEvent}
 				value={props.email}
+				name={inputName}
 			/>
 		</>
 	)

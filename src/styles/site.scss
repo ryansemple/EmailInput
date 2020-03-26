@@ -11,20 +11,7 @@
 .error {
 	color: $red;
 	border: 1px solid $red;
-	padding: 20px;
 	border-radius: $box-border-radius;
-}
-
-.block {
-	display: block;
-}
-
-.flex {
-	display: flex;
-}
-
-.absolute {
-	position: absolute;
 }
 
 .container {
@@ -40,13 +27,25 @@
 	clear: left;
 }
 
+/* General ------------------------------------*/
+
+/* Positioning --------------------------------*/
+
+.block {
+	display: block;
+}
+
 .inline_block {
 	display: inline-block;
 }
 
-/* General ------------------------------------*/
+.flex {
+	display: flex;
+}
 
-/* Positioning --------------------------------*/
+.absolute {
+	position: absolute;
+}
 
 .horizontal_center_flex {
 	justify-content: center;
@@ -66,24 +65,12 @@
 
 /* Spacing ------------------------------------*/
 
-.margin_top_10 {
-	margin-top: 10px;
+.margin_bottom_medium {
+	margin-bottom: $medium-spacing;
 }
 
-.margin_top_20 {
-	margin-top: 20px;
-}
-
-.margin_top_40 {
-	margin-top: 40px;
-}
-
-.margin_bottom_20 {
-	margin-bottom: 20px;
-}
-
-.margin_bottom_40 {
-	margin-bottom: 40px;
+.padding_small {
+	padding: $small-spacing;
 }
 
 .full_width {
@@ -106,7 +93,6 @@ body {
 
 .form_label {
 	font-size: 20px;
-	font-weight: 400;
 	margin-bottom: 8px;
 	text-align: left;
 	font-weight: 600;

@@ -7,24 +7,15 @@ interface ButtonProps {
 	disabled?: boolean
 }
 
-const Button = (props: ButtonProps) => {
-
-	const onClick = 
-	(event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => 
-	{
-		props.onClick();
-	};
-
-	return (
-		<button
-			type="button"
-			className="Button"
-			onClick={onClick}
-			style={props.style}
-			disabled={props.disabled}>
-			{props.text}
-		</button>
-	);
-}
+const Button = (props: ButtonProps) => (
+	<button
+		type="button"
+		className="Button"
+		onClick={() => { props.onClick(); }}
+		style={props.style}
+		disabled={props.disabled}>
+		{props.text}
+	</button>
+);
 
 export default Button;

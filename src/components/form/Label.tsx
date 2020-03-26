@@ -2,11 +2,14 @@ import React from "react";
 
 interface LabelProps {
 	className: string,
-	text: string
+	text: string,
+	htmlFor?: string
 }
 
 const Label = (props: LabelProps) => (
-	<label className={`form_label ${props.className}`}>
+	<label
+		htmlFor={props.htmlFor}
+		className={`form_label ${props.className}`}>
 		{props.text}
 	</label>
 )

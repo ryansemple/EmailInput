@@ -107,7 +107,7 @@ const EmailSuggestions = (props: SuggestionsProps) =>
 						{
 							continue;
 						}
-					}    
+					}
 				}
 					
 				if (suggestedEmail && suggestedEmail !== "")

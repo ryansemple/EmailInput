@@ -9,10 +9,9 @@ const InformationDisplay = (props: InformationDisplay) => (
 	<>
 		<Label
 			className="block"
-			text="Information:"
+			text="Information"
 		/>
-		<p 
-			className="error margin_bottom_20 block full_width">
+		<p className="error block full_width padding_small">
 			{props.emailMessage}
 		</p>
 	</>
