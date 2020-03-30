@@ -9,7 +9,7 @@ import InformationDisplay from "./InformationDisplay";
 import { isNetworkError } from "../utility/Network";
 import { returnNewUuid } from "../utility/Uuid";
 import { 
-	NotificationInstance, 
+	NotificationImplementation as Notification, 
 	NotificationType
 } from "../types/Notification";
 import Notifications from "./notifications/Notifications";
@@ -23,7 +23,7 @@ const MainContent = () =>
 	const [emailIsVerified, setEmailIsVerified] = useState(false);
 	const [emailMessage, setEmailMessage] = useState("");
 	const [emailIsValid, setEmailIsValid] = useState(false);
-	const [notifications, setNotifications] = useState<NotificationInstance[]>([]);
+	const [notifications, setNotifications] = useState<Notification[]>([]);
 	const [testCount, setTestCount] = useState(1);
 
 	const checkEmail = () => 
@@ -36,21 +36,38 @@ const MainContent = () =>
 		{
 			const successfullySent: boolean = response.data.success;	
 			setEmailIsVerified(successfullySent);
-			setEmailMessage(successfullySent ? "" : response.data.reason);
+
+			if(!successfullySent)
+			{
+				setEmailMessage(response.data.reason);
+			} 
+			else 
+			{
+				setEmailMessage("");
+			}
+
+			const successNotification: Notification = new Notification(
+				"Email has been successfully verified as being valid.",
+				NotificationType.Success
+			);
+
+			setNotifications([
+				...notifications,
+				successNotification
+			]);
 		})
 		.catch((error: AxiosError) => 
     {
 			if(isNetworkError(error))
 			{
-				const notificationInstance: NotificationInstance = {
-					text: "There was a network error, please check your internet connection and try again.",
-					id: returnNewUuid(),
-					notificationType: NotificationType.Error
-				}
+				const networkErrorNotification: Notification = new Notification(
+					"There was a network error, please check your internet connection and try again.",
+					NotificationType.Error
+				);
 
 				setNotifications([
 					...notifications,
-					notificationInstance
+					networkErrorNotification
 				]);
 			}
     });
@@ -59,19 +76,19 @@ const MainContent = () =>
 	//`~TEST
 	const testButtonClick = (event: any) => 
 	{
-		const newNotificationInstance: NotificationInstance = {
+		const newNotification: Notification = {
 			text: `${testCount} There was a network error, please check your internet connection and try again.`,
 			id: returnNewUuid(),
 			notificationType: NotificationType.Success
 		};
 
-		console.log(`new notification uuid: ${newNotificationInstance.id}`);
+		console.log(`new notification uuid: ${newNotification.id}`);
 
 		setTestCount(testCount + 1);
 
 		setNotifications([
 			...notifications,
-			newNotificationInstance
+			newNotification
 		]);
 	};
 
@@ -87,7 +104,6 @@ const MainContent = () =>
 								setEmailMessage={(emailMessage: string) => setEmailMessage(emailMessage)}
 								setEmailIsValid={(emailIsValid: boolean) => setEmailIsValid(emailIsValid)}
 							/>
-							<br />
 							<EmailSuggestions
 								email={email}
 								setEmail={(email: string) => setEmail(email)}
@@ -101,6 +117,7 @@ const MainContent = () =>
 							<Button 
 								onClick={checkEmail}
 								disabled={!emailIsValid}
+								disabledTooltipTitle={"Disabled: email not valid"}
 								text={emailIsVerified ? "Verified!" : "Verify"}
 								style={{background: emailIsVerified ? green : brandOrange}}
 							/>

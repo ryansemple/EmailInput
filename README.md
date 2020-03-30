@@ -17,9 +17,6 @@ that makes sense for it to take precedent over other styles by default.
 I also group styles into general areas that they belong to like Form, 
 Fonts and Header areas using comments.
 
-•If you find my code to be narrow, the reason is because I work the majority 
-of time in split screen code windows so it's easier visually to see as 
-much information as possible.
 •
 
 ## Available Scripts

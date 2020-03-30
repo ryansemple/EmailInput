@@ -3,7 +3,7 @@ import ErrorNotification from "./ErrorNotification";
 import SuccessNotification from "./SuccessNotification";
 import { 
 	NotificationType,
-	NotificationInstance
+	Notification
 } from "../../types/Notification";
 import usePrevious from "../../hooks/usePrevious";
 import { 
@@ -11,8 +11,8 @@ import {
 } from "../../utility/Array";
 
 interface NotificationsProps {
-	notifications: NotificationInstance[],
-	setNotifications: React.Dispatch<React.SetStateAction<NotificationInstance[]>>
+	notifications: Notification[],
+	setNotifications: React.Dispatch<React.SetStateAction<Notification[]>>
 }
 
 const notificationTimeout: number = 6000;
@@ -26,20 +26,20 @@ const notificationTimeout: number = 6000;
  */
 const useDestroyNewNotificationsAfterTimeout =
 (
-	notifications: NotificationInstance[],
-	setNotifications: React.Dispatch<React.SetStateAction<NotificationInstance[]>>,
-	previousNotifications: NotificationInstance[] | undefined
+	notifications: Notification[],
+	setNotifications: React.Dispatch<React.SetStateAction<Notification[]>>,
+	previousNotifications: Notification[] | undefined
 ): void =>
 {
 	useEffect(() =>
 	{
-		const destroyNotificationAfterTimeoutEnds = (noticationToBeDestroyed: NotificationInstance) => 
+		const destroyNotificationAfterTimeoutEnds = (noticationToBeDestroyed: Notification) => 
 		{
 			setTimeout(() => 
 			{
 				setNotifications(_notifications =>	{
 					return _notifications
-					.filter((notificationInstance: NotificationInstance) => 
+					.filter((notificationInstance: Notification) => 
 							notificationInstance.id !== noticationToBeDestroyed.id
 					);
 				});
@@ -50,7 +50,7 @@ const useDestroyNewNotificationsAfterTimeout =
 		
 		if (notificationPropsHaveUpdated) 
 		{
-			let newNotifications: NotificationInstance[] = [];
+			let newNotifications: Notification[] = [];
 
 			if (!previousNotifications || previousNotifications.length === 0)
 			{
@@ -82,7 +82,7 @@ const Notifications = (props: NotificationsProps) => {
 
 	const { notifications, setNotifications } = props;
 	const previousProps = usePrevious({ notifications });
-	const previousNotifications: NotificationInstance[] | undefined = previousProps?.notifications;
+	const previousNotifications: Notification[] | undefined = previousProps?.notifications;
 
 	useDestroyNewNotificationsAfterTimeout(
 		notifications,
@@ -93,7 +93,7 @@ const Notifications = (props: NotificationsProps) => {
 	return (
 		<div className="Notifications absolute flex horizontal_center_flex full_width">
 			{notifications
-			.map((notificationInstance: NotificationInstance) => 
+			.map((notificationInstance: Notification) => 
 			{
 				const sharedProperties = {
 					text: notificationInstance.text,

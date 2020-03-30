@@ -21,5 +21,7 @@ $gutter-padding: 15px;
 
 .row {
     margin-left: -#{$gutter-padding};
-    margin-right: -#{$gutter-padding};
+		margin-right: -#{$gutter-padding};
+    display: flex;
+    flex-wrap: wrap;
 }
