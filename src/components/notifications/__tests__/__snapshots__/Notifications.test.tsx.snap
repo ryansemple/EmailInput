@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders Notifications component correctly. 1`] = `
+<div>
+  <div
+    class="Notifications absolute flex horizontal_center_flex full_width"
+  >
+    <div
+      class="Notifications_Notification Notifications_Notification-Success"
+      role="alert"
+    >
+      <p>
+        success
+      </p>
+    </div>
+    <div
+      class="Notifications_Notification Notifications_Notification-Error"
+      role="alert"
+    >
+      <p>
+        error
+      </p>
+    </div>
+  </div>
+</div>
+`;

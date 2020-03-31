@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders Notification component correctly. 1`] = `
+<div>
+  <div
+    class="Notifications_Notification class"
+    role="alert"
+  >
+    <p>
+      Notification
+    </p>
+  </div>
+</div>
+`;
