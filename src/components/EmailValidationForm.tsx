@@ -16,7 +16,8 @@ interface EmailValidationForm {
 	setEmailIsValid: (emailIsValid: boolean) => void,
 	emailIsValid: boolean,
 	emailMessage?: string,
-	className?: string
+	className?: string,
+	resetEmail: () => void
 }
 
 interface Validator {
@@ -61,6 +62,8 @@ const validationRules: Validator[] =
 
 const EmailValidationForm = (props: EmailValidationForm) => 
 {
+	const { setEmail, setEmailIsValid, setEmailMessage, resetEmail } = props;
+	
 	const handleSettingEmailMessage = (email: string) => 
 	{
 		for (let i: number = 0; i < validationRules.length; i++)
@@ -72,20 +75,20 @@ const EmailValidationForm = (props: EmailValidationForm) =>
 
 			if (!validationRulePassed)
 			{
-				props.setEmailIsValid(false);
-				props.setEmailMessage(validationRule.errorMessageIfFailed);
+				setEmailIsValid(false);
+				setEmailMessage(validationRule.errorMessageIfFailed);
 				return;
 			}
 		}
 
 		//email passed all validation tests
-		props.setEmailIsValid(true);
-		props.setEmailMessage("Email appears to be valid");
+		setEmailIsValid(true);
+		setEmailMessage("Email appears to be valid");
 	}
 	
-	const emailChangedEvent = (email: string): void => 
+	const emailChanged = (email: string): void => 
 	{		
-		props.setEmail(email);
+		setEmail(email);
 
 		if (email)
 		{
@@ -93,8 +96,8 @@ const EmailValidationForm = (props: EmailValidationForm) =>
 		} 
 		else 
 		{
-			props.setEmailIsValid(false);
-			props.setEmailMessage("");
+			setEmailIsValid(false);
+			setEmailMessage("");
 		}	
 	}
 	
@@ -113,12 +116,12 @@ const EmailValidationForm = (props: EmailValidationForm) =>
 			<div className="relative">
 				<Input
 					className="block full_width"
-					onChange={emailChangedEvent}
+					onChange={emailChanged}
 					value={props.email}
 					name={inputName}
 				/>
 				<Button 
-					onClick={() => { alert("hey"); }}
+					onClick={() => { resetEmail(); }}
 					text="×"
 					className="Button-Clear absolute"
 					notDisabledTooltipTitle="Clear text input"

@@ -3,7 +3,6 @@ import EmailValidationForm from "./EmailValidationForm";
 import Label from "./form/Label";
 import axios, { AxiosError } from "axios";
 import { KickBoxResponse } from "../utility/Kickbox";
-import { brandOrange, green } from "../styles/sass.scss";
 import { isNetworkError } from "../utility/Network";
 import { Notification } from "../types/Notification";
 import { ValidationType } from "../types/Validation";
@@ -15,11 +14,9 @@ const serverDomainUrl: string = "http://localhost:3001";
 const MainContent = () =>
 {
 	const [email, setEmail] = useState("");
-	const [emailIsVerified, setEmailIsVerified] = useState(false);
 	const [emailMessage, setEmailMessage] = useState("");
 	const [emailIsValid, setEmailIsValid] = useState(false);
 	const [notifications, setNotifications] = useState<Notification[]>([]);
-	//const [testCount, setTestCount] = useState(1);
 
 	const checkEmail = () => 
 	{
@@ -30,25 +27,28 @@ const MainContent = () =>
 		.then((response: KickBoxResponse) =>
 		{
 			const successfullySent: boolean = response.data.success;	
-			setEmailIsVerified(successfullySent);
+			let notification: Notification;
 
 			if(!successfullySent)
 			{
 				setEmailMessage(response.data.reason);
+				notification = new Notification(
+					"Email has been successfully verified as being valid.",
+					ValidationType.Success
+				);
 			} 
 			else 
 			{
 				setEmailMessage("");
+				notification = new Notification(
+					"Email has been successfully verified as being valid.",
+					ValidationType.Success
+				);
 			}
-
-			const successNotification: Notification = new Notification(
-				"Email has been successfully verified as being valid.",
-				ValidationType.Success
-			);
 
 			setNotifications([
 				...notifications,
-				successNotification
+				notification
 			]);
 		})
 		.catch((error: AxiosError) => 
@@ -68,24 +68,12 @@ const MainContent = () =>
     });
 	}
 
-	//`~TEST
-	// const testButtonClick = (event: any) => 
-	// {
-	// 	const newNotification: Notification = {
-	// 		text: `${testCount} There was a network error, please check your internet connection and try again.`,
-	// 		id: returnNewUuid(),
-	// 		notificationType: ValidationType.Success
-	// 	};
-
-	// 	console.log(`new notification uuid: ${newNotification.id}`);
-
-	// 	setTestCount(testCount + 1);
-
-	// 	setNotifications([
-	// 		...notifications,
-	// 		newNotification
-	// 	]);
-	// };
+	const resetEmail = (): void => 
+	{
+		setEmail("");
+		setEmailIsValid(false);
+		setEmailMessage("");
+	}
 
 	return (
 		<div className="container">
@@ -99,19 +87,23 @@ const MainContent = () =>
 						emailIsValid={emailIsValid}
 						emailMessage={emailMessage}
 						className="full_width"
+						resetEmail={resetEmail}
 					/>
 					<div>
+						{/*
+						 Dummy Label element so that they "Verify" button is vertically aligned with the email textbox/
+						*/}
 						<Label 
 							text="&nbsp;"
 							className="block"
 						/>
-					<Button 
-						onClick={checkEmail}
-						disabled={!emailIsValid}
-						disabledTooltipTitle={"Disabled: email not valid"}
-						text={"Verify"}
-						className="margin_left_small"
-					/>
+						<Button 
+							onClick={checkEmail}
+							disabled={!emailIsValid}
+							disabledTooltipTitle={"Disabled: email not valid"}
+							text={"Verify"}
+							className="margin_left_small"
+						/>
 					</div>
 				</div>
 			</div>
