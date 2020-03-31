@@ -14,11 +14,6 @@
 	border-radius: $box-border-radius;
 }
 
-.container {
-	width: $container-width;
-	display: block;
-}
-
 .clear_children_float:after {
 	@include clear-children-float();
 }
@@ -47,6 +42,10 @@
 	position: absolute;
 }
 
+.relative {
+	position: relative;
+}
+
 .horizontal_center_flex {
 	justify-content: center;
 	align-items: center;
@@ -69,6 +68,14 @@
 	margin-bottom: $medium-spacing;
 }
 
+.margin_top_small {
+	margin-top: $small-spacing;
+}
+
+.margin_left_small {
+	margin-left: $small-spacing;
+}
+
 .padding_small {
 	padding: $small-spacing;
 }
@@ -78,6 +85,18 @@
 }
 
 /* Spacing ------------------------------------*/
+
+/* Color --------------------------------------*/
+
+.green {
+	color: $green;
+}
+
+.red {
+	color: $red;
+}
+
+/* Color --------------------------------------*/
 
 /* Font ---------------------------------------*/
 
@@ -118,10 +137,18 @@ body {
 	color: white;
 	height: $input-height;
 	padding: 0 14px;
+	border-radius: $box-border-radius;
+	cursor: pointer;
 
 	&:disabled {
 		opacity: .6;
+		cursor: not-allowed;
 	}
+}
+
+.Button-Clear {
+	background-color: $border-grey;
+	font-size: 26px;
 }
 
 /* Button -------------------------------------*/

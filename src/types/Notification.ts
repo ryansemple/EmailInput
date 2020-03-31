@@ -1,15 +1,11 @@
 import ObjectWithId from "../types/ObjectWithId";
 import { returnNewUuid } from "../utility/Uuid";
+import { ValidationType } from "./Validation";
 
-export enum NotificationType {
-	Success,
-	Error
-}
-
-export interface Notification extends ObjectWithId {
+interface NotificationInterface extends ObjectWithId {
 	text: string,
 	id: string,
-	notificationType: NotificationType
+	notificationType: ValidationType
 }
 
 /**
@@ -20,16 +16,16 @@ export interface Notification extends ObjectWithId {
  * @constructor
  * @param {string} text - The text that will appear in the notification.
  * @param {id} id - the id that will be used to uniquely identity the notification.
- * @param {NotificationType} notificationType - the type of notification, will
+ * @param {ValidationType} notificationType - the type of notification, will
  * change the style of the notification.
  */
-export class NotificationImplementation implements Notification {
+export class Notification implements NotificationInterface {
 
 	public readonly text: string;
 	public readonly id: string;
-	public readonly notificationType: NotificationType;
+	public readonly notificationType: ValidationType;
 
-	constructor(text: string, notificationType: NotificationType) 
+	constructor(text: string, notificationType: ValidationType) 
 	{ 
 		this.text = text;
 		this.id = returnNewUuid();

@@ -3,12 +3,20 @@ import Label from "./form/Label";
 import Input from "./form/Input";
 import { allKeyboardKeysRegex } from "../utility/Regex";
 import { atCharacter } from "../utility/String";
+import Button from "./form/Button";
+import EmailSuggestions from "./suggestions/Suggestions";
+import ValidationMessage from "./ValidationMessage";
+import { ValidationType } from "../types/Validation";
+import clsx from "clsx";
 
 interface EmailValidationForm {
 	setEmail: (email: string) => void,
 	setEmailMessage: (emailMessage: string) => void,
 	email: string,
-	setEmailIsValid: (emailIsValid: boolean) => void
+	setEmailIsValid: (emailIsValid: boolean) => void,
+	emailIsValid: boolean,
+	emailMessage?: string,
+	className?: string
 }
 
 interface Validator {
@@ -91,21 +99,47 @@ const EmailValidationForm = (props: EmailValidationForm) =>
 	}
 	
 	const inputName: string = "EmailValidator";
+	const validationType: ValidationType = props.emailIsValid ?
+	ValidationType.Success :
+	ValidationType.Error;
 
 	return (
-		<>
+		<div className={clsx("EmailValidationForm", props.className)}>
 			<Label
 				className="block"
 				text="Enter Email"
 				htmlFor={inputName}
 			/>
-			<Input
-				className="block full_width"
-				onChange={emailChangedEvent}
-				value={props.email}
-				name={inputName}
+			<div className="relative">
+				<Input
+					className="block full_width"
+					onChange={emailChangedEvent}
+					value={props.email}
+					name={inputName}
+				/>
+				<Button 
+					onClick={() => { alert("hey"); }}
+					text="×"
+					className="Button-Clear absolute"
+					notDisabledTooltipTitle="Clear text input"
+					style={{
+						top: 0,
+						bottom: 0,
+						right: 0,
+						borderTopLeftRadius: 0,
+						borderBottomLeftRadius: 0
+					}}
+				/>
+			</div>
+			<EmailSuggestions
+				email={props.email}
+				setEmail={(email: string) => props.setEmail(email)}
 			/>
-		</>
+			<ValidationMessage
+				validationMessage={props.emailMessage}
+				validationType={validationType}
+			/>
+		</div>
 	)
 }
 

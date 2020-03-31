@@ -1,18 +1,30 @@
 import React from "react";
+import clsx from "clsx";
 
 interface ButtonProps {
 	text: string,
 	onClick: Function,
 	style?: any,
 	disabled?: boolean,
-	disabledTooltipTitle?: string
+	disabledTooltipTitle?: string,
+	notDisabledTooltipTitle?: string,
+	className?: string
 }
 
 const Button = (props: ButtonProps) => (
 	<button
 		type="button"
-		className="Button"
-		title={props.disabled ? props.disabledTooltipTitle : ""}
+		className={
+			clsx(
+				props.className && props.className,
+				"Button"
+			)
+		}
+		title={
+			props.disabled ? 
+			props.disabledTooltipTitle : 
+			props.notDisabledTooltipTitle
+		}
 		onClick={() => { props.onClick(); }}
 		style={props.style}
 		disabled={props.disabled}>

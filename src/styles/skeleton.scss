@@ -1,5 +1,12 @@
 $gutter-padding: 15px;
 
+.container {
+	width: $container-width;
+	display: block;
+	padding-left: $gutter-padding;
+	padding-right: $gutter-padding;
+}
+
 .col-sm-12,
 .col-sm-6,
 .col-sm-18 {
@@ -19,9 +26,25 @@ $gutter-padding: 15px;
     width: 75%;   
 }
 
+.col-sm-24 {
+	width: 100%;
+}
+
 .row {
-    margin-left: -#{$gutter-padding};
-		margin-right: -#{$gutter-padding};
-    display: flex;
-    flex-wrap: wrap;
+	margin-left: -#{$gutter-padding};
+	margin-right: -#{$gutter-padding};
+	display: flex;
+	flex-wrap: wrap;
+}
+
+@media screen and (max-width: $container-width) {
+	#root .container { 
+		width: 100%;
+	}
+}
+
+@media screen and (max-width: 950px) {
+	.col-xs-24 {
+		width: 100%;
+	}
 }

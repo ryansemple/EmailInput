@@ -5,15 +5,12 @@ import Label from "./form/Label";
 import axios, { AxiosError } from "axios";
 import { KickBoxResponse } from "../utility/Kickbox";
 import { brandOrange, green } from "../styles/sass.scss";
-import InformationDisplay from "./InformationDisplay";
 import { isNetworkError } from "../utility/Network";
-import { returnNewUuid } from "../utility/Uuid";
-import { 
-	NotificationImplementation as Notification, 
-	NotificationType
-} from "../types/Notification";
+import { Notification } from "../types/Notification";
+import { ValidationType } from "../types/Validation";
 import Notifications from "./notifications/Notifications";
 import Button from "./form/Button";
+import ValidationMessage from "./ValidationMessage";
 
 const serverDomainUrl: string = "http://localhost:3001";
 
@@ -24,7 +21,7 @@ const MainContent = () =>
 	const [emailMessage, setEmailMessage] = useState("");
 	const [emailIsValid, setEmailIsValid] = useState(false);
 	const [notifications, setNotifications] = useState<Notification[]>([]);
-	const [testCount, setTestCount] = useState(1);
+	//const [testCount, setTestCount] = useState(1);
 
 	const checkEmail = () => 
 	{
@@ -48,7 +45,7 @@ const MainContent = () =>
 
 			const successNotification: Notification = new Notification(
 				"Email has been successfully verified as being valid.",
-				NotificationType.Success
+				ValidationType.Success
 			);
 
 			setNotifications([
@@ -62,7 +59,7 @@ const MainContent = () =>
 			{
 				const networkErrorNotification: Notification = new Notification(
 					"There was a network error, please check your internet connection and try again.",
-					NotificationType.Error
+					ValidationType.Error
 				);
 
 				setNotifications([
@@ -74,65 +71,61 @@ const MainContent = () =>
 	}
 
 	//`~TEST
-	const testButtonClick = (event: any) => 
-	{
-		const newNotification: Notification = {
-			text: `${testCount} There was a network error, please check your internet connection and try again.`,
-			id: returnNewUuid(),
-			notificationType: NotificationType.Success
-		};
+	// const testButtonClick = (event: any) => 
+	// {
+	// 	const newNotification: Notification = {
+	// 		text: `${testCount} There was a network error, please check your internet connection and try again.`,
+	// 		id: returnNewUuid(),
+	// 		notificationType: ValidationType.Success
+	// 	};
 
-		console.log(`new notification uuid: ${newNotification.id}`);
+	// 	console.log(`new notification uuid: ${newNotification.id}`);
 
-		setTestCount(testCount + 1);
+	// 	setTestCount(testCount + 1);
 
-		setNotifications([
-			...notifications,
-			newNotification
-		]);
-	};
+	// 	setNotifications([
+	// 		...notifications,
+	// 		newNotification
+	// 	]);
+	// };
 
 	return (
 		<div className="container">
-			<div className="row">
-				<div className="col-sm-12">
-					<div className="row">
-						<div className="col-sm-18">
-							<EmailValidationForm
-								setEmail={(email: string) => setEmail(email)}
-								email={email}
-								setEmailMessage={(emailMessage: string) => setEmailMessage(emailMessage)}
-								setEmailIsValid={(emailIsValid: boolean) => setEmailIsValid(emailIsValid)}
-							/>
-							<EmailSuggestions
-								email={email}
-								setEmail={(email: string) => setEmail(email)}
-							/>
-						</div>
-						<div className="col-sm-6">
-							<Label 
-								className="block"
-								text="&nbsp;"
-							/>
-							<Button 
-								onClick={checkEmail}
-								disabled={!emailIsValid}
-								disabledTooltipTitle={"Disabled: email not valid"}
-								text={emailIsVerified ? "Verified!" : "Verify"}
-								style={{background: emailIsVerified ? green : brandOrange}}
-							/>
-							<Button 
-								onClick={testButtonClick}
-								text="Test add notification"
-								style={{ marginTop: "20px" }}
-							/>
-						</div>
-					</div>
-				</div>
-				<div className="col-sm-12">
-					<InformationDisplay 
-						emailMessage={emailMessage} 
+			<div className="row horizontal_center_flex">
+				<div className="col-sm-12 col-xs-24 flex">
+					<EmailValidationForm
+						setEmail={(email: string) => setEmail(email)}
+						email={email}
+						setEmailMessage={(emailMessage: string) => setEmailMessage(emailMessage)}
+						setEmailIsValid={(emailIsValid: boolean) => setEmailIsValid(emailIsValid)}
+						emailIsValid={emailIsValid}
+						emailMessage={emailMessage}
+						className="full_width"
 					/>
+					{/* <EmailSuggestions
+						email={email}
+						setEmail={(email: string) => setEmail(email)}
+					/> */}
+					<div>
+						<Label 
+							text="&nbsp;"
+							className="block"
+						/>
+					<Button 
+						onClick={checkEmail}
+						disabled={!emailIsValid}
+						disabledTooltipTitle={"Disabled: email not valid"}
+						text={"Verify"}
+						style={{
+							background: emailIsVerified ? green : brandOrange
+						}}
+						className="margin_left_small"
+					/>
+					</div>
+					{/* <ValidationMessage
+						validationMessage={emailMessage}
+						validationType={validationType}
+					/> */}
 				</div>
 			</div>
 			<Notifications 

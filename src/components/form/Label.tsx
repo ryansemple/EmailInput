@@ -1,7 +1,8 @@
 import React from "react";
+import clsx from "clsx";
 
 interface LabelProps {
-	className: string,
+	className?: string,
 	text: string,
 	htmlFor?: string
 }
@@ -9,7 +10,7 @@ interface LabelProps {
 const Label = (props: LabelProps) => (
 	<label
 		htmlFor={props.htmlFor}
-		className={`form_label ${props.className}`}>
+		className={clsx("form_label", props.className && props.className)}>
 		{props.text}
 	</label>
 )

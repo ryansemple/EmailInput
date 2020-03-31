@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
 import ErrorNotification from "./ErrorNotification";
 import SuccessNotification from "./SuccessNotification";
-import { 
-	NotificationType,
-	Notification
-} from "../../types/Notification";
+import { Notification } from "../../types/Notification";
+import { ValidationType } from "../../types/Validation";
 import usePrevious from "../../hooks/usePrevious";
 import { 
 	returnItemsInArrayNotInAnotherArrayById
@@ -102,9 +100,9 @@ const Notifications = (props: NotificationsProps) => {
 				
 				switch(notificationInstance.notificationType)
 				{
-					case NotificationType.Error:
+					case ValidationType.Error:
 						return <ErrorNotification {...sharedProperties} />;
-					case NotificationType.Success:
+					case ValidationType.Success:
 						return <SuccessNotification {...sharedProperties} />;
 					default:
 						return <SuccessNotification {...sharedProperties} />;
