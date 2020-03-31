@@ -9,27 +9,13 @@
 	}
 }
 
-.col-sm-12,
-.col-sm-6,
-.col-sm-18 {
-    padding: 0 $gutter-padding;
-    float: left;
-}
-
-.col-sm-12 {
-    width: 50%;
-}
-
-.col-sm-6 {
-    width: 25%;
-}
-
-.col-sm-18 {
-    width: 75%;   
-}
-
+.col-md-12,
 .col-sm-24 {
-	width: 100%;
+	padding: 0 $gutter-padding;
+}
+
+.col-md-12 { 
+	width: 50%;
 }
 
 .row {
@@ -40,7 +26,7 @@
 }
 
 @media screen and (max-width: $tablet-screen-width) {
-	.col-xs-24 {
+	.col-sm-24 {
 		width: 100%;
 	}
 }

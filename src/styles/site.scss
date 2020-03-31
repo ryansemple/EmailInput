@@ -107,7 +107,7 @@ body {
 	cursor: pointer;
 
 	&:disabled {
-		opacity: .6;
+		opacity: $disabled-opacity;
 		cursor: not-allowed;
 	}
 }
@@ -150,7 +150,7 @@ body {
 	background-color: $off-white;
 	
 	&:hover {
-			background-color: darken($off-white, $lightness-delta);
+		background-color: darken($off-white, $lightness-delta);
 	}
 
 	&:last-child {
@@ -193,11 +193,3 @@ body {
 }
 
 /* Notifications ------------------------------*/
-
-/* Keep Last ----------------------------------*/
-
-.show {
-	display: block;
-}
-
-/* Keep Last ----------------------------------*/

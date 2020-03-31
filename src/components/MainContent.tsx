@@ -80,7 +80,7 @@ const MainContent = () =>
 	return (
 		<div className="container">
 			<div className="row horizontal_center_flex">
-				<div className="col-sm-12 col-xs-24 flex">
+				<div className="col-md-12 col-sm-24 flex">
 					<EmailValidationForm
 						setEmail={(email: string) => setEmail(email)}
 						email={email}
