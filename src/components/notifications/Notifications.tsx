@@ -13,7 +13,7 @@ interface NotificationsProps {
 	setNotifications: React.Dispatch<React.SetStateAction<Notification[]>>
 }
 
-const notificationTimeout: number = 6000;
+const notificationTimeout: number = 6000 * 6000;
 
 /**
  * Sets a timeout for newly added notifications that will destroy the newly added 

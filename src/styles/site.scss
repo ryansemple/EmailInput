@@ -87,8 +87,8 @@ body {
 	height: $input-height;
 	line-height: $input-height;
 	border-radius: $box-border-radius;
-	border: 0.063rem solid $border-grey;
-	padding: 0 0.625rem;
+	border: $thin-border-width solid $border-grey;
+	padding: $input-padding;
 	font: $body-font;
 }
 
@@ -102,7 +102,7 @@ body {
 	border: none;
 	color: white;
 	height: $input-height;
-	padding: 0 0.875rem;
+	padding: $button-padding;
 	border-radius: $box-border-radius;
 	cursor: pointer;
 
@@ -122,19 +122,19 @@ body {
 /* Header -------------------------------------*/
 
 .Header {
-	border-bottom: $border-width solid $brand-orange;
+	border-bottom: $thick-border-width solid $brand-orange;
 	height: $header-height;
 	color: white;
 	text-align: center;
 	background-color: $brand-off-black;
-}
-  
-.Header h1 {
-	line-height: $header-height;
-	font-size: $h1-font-size;
 
-	@media screen and (max-width: $phone-screen-width) {
-		font-size: $h1-font-size - .35;
+	h1 {
+		line-height: $header-height;
+		font-size: $h1-font-size;
+	
+		@media screen and (max-width: $phone-screen-width) {
+			font-size: $h1-font-size - .35;
+		}
 	}
 }
 
@@ -142,15 +142,12 @@ body {
 
 /* Suggestions --------------------------------*/
 
-.Email_Suggestions {
-	background-color: $off-white;
-}
-
 .Email_Suggestions_Suggestion {
 	cursor: pointer;
-	padding: 0.625rem 0.313rem;
+	padding: 0.563rem $input-padding-left-right;
 	text-decoration: underline;
 	color: $link-blue;
+	background-color: $off-white;
 	
 	&:hover {
 			background-color: darken($off-white, $lightness-delta);
@@ -169,7 +166,7 @@ body {
 .Notifications {
 	left: 0;
 	right: 0;
-	bottom: 1.25rem;
+	bottom: $gutter-padding;
 	flex-wrap: wrap;
 }
 
