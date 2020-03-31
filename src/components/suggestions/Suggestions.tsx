@@ -28,7 +28,7 @@ const EmailSuggestions = (props: SuggestionsProps) =>
 	): string => 
 	{
 		let suggestedEmail: string = "";
-		const popularEmailDomainCharacters: string[] =
+		const popularEmailDomainCharacters: string[] = 
 			popularEmailDomain.split("");
 		let popularEmailMatch: boolean = true;
 		

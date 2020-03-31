@@ -21,12 +21,10 @@ Fonts and Header areas using comments.
 
 ## Available Scripts
 
-In the project directory, you can run:
-
 ### `npm start`
 
 Starts the app in development mode, also starts the server that will be used to make calls to the Kickbox API.
 
-### `npm test`
+### `npm run test`
 
 Runs all tests.

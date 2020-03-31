@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders Suggestions component correctly. 1`] = `
+<div>
+  <div
+    class="Email_Suggestions full_width"
+  >
+    <ul />
+  </div>
+</div>
+`;
