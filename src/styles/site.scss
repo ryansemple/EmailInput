@@ -168,6 +168,12 @@ body {
 	font-size: 30px;
 }
 
+@media screen and (max-width: 378px) {
+	.Header h1 { 
+		font-size: 24px;
+	}
+}
+
 /* Header -------------------------------------*/
 
 /* Suggestions --------------------------------*/
