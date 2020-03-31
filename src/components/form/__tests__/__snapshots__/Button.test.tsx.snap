@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders Button component correctly. 1`] = `
+<div>
+  <button
+    class="class Button"
+    disabled=""
+    style="color: red;"
+    title="disabled"
+    type="button"
+  >
+    Text
+  </button>
+</div>
+`;

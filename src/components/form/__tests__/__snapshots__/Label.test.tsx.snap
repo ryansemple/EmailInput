@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders Label component correctly. 1`] = `
+<div>
+  <label
+    class="form_label class"
+    for="input"
+  >
+    Label text
+  </label>
+</div>
+`;

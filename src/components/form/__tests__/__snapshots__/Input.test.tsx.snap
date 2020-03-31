@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders Button component correctly. 1`] = `
+<div>
+  <input
+    class="form_input class"
+    name="input"
+    value="abc"
+  />
+</div>
+`;
