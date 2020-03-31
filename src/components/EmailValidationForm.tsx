@@ -110,7 +110,7 @@ const EmailValidationForm = (props: EmailValidationForm) =>
 		<div className={clsx("EmailValidationForm", props.className)}>
 			<Label
 				className="block"
-				text="Enter Email"
+				text="Enter Email:"
 				htmlFor={inputName}
 			/>
 			<div className="relative">

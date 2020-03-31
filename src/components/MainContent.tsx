@@ -75,6 +75,8 @@ const MainContent = () =>
 		setEmailMessage("");
 	}
 
+	const testText: string = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco labo";
+
 	return (
 		<div className="container">
 			<div className="row horizontal_center_flex">
@@ -91,7 +93,7 @@ const MainContent = () =>
 					/>
 					<div>
 						{/*
-						 Dummy Label element so that they "Verify" button is vertically aligned with the email textbox/
+						 Dummy Label element so that they "Verify" button is vertically aligned with the email textbox
 						*/}
 						<Label 
 							text="&nbsp;"
@@ -104,6 +106,16 @@ const MainContent = () =>
 							text={"Verify"}
 							className="margin_left_small"
 						/>
+						{/* <Button 
+							onClick={() => {
+								setNotifications([
+									...notifications,
+									new Notification(testText, ValidationType.Success)
+								])
+							}}
+							text={"test notication"}
+							className="margin_left_small"
+						/> */}
 					</div>
 				</div>
 			</div>
