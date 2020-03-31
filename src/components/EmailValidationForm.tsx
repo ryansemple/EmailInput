@@ -6,7 +6,7 @@ import { atCharacter } from "../utility/String";
 import Button from "./form/Button";
 import EmailSuggestions from "./suggestions/Suggestions";
 import ValidationMessage from "./ValidationMessage";
-import { ValidationType } from "../types/Validation";
+import { ValidationType } from "../types/ValidationType";
 import clsx from "clsx";
 
 interface EmailValidationForm {

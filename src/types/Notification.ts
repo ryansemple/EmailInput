@@ -1,6 +1,6 @@
 import ObjectWithId from "../types/ObjectWithId";
 import { returnNewUuid } from "../utility/Uuid";
-import { ValidationType } from "./Validation";
+import { ValidationType } from "./ValidationType";
 
 interface NotificationInterface extends ObjectWithId {
 	text: string,

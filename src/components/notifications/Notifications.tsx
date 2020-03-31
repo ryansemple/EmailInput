@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import ErrorNotification from "./ErrorNotification";
 import SuccessNotification from "./SuccessNotification";
 import { Notification } from "../../types/Notification";
-import { ValidationType } from "../../types/Validation";
+import { ValidationType } from "../../types/ValidationType";
 import usePrevious from "../../hooks/usePrevious";
 import { 
 	returnItemsInArrayNotInAnotherArrayById

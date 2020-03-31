@@ -1,5 +1,5 @@
 import React from "react";
-import { ValidationType } from "../types/Validation";
+import { ValidationType } from "../types/ValidationType";
 import { red, green } from "../styles/sass.scss";
 
 interface ValidationMessage {
