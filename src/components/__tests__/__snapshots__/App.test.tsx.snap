@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders App component correctly. 1`] = `
+<div>
+  <header
+    class="Header margin_bottom_medium"
+  >
+    <h1>
+      📧 Email input challenge
+    </h1>
+  </header>
+  <main
+    class="flex horizontal_center_flex"
+  >
+    <div
+      class="container"
+    >
+      <div
+        class="row horizontal_center_flex"
+      >
+        <div
+          class="col-md-12 col-sm-24 flex"
+        >
+          <div
+            class="EmailValidationForm full_width"
+          >
+            <label
+              class="form_label block"
+              for="EmailValidator"
+            >
+              Enter Email:
+            </label>
+            <div
+              class="relative"
+            >
+              <input
+                class="form_input block full_width"
+                name="EmailValidator"
+                value=""
+              />
+              <button
+                class="Button-Clear absolute Button"
+                style="top: 0px; bottom: 0px; right: 0px; border-top-left-radius: 0; border-bottom-left-radius: 0;"
+                title="Clear text input"
+                type="button"
+              >
+                ×
+              </button>
+            </div>
+            <div
+              class="Email_Suggestions full_width"
+            />
+            <p
+              class="block full_width margin_top_small"
+            />
+          </div>
+          <div>
+            <label
+              class="form_label block"
+            >
+               
+            </label>
+            <button
+              class="margin_left_small Button"
+              disabled=""
+              title="Disabled: email not valid"
+              type="button"
+            >
+              Verify
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="Notifications absolute flex horizontal_center_flex full_width"
+      />
+    </div>
+  </main>
+</div>
+`;

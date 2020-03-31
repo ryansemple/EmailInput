@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders Header component correctly. 1`] = `
+exports[`Renders Header component correctly. 1`] = `
 <div>
   <header
     class="Header margin_bottom_medium"

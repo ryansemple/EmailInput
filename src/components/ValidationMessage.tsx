@@ -10,8 +10,8 @@ interface ValidationMessage {
 const ValidationMessage = (props: ValidationMessage) => (
 	<p 
 		/* 
-			Normally I'd do this kind of styling with classes but	here
-			I wanted to show how I can access sass variables from react.
+			Normally I would do this kind of styling with classes but I
+			wanted to show how I can access sass variables from react.
 		*/
 		style={{
 			color: props.validationType === ValidationType.Success ? 

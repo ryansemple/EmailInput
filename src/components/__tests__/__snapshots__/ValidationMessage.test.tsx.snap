@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders ValidationMessage component correctly. 1`] = `
+<div>
+  <p
+    class="block full_width margin_top_small"
+  >
+    This is valid
+  </p>
+</div>
+`;
