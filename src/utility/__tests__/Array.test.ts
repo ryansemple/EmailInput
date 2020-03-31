@@ -1,7 +1,7 @@
 import { returnItemsInArrayNotInAnotherArrayById } from "../Array";
 import ObjectWithId from "../../types/ObjectWithId";
 
-test('returnItemsInArrayNotInAnotherArrayById should return an array with one item that the same properties as the expectedDifferentItem variable.', () => {
+test('returnItemsInArrayNotInAnotherArrayById should return an array with one item that has the same properties as the expectedDifferentItem object.', () => {
 
 	interface TestObject extends ObjectWithId {
 		title: string;
@@ -13,7 +13,7 @@ test('returnItemsInArrayNotInAnotherArrayById should return an array with one it
 		id: "3"
 	};
 
-	const array1: TestObject[] = 
+	const arrayWithDifferentItem: TestObject[] = 
 	[
 		{
 			title: "a",
@@ -26,7 +26,7 @@ test('returnItemsInArrayNotInAnotherArrayById should return an array with one it
 		expectedDifferentItem
 	];
 
-	const array2: TestObject[] = 
+	const arrayWithoutDifferentItem: TestObject[] = 
 	[
 		{
 			title: "a",
@@ -39,8 +39,8 @@ test('returnItemsInArrayNotInAnotherArrayById should return an array with one it
 	];
 
 	const differentItem: TestObject = returnItemsInArrayNotInAnotherArrayById(
-		array1,
-		array2
+		arrayWithDifferentItem,
+		arrayWithoutDifferentItem
 	)[0];
 	
 	expect(differentItem.title).toBe(expectedDifferentItem.title);
