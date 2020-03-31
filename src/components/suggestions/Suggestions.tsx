@@ -136,7 +136,7 @@ const EmailSuggestions = (props: SuggestionsProps) =>
 	]);
 	
 	return (
-		<div className="Email_Suggestions">
+		<div className="Email_Suggestions full_width">
 			{showEmailSuggestions &&
 			<ul>
 				{emailSuggestions.map((emailSuggestion: string) => 

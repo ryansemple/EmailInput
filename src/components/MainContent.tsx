@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import EmailValidationForm from "./EmailValidationForm";
-import EmailSuggestions from "./suggestions/Suggestions";
 import Label from "./form/Label";
 import axios, { AxiosError } from "axios";
 import { KickBoxResponse } from "../utility/Kickbox";
@@ -10,11 +9,10 @@ import { Notification } from "../types/Notification";
 import { ValidationType } from "../types/Validation";
 import Notifications from "./notifications/Notifications";
 import Button from "./form/Button";
-import ValidationMessage from "./ValidationMessage";
 
 const serverDomainUrl: string = "http://localhost:3001";
 
-const MainContent = () => 
+const MainContent = () =>
 {
 	const [email, setEmail] = useState("");
 	const [emailIsVerified, setEmailIsVerified] = useState(false);
@@ -102,10 +100,6 @@ const MainContent = () =>
 						emailMessage={emailMessage}
 						className="full_width"
 					/>
-					{/* <EmailSuggestions
-						email={email}
-						setEmail={(email: string) => setEmail(email)}
-					/> */}
 					<div>
 						<Label 
 							text="&nbsp;"
@@ -116,16 +110,9 @@ const MainContent = () =>
 						disabled={!emailIsValid}
 						disabledTooltipTitle={"Disabled: email not valid"}
 						text={"Verify"}
-						style={{
-							background: emailIsVerified ? green : brandOrange
-						}}
 						className="margin_left_small"
 					/>
 					</div>
-					{/* <ValidationMessage
-						validationMessage={emailMessage}
-						validationType={validationType}
-					/> */}
 				</div>
 			</div>
 			<Notifications 
