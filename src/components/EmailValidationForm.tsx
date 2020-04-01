@@ -62,7 +62,16 @@ const validationRules: Validator[] =
 
 const EmailValidationForm = (props: EmailValidationForm) => 
 {
-	const { setEmail, setEmailIsValid, setEmailMessage, resetEmail } = props;
+	const { 
+		setEmail, 
+		setEmailIsValid, 
+		setEmailMessage, 
+		resetEmail, 
+		email,
+		emailMessage,
+		emailIsValid,
+		className
+	} = props;
 	
 	const handleSettingEmailMessage = (email: string) => 
 	{
@@ -102,12 +111,12 @@ const EmailValidationForm = (props: EmailValidationForm) =>
 	}
 	
 	const inputName: string = "EmailValidator";
-	const validationType: ValidationType = props.emailIsValid ?
+	const validationType: ValidationType = emailIsValid ?
 	ValidationType.Success :
 	ValidationType.Error;
 
 	return (
-		<div className={clsx("EmailValidationForm", props.className)}>
+		<div className={clsx("EmailValidationForm", className)}>
 			<Label
 				className="block"
 				text="Enter Email:"
@@ -117,7 +126,7 @@ const EmailValidationForm = (props: EmailValidationForm) =>
 				<Input
 					className="block full_width"
 					onChange={emailChanged}
-					value={props.email}
+					value={email}
 					name={inputName}
 				/>
 				<Button 
@@ -135,11 +144,13 @@ const EmailValidationForm = (props: EmailValidationForm) =>
 				/>
 			</div>
 			<EmailSuggestions
-				email={props.email}
-				setEmail={(email: string) => props.setEmail(email)}
+				email={email}
+				setEmail={(email: string) => setEmail(email)}
+				setEmailIsValid={(emailIsValid: boolean) => setEmailIsValid(emailIsValid) }
+				setEmailMessage={(emailMessage: string) => setEmailMessage(emailMessage)}
 			/>
 			<ValidationMessage
-				validationMessage={props.emailMessage}
+				validationMessage={emailMessage}
 				validationType={validationType}
 			/>
 		</div>

@@ -6,18 +6,22 @@ import { popularEmailDomains } from "../../utility/Email";
 
 interface SuggestionsProps {
 	setEmail: (email: string) => void,
-	email: string
+	email: string,
+	setEmailIsValid: (emailIsValid: boolean) => void,
+	setEmailMessage: (emailMessage: string) => void
 }
 
 const EmailSuggestions = (props: SuggestionsProps) => 
 {
-	const { email, setEmail } = props;
+	const { email, setEmail, setEmailIsValid, setEmailMessage } = props;
 	const [emailSuggestions, setEmailSuggestions] = useState([""]);
 	const [showEmailSuggestions, setShowEmailSuggestions] = useState(false);
 
 	const emailSuggestionsClickEvent = (suggestedEmail: string): void => 
 	{
 		setEmail(suggestedEmail);
+		setEmailIsValid(true);
+		setEmailMessage("Email appears to be valid");
 	}
 
 	const checkForDomainToMatchEmail = 
