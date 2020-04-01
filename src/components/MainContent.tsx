@@ -4,8 +4,8 @@ import Label from "./form/Label";
 import axios, { AxiosError } from "axios";
 import { KickBoxResponse } from "../utility/Kickbox";
 import { isNetworkError } from "../utility/Network";
-import { Notification } from "../types/Notification";
-import { ValidationType } from "../types/ValidationType";
+import Notification from "../types/Notification";
+import ValidationType from "../types/ValidationType";
 import Notifications from "./notifications/Notifications";
 import Button from "./form/Button";
 

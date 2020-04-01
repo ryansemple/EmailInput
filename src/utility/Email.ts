@@ -1,4 +1,4 @@
-export const popularEmailDomains : string[] =
+export const emailDomains : string[] =
 [
 	"yahoo",
 	"gmail",
@@ -7,3 +7,13 @@ export const popularEmailDomains : string[] =
 	"outlook",
 	"aol"
 ];
+
+export const domainExtensions: string[] =
+[
+	"com",
+	"ca",
+	"edu",
+	"uk",
+	"net",
+	"gov"
+]
