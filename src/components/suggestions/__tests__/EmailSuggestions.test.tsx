@@ -1,13 +1,15 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Suggestions from "../Suggestions";
+import EmailSuggestions from "../EmailSuggestions";
 
-test("Renders Suggestions component correctly.", () => {
+test("Renders EmailSuggestions component correctly.", () => {
 	const { container } = render
 	(
-		<Suggestions
+		<EmailSuggestions
 			email="ryan@gmail.com"
 			setEmail={() => {}}
+			setEmailIsValid={() => {}}
+			setEmailMessage={() => {}}
 		/>
 	);
 	

@@ -48,7 +48,7 @@ exports[`Renders App component correctly. 1`] = `
               </button>
             </div>
             <div
-              class="Email_Suggestions full_width"
+              class="EmailSuggestions full_width"
             />
             <p
               class="block full_width margin_top_small"

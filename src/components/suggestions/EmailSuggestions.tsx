@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
-import Suggestion from "./Suggestion";
+import EmailSuggestion from "./EmailSuggestion";
 import { isAlphaNumericRegex } from "../../utility/Regex";
 import { atCharacter } from "../../utility/String";
 import { popularEmailDomains } from "../../utility/Email";
 import { emailAppearsToBeValid } from "../../utility/Language";
 
-interface SuggestionsProps {
-	setEmail: (email: string) => void,
+interface EmailSuggestionsProps {
 	email: string,
+	setEmail: (email: string) => void,
 	setEmailIsValid: (emailIsValid: boolean) => void,
 	setEmailMessage: (emailMessage: string) => void
 }
 
-const EmailSuggestions = (props: SuggestionsProps) => 
+const EmailSuggestions = (props: EmailSuggestionsProps) => 
 {
 	const { email, setEmail, setEmailIsValid, setEmailMessage } = props;
 	const [emailSuggestions, setEmailSuggestions] = useState([""]);
@@ -63,8 +63,7 @@ const EmailSuggestions = (props: SuggestionsProps) =>
 
 	useEffect(() => {
 
-		const isAlphaNumeric = (input: string): boolean => 
-		isAlphaNumericRegex.test(input);
+		const isAlphaNumeric = (input: string): boolean => isAlphaNumericRegex.test(input);
 
 		const setSuggestionsAfterEmailChanges = (): void =>
 		{
@@ -80,7 +79,7 @@ const EmailSuggestions = (props: SuggestionsProps) =>
 						suggestedEmail = `${email}@${popularEmailDomain}.com`;
 				}
 	
-				if(email.includes(atCharacter))
+				if (email.includes(atCharacter))
 				{
 					const emailSplitByAtCharacter: string[] = email.split(atCharacter);
 					const emailCharactersAfterAtCharacter: string = emailSplitByAtCharacter[1];
@@ -108,7 +107,7 @@ const EmailSuggestions = (props: SuggestionsProps) =>
 							emailCharactersBeforeAtCharacter
 						);
 	
-						if(suggestedEmail === "")
+						if (suggestedEmail === "")
 						{
 							continue;
 						}
@@ -141,11 +140,11 @@ const EmailSuggestions = (props: SuggestionsProps) =>
 	]);
 	
 	return (
-		<div className="Email_Suggestions full_width">
+		<div className="EmailSuggestions full_width">
 			{showEmailSuggestions &&
 			<ul>
 				{emailSuggestions.map((emailSuggestion: string) => 
-					<Suggestion
+					<EmailSuggestion
 						key={emailSuggestion}
 						emailSuggestion={emailSuggestion}
 						emailSuggestionClickEvent={emailSuggestionsClickEvent}

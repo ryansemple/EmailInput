@@ -24,7 +24,7 @@ $input-padding: 0 $input-padding-left-right;
 $thick-border-width: 0.313rem;
 $thin-border-width: 0.063rem;
 
-$header-height: 7rem;
+$header-height: 6rem;
 $button-padding: 0 0.875rem;
 $box-border-radius: 0.25rem;
 $notification-width: 31.25rem;
@@ -35,7 +35,7 @@ $phone-screen-width: 23.625rem;
 
 $gutter-padding: 0.938rem;
 $extra-small-spacing: 0.5rem;
-$small-spacing: 1rem;
+$small-spacing: $gutter-padding;
 $medium-spacing: 2rem;
 
 /* Dimensions ---------------------------------*/

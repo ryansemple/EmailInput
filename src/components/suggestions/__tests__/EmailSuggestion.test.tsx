@@ -1,11 +1,11 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Suggestion from "../Suggestion";
+import EmailSuggestion from "../EmailSuggestion";
 
-test("Renders Suggestion component correctly.", () => {
+test("Renders EmailSuggestion component correctly.", () => {
 	const { container } = render
 	(
-		<Suggestion
+		<EmailSuggestion
 			emailSuggestion="suggestion"
 			emailSuggestionClickEvent={() => {}}
 		/>
