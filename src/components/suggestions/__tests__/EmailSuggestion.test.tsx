@@ -7,7 +7,7 @@ test("Renders EmailSuggestion component correctly.", () => {
 	(
 		<EmailSuggestion
 			emailSuggestion="suggestion"
-			emailSuggestionClickEvent={() => {}}
+			onClick={() => {}}
 		/>
 	);
 	

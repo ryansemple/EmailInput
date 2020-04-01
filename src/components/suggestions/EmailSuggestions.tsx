@@ -147,7 +147,7 @@ const EmailSuggestions = (props: EmailSuggestionsProps) =>
 					<EmailSuggestion
 						key={emailSuggestion}
 						emailSuggestion={emailSuggestion}
-						emailSuggestionClickEvent={emailSuggestionsClickEvent}
+						onClick={emailSuggestionsClickEvent}
 					/>
 				)}
 			</ul>

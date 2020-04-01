@@ -2,13 +2,14 @@ import React from "react";
 
 interface SuggestionProps {
 	emailSuggestion: string,
-	emailSuggestionClickEvent: any
+	onClick: (suggestedEmail: string) => void
 }
 
 const EmailSuggestion = (props: SuggestionProps) => (
 	<li
-		onClick={() => props.emailSuggestionClickEvent(props.emailSuggestion)}
-		key={props.emailSuggestion}
+		onClick={
+			() => props.onClick(props.emailSuggestion)
+		}
 		className="EmailSuggestions_Suggestion">
 		{props.emailSuggestion}
 	</li>
