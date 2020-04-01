@@ -3,7 +3,7 @@
 exports[`Renders App component correctly. 1`] = `
 <div>
   <header
-    class="Header margin_bottom_medium"
+    class="Header"
   >
     <h1>
       📧 Email input challenge
