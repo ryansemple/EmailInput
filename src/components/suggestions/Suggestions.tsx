@@ -3,6 +3,7 @@ import Suggestion from "./Suggestion";
 import { isAlphaNumericRegex } from "../../utility/Regex";
 import { atCharacter } from "../../utility/String";
 import { popularEmailDomains } from "../../utility/Email";
+import { emailAppearsToBeValid } from "../../utility/Language";
 
 interface SuggestionsProps {
 	setEmail: (email: string) => void,
@@ -21,7 +22,7 @@ const EmailSuggestions = (props: SuggestionsProps) =>
 	{
 		setEmail(suggestedEmail);
 		setEmailIsValid(true);
-		setEmailMessage("Email appears to be valid");
+		setEmailMessage(emailAppearsToBeValid);
 	}
 
 	const checkForDomainToMatchEmail = 

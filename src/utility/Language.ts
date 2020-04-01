@@ -1,0 +1,1 @@
+export const emailAppearsToBeValid = "Email appears to be valid";

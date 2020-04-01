@@ -8,6 +8,7 @@ import EmailSuggestions from "./suggestions/Suggestions";
 import ValidationMessage from "./ValidationMessage";
 import { ValidationType } from "../types/ValidationType";
 import clsx from "clsx";
+import { emailAppearsToBeValid } from "../utility/Language";
 
 interface EmailValidationForm {
 	setEmail: (email: string) => void,
@@ -92,7 +93,7 @@ const EmailValidationForm = (props: EmailValidationForm) =>
 
 		//email passed all validation tests
 		setEmailIsValid(true);
-		setEmailMessage("Email appears to be valid");
+		setEmailMessage(emailAppearsToBeValid);
 	}
 	
 	const emailChanged = (email: string): void => 
