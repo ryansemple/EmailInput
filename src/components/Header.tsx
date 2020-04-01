@@ -5,7 +5,7 @@ interface HeaderProps {
 }
 
 const Header = (props: HeaderProps) => (
-	<header className="Header margin_bottom_medium">
+	<header className="Header">
 		<h1>{props.title}</h1>
 	</header>     
 )

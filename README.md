@@ -17,7 +17,7 @@ that makes sense for it to take precedent over other styles by default.
 I also group styles into general areas that they belong to like Form, 
 Fonts and Header areas using comments.
 
-•
+•This app is responsive down to the standard iPhone dimensions of 320 x 480 pixels.
 
 ## Available Scripts
 
