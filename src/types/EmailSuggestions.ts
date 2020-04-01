@@ -1,13 +1,11 @@
 import EmailSuggestion from "./EmailSuggestion";
 import { emailDomains, domainExtensions } from "../utility/Email";
 import { atCharacter } from "../utility/String";
-import { isAlphaNumericRegex } from "../utility/Regex";
 
 interface EmailSuggestionsInterface {
-	emailSuggestions: EmailSuggestion[]
+	emailSuggestions: EmailSuggestion[],
+	returnValidEmailSuggestions: (userEnteredEmail: string) => string[]
 }
-
-// const isAlphaNumeric = (input: string): boolean => isAlphaNumericRegex.test(input);
 
 class EmailSuggestions implements EmailSuggestionsInterface {
 	public readonly emailSuggestions: EmailSuggestion[];
@@ -49,14 +47,6 @@ class EmailSuggestions implements EmailSuggestionsInterface {
 			{
 				return this.returnAllEmailSuggestions(userEnteredEmail);
 			}
-			// if 
-			// (
-			// 	emailCharactersAfterAtCharacter &&
-			// 	!isAlphaNumeric(emailCharactersAfterAtCharacter)
-			// )
-			// {
-			// 	return [];
-			// } 
 			else
 			{
 				return this.returnFitleredEmailSuggestions(
@@ -94,14 +84,7 @@ class EmailSuggestions implements EmailSuggestionsInterface {
 			const currentEmailSuggestion: EmailSuggestion = this.emailSuggestions[i];
 			const currentEmailSuggestionAfterAtCharacter: string =
 				currentEmailSuggestion.returnEmailAfterAtCharacter();
-
-			// const regexEscapedUserEnteredEmail = userEnteredEmailAfterAtCharacter
-			// 	.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-
-			const regexToMatch: RegExp = 
-				new RegExp(`^${userEnteredEmailAfterAtCharacter}`);
-			// const regexToMatch: RegExp = 
-			// 	new RegExp(`^${regexEscapedUserEnteredEmail}`);
+			const regexToMatch: RegExp = new RegExp(`^${userEnteredEmailAfterAtCharacter}`);
 			
 			if (currentEmailSuggestionAfterAtCharacter.match(regexToMatch))
 			{
