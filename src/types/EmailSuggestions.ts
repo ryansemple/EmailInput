@@ -66,9 +66,8 @@ class EmailSuggestions implements EmailSuggestionsInterface {
 		for (let i: number = 0; i < this.emailSuggestions.length; i++)
 		{
 			const currentEmailSuggestion: EmailSuggestion = this.emailSuggestions[i];
-			const validEmailSuggestion = currentEmailSuggestion.returnFullEmail(
-				userEnteredEmail
-			);
+			const validEmailSuggestion = currentEmailSuggestion
+				.returnFullEmail(userEnteredEmail);
 			validEmailSuggestions.push(validEmailSuggestion);
 		}
 
@@ -85,16 +84,13 @@ class EmailSuggestions implements EmailSuggestionsInterface {
 			const currentEmailSuggestion: EmailSuggestion = this.emailSuggestions[i];
 			const currentEmailSuggestionAfterAtCharacter: string =
 				currentEmailSuggestion.returnEmailAfterAtCharacter();
-			const regexToMatch: RegExp = new RegExp
-			(
-				`^${userEnteredEmailAfterAtCharacter}`
-			);
+			const regexToMatch: RegExp = new RegExp(`^${userEnteredEmailAfterAtCharacter}`);
 
 			const userEmailMatchesSuggestedEmailExactly = 
 				userEnteredEmailAfterAtCharacter ===
 				currentEmailSuggestionAfterAtCharacter;
 			
-			if(userEmailMatchesSuggestedEmailExactly) 
+			if (userEmailMatchesSuggestedEmailExactly) 
 			{
 				continue;
 			}
