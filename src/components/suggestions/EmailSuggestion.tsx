@@ -5,6 +5,10 @@ interface SuggestionProps {
 	onClick: (suggestedEmail: string) => void
 }
 
+/**
+ * An individual email suggestion. When clicked it will set the
+ * email input to be the clicked suggestion.
+ */
 const EmailSuggestion = (props: SuggestionProps) => (
 	<li
 		onClick={() => props.onClick(props.emailSuggestion)}

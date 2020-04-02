@@ -8,16 +8,20 @@ interface EmailSuggestionsProps {
 	email: string,
 	setEmail: (email: string) => void,
 	setEmailIsValid: (emailIsValid: boolean) => void,
-	setEmailMessage: (emailMessage: string) => void
+	setEmailValidationMessage: (emailMessage: string) => void
 }
 
 /**
  * Shows valid email suggestions based on the user's inputted email.
- * @param {EmailSuggestionsProps} props
  */
 const EmailSuggestionsComponent = (props: EmailSuggestionsProps) => 
 {	
-	const { email, setEmail, setEmailIsValid, setEmailMessage } = props;
+	const { 
+		email, 
+		setEmail, 
+		setEmailIsValid, 
+		setEmailValidationMessage 
+	} = props;
 	const [currentEmailSuggestions, setCurrentEmailSuggestions] = 
 		useState([""]);
 	const [defaultEmailSuggestions] = useState(new EmailSuggestions());
@@ -54,7 +58,7 @@ const EmailSuggestionsComponent = (props: EmailSuggestionsProps) =>
 	{
 		setEmail(suggestedEmail);
 		setEmailIsValid(true);
-		setEmailMessage(emailAppearsToBeValid);
+		setEmailValidationMessage(emailAppearsToBeValid);
 	}
 	
 	const showEmailSuggestions: boolean = currentEmailSuggestions[0] !== "";

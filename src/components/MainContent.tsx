@@ -17,7 +17,7 @@ const serverDomainUrl: string = "http://localhost:3001";
 const MainContent = () =>
 {
 	const [email, setEmail] = useState("");
-	const [emailMessage, setEmailMessage] = useState("");
+	const [emailValidationMessage, setEmailValidationMessage] = useState("");
 	const [emailIsValid, setEmailIsValid] = useState(false);
 	const [notifications, setNotifications] = useState<Notification[]>([]);
 
@@ -29,7 +29,7 @@ const MainContent = () =>
 	 */
 	const checkEmail = () => 
 	{
-		setEmailMessage("");
+		setEmailValidationMessage("");
 		
 		axios.get
 		(
@@ -85,7 +85,7 @@ const MainContent = () =>
 	{
 		setEmail("");
 		setEmailIsValid(false);
-		setEmailMessage("");
+		setEmailValidationMessage("");
 	}
 
 	return (
@@ -95,10 +95,10 @@ const MainContent = () =>
 					<EmailValidationForm
 						setEmail={(email: string) => setEmail(email)}
 						email={email}
-						setEmailMessage={(emailMessage: string) => setEmailMessage(emailMessage)}
+						setEmailValidationMessage={(emailMessage: string) => setEmailValidationMessage(emailMessage)}
 						setEmailIsValid={(emailIsValid: boolean) => setEmailIsValid(emailIsValid)}
 						emailIsValid={emailIsValid}
-						emailMessage={emailMessage}
+						emailValidationMessage={emailValidationMessage}
 						className="full_width"
 						resetEmail={resetEmail}
 					/>

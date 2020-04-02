@@ -48,11 +48,11 @@ const validationRules: Validator[] =
 
 interface EmailValidationFormProps {
 	setEmail: (email: string) => void,
-	setEmailMessage: (emailMessage: string) => void,
+	setEmailValidationMessage: (emailMessage: string) => void,
 	email: string,
 	setEmailIsValid: (emailIsValid: boolean) => void,
 	emailIsValid: boolean,
-	emailMessage?: string,
+	emailValidationMessage?: string,
 	className?: string,
 	resetEmail: () => void
 }
@@ -62,10 +62,10 @@ const EmailValidationForm = (props: EmailValidationFormProps) =>
 	const { 
 		setEmail, 
 		setEmailIsValid, 
-		setEmailMessage, 
+		setEmailValidationMessage, 
 		resetEmail, 
 		email,
-		emailMessage,
+		emailValidationMessage,
 		emailIsValid,
 		className
 	} = props;
@@ -82,14 +82,14 @@ const EmailValidationForm = (props: EmailValidationFormProps) =>
 			if (!validationRulePassed)
 			{
 				setEmailIsValid(false);
-				setEmailMessage(validationRule.errorMessageIfFailed);
+				setEmailValidationMessage(validationRule.errorMessageIfFailed);
 				return;
 			}
 		}
 
 		//email passed all validation tests
 		setEmailIsValid(true);
-		setEmailMessage(emailAppearsToBeValid);
+		setEmailValidationMessage(emailAppearsToBeValid);
 	}
 	
 	const emailChanged = (email: string): void => 
@@ -103,7 +103,7 @@ const EmailValidationForm = (props: EmailValidationFormProps) =>
 		else 
 		{
 			setEmailIsValid(false);
-			setEmailMessage("");
+			setEmailValidationMessage("");
 		}	
 	}
 	
@@ -143,11 +143,13 @@ const EmailValidationForm = (props: EmailValidationFormProps) =>
 			<EmailSuggestions
 				email={email}
 				setEmail={(email: string) => setEmail(email)}
-				setEmailIsValid={(emailIsValid: boolean) => setEmailIsValid(emailIsValid) }
-				setEmailMessage={(emailMessage: string) => setEmailMessage(emailMessage)}
+				setEmailIsValid={(emailIsValid: boolean) => setEmailIsValid(emailIsValid)}
+				setEmailValidationMessage={
+					(emailMessage: string) => setEmailValidationMessage(emailMessage)
+				}
 			/>
 			<ValidationMessage
-				validationMessage={emailMessage}
+				validationMessage={emailValidationMessage}
 				validationType={validationType}
 			/>
 		</div>
