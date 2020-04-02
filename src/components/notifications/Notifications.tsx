@@ -88,6 +88,9 @@ const useDestroyNewNotificationsAfterTimeout =
 	]);
 }
 
+/**
+ * Renders the notifications.
+ */
 const Notifications = (props: NotificationsProps) => {
 
 	const { notifications, setNotifications } = props;

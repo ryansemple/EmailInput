@@ -5,6 +5,9 @@ interface ErrorNotificationProps {
 	text: string
 }
 
+/**
+ * Renders an error notification.
+ */
 const ErrorNotification = (props: ErrorNotificationProps) => (
 	<Notification 
 		text={props.text}

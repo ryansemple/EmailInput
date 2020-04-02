@@ -7,6 +7,9 @@ interface LabelProps {
 	htmlFor?: string
 }
 
+/**
+ * Renders a label element.
+ */
 const Label = (props: LabelProps) => (
 	<label
 		htmlFor={props.htmlFor}

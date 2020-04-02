@@ -6,7 +6,7 @@ interface SuggestionProps {
 }
 
 /**
- * An individual email suggestion. When clicked it will set the
+ * Renders An email suggestion. When clicked it will set the
  * email input to be the clicked suggestion.
  */
 const EmailSuggestion = (props: SuggestionProps) => (

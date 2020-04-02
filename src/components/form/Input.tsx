@@ -8,6 +8,9 @@ interface InputProps {
 	name: string
 }
 
+/**
+ * Renders an input element.
+ */
 const Input = (props: InputProps) => 
 {
 	const { className, value, onChange, name } = props;

@@ -1,3 +1,4 @@
+//Documentation: https://docs.kickbox.com/docs/terminology#section-result-reason
 export enum EmailReasonType {
 	invalid_email = "invalid_email",
 	invalid_domain = "invalid_domain",
@@ -16,6 +17,7 @@ export interface KickBoxResponse {
 	data: KickBoxData;
 }
 
+//Documentation: https://docs.kickbox.com/docs/single-verification-api#section-the-response
 export interface KickBoxData {
 	result: string;
 	reason: EmailReasonType;

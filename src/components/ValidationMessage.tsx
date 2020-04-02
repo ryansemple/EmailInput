@@ -8,8 +8,8 @@ interface ValidationMessageProps {
 }
 
 /**
- * Displays a validation message that is either a success or error
- * message depending on the value of @param validationType
+ * Renders a validation message that is either a success or error
+ * message depending on the value of validation type passed in.
  */
 const ValidationMessage = (props: ValidationMessageProps) => (
 	<p 

@@ -1,3 +1,8 @@
+/**
+ * Returns a new unique uuid.
+ * Based off this solution: https://stackoverflow.com/a/13423320
+ * Example return value: "b37c864f-afeb-402a-97e9-9c90e5af124c"
+ */
 export const returnNewUuid = (): string =>
 {
 	let randomNumber: number;

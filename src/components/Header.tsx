@@ -5,7 +5,7 @@ interface HeaderProps {
 }
 
 /**
- * Renders the header of the App
+ * Renders the header of the App.
  */
 const Header = (props: HeaderProps) => (
 	<header className="Header">

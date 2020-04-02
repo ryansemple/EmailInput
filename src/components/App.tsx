@@ -3,7 +3,7 @@ import Header from "./Header";
 import React from "react";
 
 /**
- * The top level component of the App.
+ * The top level component of the App, renders all the App content.
  */
 const App = () => (
   <>

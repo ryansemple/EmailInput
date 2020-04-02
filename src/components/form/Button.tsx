@@ -11,6 +11,9 @@ interface ButtonProps {
 	className?: string
 }
 
+/**
+ * Renders a button element.
+ */
 const Button = (props: ButtonProps) => (
 	<button
 		type="button"

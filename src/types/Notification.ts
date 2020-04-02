@@ -13,16 +13,25 @@ interface NotificationInterface extends ObjectWithId {
  * by encapsulating the logic for creating a new id so that it will
  * always be a new uuid and making the properties readonly so that
  * they can not be modified after the class has been constructed.
- * @constructor
- * @param {id} id - the id that will be used to uniquely identity the notification.
- * @param {string} text - The text that will appear in the notification.
- * @param {ValidationType} notificationType - the type of notification, will
- * change the style of the notification.
+ * 
+ * @class Notification
+ * @implements {NotificationInterface}
  */
 class Notification implements NotificationInterface {
 
+	/**
+	 * The id that will be used to uniquely identity the notification.
+	 */
 	public readonly id: string;
+
+	/**
+	 * The text that will appear in the notification.
+	 */
 	public readonly text: string;
+
+	/**
+	 * the type of notification, this will determine the style of the notification.
+	 */
 	public readonly notificationType: ValidationType;
 
 	constructor(text: string, notificationType: ValidationType)

@@ -9,7 +9,7 @@ test("Renders EmailSuggestions component correctly.", () => {
 			email="ryan@gmail.com"
 			setEmail={() => {}}
 			setEmailIsValid={() => {}}
-			setEmailMessage={() => {}}
+			setEmailValidationMessage={() => {}}
 		/>
 	);
 	

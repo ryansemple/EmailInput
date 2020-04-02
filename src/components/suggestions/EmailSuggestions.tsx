@@ -12,7 +12,7 @@ interface EmailSuggestionsProps {
 }
 
 /**
- * Shows valid email suggestions based on the user's inputted email.
+ * Renders valid email suggestions based on the user's inputted email.
  */
 const EmailSuggestionsComponent = (props: EmailSuggestionsProps) => 
 {	

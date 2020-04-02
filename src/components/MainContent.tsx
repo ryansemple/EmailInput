@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import EmailValidationForm from "./EmailValidationForm";
 import Label from "./form/Label";
 import axios, { AxiosError } from "axios";
-import { KickBoxResponse } from "../utility/Kickbox";
+import { KickBoxResponse } from "../types/Kickbox";
 import { isNetworkError } from "../utility/Network";
 import Notification from "../types/Notification";
 import ValidationType from "../types/ValidationType";
@@ -12,7 +12,7 @@ import Button from "./form/Button";
 const serverDomainUrl: string = "http://localhost:3001";
 
 /**
- * Renders the content inside the "main" html tag
+ * Renders the content inside the "main" html tag.
  */
 const MainContent = () =>
 {

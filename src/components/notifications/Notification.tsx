@@ -6,6 +6,9 @@ interface NotificationProps {
 	className: string
 }
 
+/**
+ * Renders a notification.
+ */
 const Notification = (props: NotificationProps) => (
 	<div 
 		className={clsx("Notifications_Notification", props.className)} 

@@ -5,6 +5,9 @@ interface SuccessNotificationProps {
 	text: string
 }
 
+/**
+ * Renders a success notification.
+ */
 const SuccessNotification = (props: SuccessNotificationProps) => (
 	<Notification 
 		text={props.text}
