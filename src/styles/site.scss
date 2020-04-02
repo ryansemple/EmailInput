@@ -123,14 +123,14 @@ body {
 	color: white;
 	text-align: center;
 	background-color: $brand-off-black;
+}
 
-	h1 {
-		line-height: $header-height;
-		font-size: $h1-font-size;
-	
-		@media screen and (max-width: $phone-screen-width) {
-			font-size: $h1-font-size - .35;
-		}
+.Header_Title {
+	line-height: $header-height;
+	font-size: $h1-font-size;
+
+	@media screen and (max-width: $phone-screen-width) {
+		font-size: $h1-font-size - .35;
 	}
 }
 
@@ -138,7 +138,7 @@ body {
 
 /* Main ---------------------------------------*/
 
-main {
+.Main {
 	padding: $gutter-padding 0;
 }
 

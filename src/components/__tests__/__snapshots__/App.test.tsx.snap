@@ -10,7 +10,7 @@ exports[`Renders App component correctly. 1`] = `
     </h1>
   </header>
   <main
-    class="flex horizontal_center_flex"
+    class="Main flex horizontal_center_flex"
   >
     <div
       class="container"

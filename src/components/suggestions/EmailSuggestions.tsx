@@ -41,7 +41,7 @@ const EmailSuggestionsComponent = (props: EmailSuggestionsProps) =>
 		defaultEmailSuggestions
 	]);
 
-	const emailSuggestionClickEvent = (suggestedEmail: string): void => 
+	const emailSuggestionOnClick = (suggestedEmail: string): void => 
 	{
 		setEmail(suggestedEmail);
 		setEmailIsValid(true);
@@ -56,7 +56,7 @@ const EmailSuggestionsComponent = (props: EmailSuggestionsProps) =>
 					<EmailSuggestion
 						key={emailSuggestion}
 						emailSuggestion={emailSuggestion}
-						onClick={emailSuggestionClickEvent}
+						onClick={emailSuggestionOnClick}
 					/>
 				)}
 			</ul>
