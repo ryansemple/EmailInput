@@ -17,7 +17,7 @@ const ValidationMessage = (props: ValidationMessageProps) => (
 			color: props.validationType === ValidationType.Success ? 
 			green : red
 		}}
-		className="block full_width margin_top_small">
+		className="block full_width margin_top_small bold">
 		{props.validationMessage}
 	</p>
 )

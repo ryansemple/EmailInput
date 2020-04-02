@@ -68,6 +68,10 @@ body {
 	-moz-osx-font-smoothing: grayscale;
 }
 
+.bold {
+	font-weight: $bold-font-weight;
+}
+
 /* Font ---------------------------------------*/
 
 /* Form ---------------------------------------*/
@@ -76,7 +80,7 @@ body {
 	font-size: $label-font-size;
 	margin-bottom: $extra-small-spacing;
 	text-align: left;
-	font-weight: 600;
+	font-weight: $bold-font-weight;
 }
 
 .Input {
