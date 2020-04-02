@@ -11,17 +11,6 @@ import clsx from "clsx";
 import { emailAppearsToBeValid } from "../utility/Language";
 import Validator from "../types/Validator";
 
-interface EmailValidationForm {
-	setEmail: (email: string) => void,
-	setEmailMessage: (emailMessage: string) => void,
-	email: string,
-	setEmailIsValid: (emailIsValid: boolean) => void,
-	emailIsValid: boolean,
-	emailMessage?: string,
-	className?: string,
-	resetEmail: () => void
-}
-
 const doesEmailHaveDomain = (email : string): boolean =>
 {
 	return email.split(atCharacter)[1].includes(".");
@@ -57,7 +46,18 @@ const validationRules: Validator[] =
 	}
 ];
 
-const EmailValidationForm = (props: EmailValidationForm) => 
+interface EmailValidationFormProps {
+	setEmail: (email: string) => void,
+	setEmailMessage: (emailMessage: string) => void,
+	email: string,
+	setEmailIsValid: (emailIsValid: boolean) => void,
+	emailIsValid: boolean,
+	emailMessage?: string,
+	className?: string,
+	resetEmail: () => void
+}
+
+const EmailValidationForm = (props: EmailValidationFormProps) => 
 {
 	const { 
 		setEmail, 

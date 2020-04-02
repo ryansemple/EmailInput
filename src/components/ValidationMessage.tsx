@@ -2,12 +2,12 @@ import React from "react";
 import { ValidationType } from "../types/ValidationType";
 import { red, green } from "../styles/sass.scss";
 
-interface ValidationMessage {
+interface ValidationMessageProps {
 	validationMessage?: string,
 	validationType: ValidationType
 }
 
-const ValidationMessage = (props: ValidationMessage) => (
+const ValidationMessage = (props: ValidationMessageProps) => (
 	<p 
 		/* 
 			Normally I would do this kind of styling with classes but I

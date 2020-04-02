@@ -5,7 +5,9 @@ exports[`Renders Header component correctly. 1`] = `
   <header
     class="Header"
   >
-    <h1>
+    <h1
+      class="Header_Title"
+    >
       Header Title
     </h1>
   </header>
