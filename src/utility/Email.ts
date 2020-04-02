@@ -4,8 +4,7 @@ export const emailDomains : string[] =
 	"gmail",
 	"hotmail",
 	"live",
-	"outlook",
-	"aol"
+	"outlook"
 ];
 
 export const domainExtensions: string[] =

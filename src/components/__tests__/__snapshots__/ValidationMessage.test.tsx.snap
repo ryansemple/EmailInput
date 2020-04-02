@@ -3,7 +3,7 @@
 exports[`Renders ValidationMessage component correctly. 1`] = `
 <div>
   <p
-    class="block full_width margin_top_small"
+    class="block full_width margin_top_small bold"
   >
     This is valid
   </p>
