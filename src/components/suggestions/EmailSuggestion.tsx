@@ -7,9 +7,7 @@ interface SuggestionProps {
 
 const EmailSuggestion = (props: SuggestionProps) => (
 	<li
-		onClick={
-			() => props.onClick(props.emailSuggestion)
-		}
+		onClick={() => props.onClick(props.emailSuggestion)}
 		className="EmailSuggestions_Suggestion">
 		{props.emailSuggestion}
 	</li>

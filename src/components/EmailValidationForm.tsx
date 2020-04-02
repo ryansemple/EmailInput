@@ -9,6 +9,7 @@ import ValidationMessage from "./ValidationMessage";
 import { ValidationType } from "../types/ValidationType";
 import clsx from "clsx";
 import { emailAppearsToBeValid } from "../utility/Language";
+import Validator from "../types/Validator";
 
 interface EmailValidationForm {
 	setEmail: (email: string) => void,
@@ -19,11 +20,6 @@ interface EmailValidationForm {
 	emailMessage?: string,
 	className?: string,
 	resetEmail: () => void
-}
-
-interface Validator {
-	validationFunctionToPass: (email: string) => boolean
-	errorMessageIfFailed: string;
 }
 
 const doesEmailHaveDomain = (email : string): boolean =>
@@ -40,23 +36,23 @@ const isDomainInEmail = (email : string) : boolean =>
 const validationRules: Validator[] = 
 [
 	{
-		validationFunctionToPass: (email: string) => allKeyboardKeysRegex.test(email),
+		validationPredicateToPass: (email: string) => allKeyboardKeysRegex.test(email),
 		errorMessageIfFailed: "Beginning part of email is not valid. only characters a-z, A-Z, 0-1 and !#$%&'*+-/=?^_`{|}~ are allowed."
 	},
 	{
-		validationFunctionToPass: (email: string) => email.includes(atCharacter),
+		validationPredicateToPass: (email: string) => email.includes(atCharacter),
 		errorMessageIfFailed: `Email doesn't contain an '${atCharacter}' symbol`
 	},
 	{
-		validationFunctionToPass: (email: string) => doesEmailHaveDomain(email),
+		validationPredicateToPass: (email: string) => doesEmailHaveDomain(email),
 		errorMessageIfFailed: `Email doesn't contain a domain name (name after the '${atCharacter}' symbol)`
 	},
 	{
-		validationFunctionToPass: (email: string) => email.split(atCharacter).length === 2,
+		validationPredicateToPass: (email: string) => email.split(atCharacter).length === 2,
 		errorMessageIfFailed: `Email can only contain one '${atCharacter}' symbol`
 	},
 	{
-		validationFunctionToPass: (email: string) => isDomainInEmail(email),
+		validationPredicateToPass: (email: string) => isDomainInEmail(email),
 		errorMessageIfFailed: "Email doesn't contain a domain"
 	}
 ];
@@ -81,7 +77,7 @@ const EmailValidationForm = (props: EmailValidationForm) =>
 			const validationRule: Validator = validationRules[i];
 
 			const validationRulePassed: boolean = validationRule
-				.validationFunctionToPass(email);
+				.validationPredicateToPass(email);
 
 			if (!validationRulePassed)
 			{
