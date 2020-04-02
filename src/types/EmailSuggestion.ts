@@ -48,11 +48,11 @@ class EmailSuggestion implements EmailSuggestionInterface {
 	}
 
 	/**
-		* Returns the full email of based on the email passed in. 
-		*
-		* For example, if "jason@g" is passed in and the emails domain 
-		* is "gmail" and the extension is "ca" then it
-		* would output "jason@gmail.ca".
+	 * Returns the full email of based on the email passed in. 
+	 *
+	 * For example, if "jason@g" is passed in and the emails domain 
+	 * is "gmail" and the extension is "ca" then it
+	 * would output "jason@gmail.ca".
 	*/
 	public returnFullEmail = (enteredEmail: string): string => 
 	{
@@ -61,20 +61,16 @@ class EmailSuggestion implements EmailSuggestionInterface {
 	}
 
 	/**
-		* Returns the domain and the extension as a string with a 
-		* period in between them.
-		*
-		* For example, if the domain is "gmail" and the extension is 
-		* "ca" then it would output "gmail.ca".
+	 * Returns the domain and the extension as a string with a 
+	 * period in between them.
+	 *
+	 * For example, if the domain is "gmail" and the extension is 
+	 * "ca" then it would output "gmail.ca".
 	*/
 	public returnEmailAfterAtCharacter = (): string =>
 	{
 		return `${this.domain}.${this.extension}`;
 	}
 }
-
-const e = new EmailSuggestion("", "");
-
-e.returnEmailAfterAtCharacter();
 
 export default EmailSuggestion;
