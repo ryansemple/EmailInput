@@ -26,7 +26,7 @@ const validationRules: Validator[] =
 [
 	{
 		validationPredicateToPass: (email: string) => allKeyboardKeysRegex.test(email),
-		errorMessageIfFailed: "Beginning part of email is not valid. only characters a-z, A-Z, 0-1 and !#$%&'*+-/=?^_`{|}~ are allowed."
+		errorMessageIfFailed: "Email is not valid. only characters a-z, A-Z, 0-1 and !#$%&'*+-/=?^_`{|}~ are allowed."
 	},
 	{
 		validationPredicateToPass: (email: string) => email.includes(atCharacter),

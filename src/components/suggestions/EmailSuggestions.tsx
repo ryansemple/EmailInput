@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import EmailSuggestion from "./EmailSuggestion";
 import { emailAppearsToBeValid } from "../../utility/Language";
 import EmailSuggestions from "../../types/EmailSuggestions";
+import { allKeyboardKeysRegex } from "../../utility/Regex";
 
 interface EmailSuggestionsProps {
 	email: string,
@@ -19,30 +20,27 @@ const EmailSuggestionsComponent = (props: EmailSuggestionsProps) =>
 	const { email, setEmail, setEmailIsValid, setEmailMessage } = props;
 	const [currentEmailSuggestions, setCurrentEmailSuggestions] = 
 		useState([""]);
-	const [showEmailSuggestions, setShowEmailSuggestions] = 
-		useState(false);
 	const [defaultEmailSuggestions] = useState(new EmailSuggestions());
 
 	
 	useEffect(() => 
 	{
-		setCurrentEmailSuggestions
-		(
-			defaultEmailSuggestions.returnValidEmailSuggestions(email)
-		);
-
-		if (email)
+		const emailContainsInvalidCharacters: boolean = !allKeyboardKeysRegex.test(email);
+		
+		if(emailContainsInvalidCharacters || !email)
 		{
-			setShowEmailSuggestions(true);
+			setCurrentEmailSuggestions([""]);
 		} 
 		else 
 		{
-			setShowEmailSuggestions(false);
+			setCurrentEmailSuggestions
+			(
+				defaultEmailSuggestions.returnValidEmailSuggestions(email)
+			);
 		}
 	}, 
 	[
 		email,
-		setShowEmailSuggestions,
 		defaultEmailSuggestions
 	]);
 
@@ -59,9 +57,11 @@ const EmailSuggestionsComponent = (props: EmailSuggestionsProps) =>
 		setEmailMessage(emailAppearsToBeValid);
 	}
 	
+	const showEmailSuggestions: boolean = currentEmailSuggestions[0] !== "";
+
 	return (
 		<>
-			{showEmailSuggestions && 
+			{showEmailSuggestions &&
 			<ul className="EmailSuggestions full_width">
 				{currentEmailSuggestions.map((emailSuggestion: string) => 
 					<EmailSuggestion
