@@ -10,6 +10,10 @@ interface EmailSuggestionsProps {
 	setEmailMessage: (emailMessage: string) => void
 }
 
+/**
+ * Shows valid email suggestions based on the user's inputted email.
+ * @param {EmailSuggestionsProps} props
+ */
 const EmailSuggestionsComponent = (props: EmailSuggestionsProps) => 
 {	
 	const { email, setEmail, setEmailIsValid, setEmailMessage } = props;
@@ -19,6 +23,7 @@ const EmailSuggestionsComponent = (props: EmailSuggestionsProps) =>
 		useState(false);
 	const [defaultEmailSuggestions] = useState(new EmailSuggestions());
 
+	
 	useEffect(() => 
 	{
 		setCurrentEmailSuggestions
@@ -41,6 +46,12 @@ const EmailSuggestionsComponent = (props: EmailSuggestionsProps) =>
 		defaultEmailSuggestions
 	]);
 
+	/**
+	 * when the suggestion is clicked, the email in the form input
+	 * will be changed to the suggestion and the user will be able
+	 * to submit the email for verification.
+	 * @param {string} suggestedEmail - the clicked suggested email.
+	 */
 	const emailSuggestionOnClick = (suggestedEmail: string): void => 
 	{
 		setEmail(suggestedEmail);

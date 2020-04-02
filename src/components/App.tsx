@@ -2,6 +2,9 @@ import MainContent from "./MainContent";
 import Header from "./Header";
 import React from "react";
 
+/**
+ * The top level component of the App.
+ */
 const App = () => (
   <>
     <Header title={"Email input challenge"} />

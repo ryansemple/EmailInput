@@ -11,6 +11,9 @@ import Button from "./form/Button";
 
 const serverDomainUrl: string = "http://localhost:3001";
 
+/**
+ * Renders the content inside the "main" html tag
+ */
 const MainContent = () =>
 {
 	const [email, setEmail] = useState("");
@@ -18,8 +21,16 @@ const MainContent = () =>
 	const [emailIsValid, setEmailIsValid] = useState(false);
 	const [notifications, setNotifications] = useState<Notification[]>([]);
 
+	/**
+	 * Validates the email address with the Kickbox API.
+	 * Shows a success notification if it's a valid email,
+	 * shows an error notification if it's invalid or there 
+	 * was a network error.
+	 */
 	const checkEmail = () => 
 	{
+		setEmailMessage("");
+		
 		axios.get
 		(
 			`${serverDomainUrl}/VerifyEmail?email=${email}`
@@ -31,17 +42,15 @@ const MainContent = () =>
 
 			if(!successfullySent)
 			{
-				setEmailMessage(response.data.reason);
 				notification = new Notification(
-					"Email has been successfully verified as being valid.",
-					ValidationType.Success
+					`Email could not be delivered to: ${response.data.reason}.`,
+					ValidationType.Error
 				);
 			} 
 			else 
-			{
-				setEmailMessage("");
+			{			
 				notification = new Notification(
-					"Email has been successfully verified as being valid.",
+					"Email could be delivered to, it is valid.",
 					ValidationType.Success
 				);
 			}
@@ -68,6 +77,10 @@ const MainContent = () =>
     });
 	}
 
+	/**
+	 * clears the email input, disables the submit button and
+	 * clears the email validation message.
+	 */
 	const resetEmail = (): void => 
 	{
 		setEmail("");

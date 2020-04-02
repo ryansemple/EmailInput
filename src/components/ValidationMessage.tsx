@@ -3,16 +3,20 @@ import { ValidationType } from "../types/ValidationType";
 import { red, green } from "../styles/sass.scss";
 
 interface ValidationMessageProps {
-	validationMessage?: string,
-	validationType: ValidationType
+	validationType: ValidationType,
+	validationMessage?: string
 }
 
+/**
+ * Displays a validation message that is either a success or error
+ * message depending on the value of @param validationType
+ */
 const ValidationMessage = (props: ValidationMessageProps) => (
 	<p 
-		/* 
-			Normally I would do this kind of styling with classes but I
-			wanted to show how I can access sass variables from react.
-		*/
+		/**
+		 * Normally I would do this kind of styling with classes but I
+		 * wanted to show how I can access sass variables from react.
+		 */
 		style={{
 			color: props.validationType === ValidationType.Success ? 
 			green : red

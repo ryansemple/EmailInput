@@ -2,8 +2,8 @@ import React from "react";
 import clsx from "clsx";
 
 interface LabelProps {
-	className?: string,
 	text: string,
+	className?: string,
 	htmlFor?: string
 }
 

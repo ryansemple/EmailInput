@@ -13,14 +13,18 @@ interface NotificationsProps {
 	setNotifications: React.Dispatch<React.SetStateAction<Notification[]>>
 }
 
-const notificationTimeout: number = 6000;
+/**
+ * The time (in milliseconds) it will take for a notification
+ * to be destroyed after it is created
+ */
+const notificationTimeout: number = 7000;
 
 /**
  * Sets a timeout for newly added notifications that will destroy the newly added 
  * notitications after a given amount of time has passed.
  * @param notifications - the current collection of notifications.
  * @param setNotifications - hook that sets the collection of notifications.
- * @param previousNotifications - the collection of notifications before the last update.
+ * @param previousNotifications - the collection of notifications before the last update, used to comare to the new notifications.
  */
 const useDestroyNewNotificationsAfterTimeout =
 (
@@ -31,26 +35,34 @@ const useDestroyNewNotificationsAfterTimeout =
 {
 	useEffect(() =>
 	{
+		/**
+		 * Destroys a collection of notifications after the amount
+		 * of time defined by notificationTimeout has passed.
+		 * @param noticationToBeDestroyed - the notifications was will
+		 * be destroyed.
+		 */
 		const destroyNotificationAfterTimeoutEnds = (noticationToBeDestroyed: Notification) => 
 		{
 			setTimeout(() => 
 			{
-				setNotifications(_notifications =>	{
-					return _notifications
-					.filter((notificationInstance: Notification) => 
-							notificationInstance.id !== noticationToBeDestroyed.id
-					);
-				});
+				setNotifications(_notifications =>
+					_notifications.filter((notificationInstance: Notification) => 
+						notificationInstance.id !== noticationToBeDestroyed.id
+					)
+				);
 			}, notificationTimeout);
 		};
 		
-		const notificationPropsHaveUpdated = previousNotifications?.length !== notifications.length;
+		const notificationPropsHaveUpdated = previousNotifications?.length !== 
+		notifications.length;
 		
 		if (notificationPropsHaveUpdated) 
 		{
 			let newNotifications: Notification[] = [];
+			const previousNotificationsExist: boolean = 
+				previousNotifications! && previousNotifications!.length > 0;
 
-			if (!previousNotifications || previousNotifications.length === 0)
+			if (!previousNotificationsExist)
 			{
 				newNotifications = notifications;
 			} 
@@ -80,7 +92,8 @@ const Notifications = (props: NotificationsProps) => {
 
 	const { notifications, setNotifications } = props;
 	const previousProps = usePrevious({ notifications });
-	const previousNotifications: Notification[] | undefined = previousProps?.notifications;
+	const previousNotifications: Notification[] | undefined = 
+		previousProps?.notifications;
 
 	useDestroyNewNotificationsAfterTimeout(
 		notifications,
@@ -89,9 +102,9 @@ const Notifications = (props: NotificationsProps) => {
 	);
 
 	return (
-		<div className="Notifications absolute flex horizontal_center_flex full_width">
-			{notifications
-			.map((notificationInstance: Notification) => 
+		<div 
+			className="Notifications absolute flex horizontal_center_flex full_width">
+			{notifications.map((notificationInstance: Notification) => 
 			{
 				const sharedProperties = {
 					text: notificationInstance.text,
