@@ -3,7 +3,7 @@
 exports[`Renders Button component correctly. 1`] = `
 <div>
   <input
-    class="form_input class"
+    class="Input class"
     name="input"
     value="abc"
   />

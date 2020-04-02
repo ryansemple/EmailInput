@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import EmailSuggestionComponent from "./EmailSuggestion";
+import EmailSuggestion from "./EmailSuggestion";
 import { emailAppearsToBeValid } from "../../utility/Language";
 import EmailSuggestions from "../../types/EmailSuggestions";
 
@@ -13,20 +13,18 @@ interface EmailSuggestionsProps {
 const EmailSuggestionsComponent = (props: EmailSuggestionsProps) => 
 {	
 	const { email, setEmail, setEmailIsValid, setEmailMessage } = props;
-	const [currentEmailSuggestions, setCurrentEmailSuggestions] = useState([""]);
-	const [showEmailSuggestions, setShowEmailSuggestions] = useState(false);
-	const emailSuggestions: EmailSuggestions = new EmailSuggestions();
-
-	const emailSuggestionsClickEvent = (suggestedEmail: string): void => 
-	{
-		setEmail(suggestedEmail);
-		setEmailIsValid(true);
-		setEmailMessage(emailAppearsToBeValid);
-	}
+	const [currentEmailSuggestions, setCurrentEmailSuggestions] = 
+		useState([""]);
+	const [showEmailSuggestions, setShowEmailSuggestions] = 
+		useState(false);
+	const [defaultEmailSuggestions] = useState(new EmailSuggestions());
 
 	useEffect(() => 
 	{
-		setCurrentEmailSuggestions(emailSuggestions.returnValidEmailSuggestions(email));
+		setCurrentEmailSuggestions
+		(
+			defaultEmailSuggestions.returnValidEmailSuggestions(email)
+		);
 
 		if (email)
 		{
@@ -39,23 +37,31 @@ const EmailSuggestionsComponent = (props: EmailSuggestionsProps) =>
 	}, 
 	[
 		email,
-		setShowEmailSuggestions
+		setShowEmailSuggestions,
+		defaultEmailSuggestions
 	]);
+
+	const emailSuggestionClickEvent = (suggestedEmail: string): void => 
+	{
+		setEmail(suggestedEmail);
+		setEmailIsValid(true);
+		setEmailMessage(emailAppearsToBeValid);
+	}
 	
 	return (
-		<div className="EmailSuggestions full_width">
-			{showEmailSuggestions &&
-			<ul>
+		<>
+			{showEmailSuggestions && 
+			<ul className="EmailSuggestions full_width">
 				{currentEmailSuggestions.map((emailSuggestion: string) => 
-					<EmailSuggestionComponent
+					<EmailSuggestion
 						key={emailSuggestion}
 						emailSuggestion={emailSuggestion}
-						onClick={emailSuggestionsClickEvent}
+						onClick={emailSuggestionClickEvent}
 					/>
 				)}
 			</ul>
 			}
-		</div>
+		</>
 	)
 }
 

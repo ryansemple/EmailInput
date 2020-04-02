@@ -8,7 +8,7 @@ to note about it:
 •For styles, I'm using sass. The majority of the styles 
 are defined in one file called "site.scss" with these exceptions: "reset.scss" is a 
 regular CSS reset, "sass.scss" is for sass variables and mixins,
-  and "skeleton.scss" contains grid framework styles (I've only included 
+  and "skelegridton.scss" contains grid framework styles (I've only included 
   the classes that are actually used to reduce the styles bundle size).
 
 •How I organize my stylesheets is by putting the most general elements 
@@ -17,7 +17,7 @@ that makes sense for it to take precedent over other styles by default.
 I also group styles into general areas that they belong to like Form, 
 Fonts and Header areas using comments.
 
-•This app is responsive down to the standard iPhone dimensions of 320 x 480 pixels.
+•This app is responsive from desktop size down to the standard iPhone dimensions of 320 x 480 pixels.
 
 ## Available Scripts
 

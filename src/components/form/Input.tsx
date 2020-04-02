@@ -20,7 +20,7 @@ const Input = (props: InputProps) =>
 
 	return (
 		<input 
-			className={clsx("form_input", className)}
+			className={clsx("Input", className)}
 			value={value}
 			onChange={onChangeEvent}
 			name={name}

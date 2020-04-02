@@ -3,7 +3,7 @@
 exports[`Renders Label component correctly. 1`] = `
 <div>
   <label
-    class="form_label class"
+    class="Label class"
     for="input"
   >
     Label text

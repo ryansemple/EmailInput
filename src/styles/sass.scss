@@ -17,13 +17,7 @@ $disabled-opacity: .6;
 
 /* Dimensions ---------------------------------*/
 
-$input-height: 2.625rem;
-$input-padding-left-right: 0.625rem;
-$input-padding: 0 $input-padding-left-right;
-
-$thick-border-width: 0.313rem;
-$thin-border-width: 0.063rem;
-
+$email-suggestions-max-height: 60vh;
 $header-height: 6rem;
 $button-padding: 0 0.875rem;
 $box-border-radius: 0.25rem;
@@ -37,6 +31,13 @@ $gutter-padding: 0.938rem;
 $extra-small-spacing: 0.5rem;
 $small-spacing: $gutter-padding;
 $medium-spacing: 2rem;
+
+$input-height: 2.625rem;
+$input-padding-left-right: 0.625rem;
+$input-padding: 0 $input-padding-left-right;
+
+$thick-border-width: 0.313rem;
+$thin-border-width: 0.063rem;
 
 /* Dimensions ---------------------------------*/
 

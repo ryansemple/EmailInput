@@ -15,7 +15,7 @@ exports[`Renders MainContent component correctly. 1`] = `
           class="EmailValidationForm full_width"
         >
           <label
-            class="form_label block"
+            class="Label block"
             for="EmailValidator"
           >
             Enter Email:
@@ -24,7 +24,7 @@ exports[`Renders MainContent component correctly. 1`] = `
             class="relative"
           >
             <input
-              class="form_input block full_width"
+              class="Input block full_width"
               name="EmailValidator"
               value=""
             />
@@ -37,16 +37,13 @@ exports[`Renders MainContent component correctly. 1`] = `
               ×
             </button>
           </div>
-          <div
-            class="EmailSuggestions full_width"
-          />
           <p
             class="block full_width margin_top_small"
           />
         </div>
         <div>
           <label
-            class="form_label block"
+            class="Label block"
           >
              
           </label>

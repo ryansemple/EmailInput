@@ -2,7 +2,7 @@
 
 @import "reset";
 @import "sass";
-@import "skeleton";
+@import "grid";
 
 /* Imports ------------------------------------*/
 
@@ -72,14 +72,14 @@ body {
 
 /* Form ---------------------------------------*/
 
-.form_label {
+.Label {
 	font-size: $label-font-size;
 	margin-bottom: $extra-small-spacing;
 	text-align: left;
 	font-weight: 600;
 }
 
-.form_input {
+.Input {
 	height: $input-height;
 	line-height: $input-height;
 	border-radius: $box-border-radius;
@@ -146,7 +146,22 @@ main {
 
 /* Suggestions --------------------------------*/
 
+.EmailSuggestions {
+	max-height: $email-suggestions-max-height;
+	overflow-y: auto;
+	overflow-x: hidden;
+
+	@media screen and (max-height: 750px) {
+		max-height: $email-suggestions-max-height - 10vh;
+	}
+
+	@media screen and (max-height: 580px) {
+		max-height: $email-suggestions-max-height - 20vh;
+	}
+}
+
 .EmailSuggestions_Suggestion {
+	word-break: break-all;
 	cursor: pointer;
 	padding: 0.563rem $input-padding-left-right;
 	text-decoration: underline;

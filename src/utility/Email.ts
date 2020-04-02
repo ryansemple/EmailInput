@@ -12,8 +12,5 @@ export const domainExtensions: string[] =
 [
 	"com",
 	"ca",
-	"edu",
-	"uk",
-	"net",
-	"gov"
+	"co.uk"
 ]

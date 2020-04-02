@@ -2,16 +2,8 @@
 
 exports[`Renders EmailSuggestions component correctly. 1`] = `
 <div>
-  <div
+  <ul
     class="EmailSuggestions full_width"
-  >
-    <ul>
-      <li
-        class="EmailSuggestions_Suggestion"
-      >
-        ryan@gmail.com
-      </li>
-    </ul>
-  </div>
+  />
 </div>
 `;

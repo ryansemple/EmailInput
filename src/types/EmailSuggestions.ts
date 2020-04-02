@@ -40,10 +40,12 @@ class EmailSuggestions implements EmailSuggestionsInterface {
 		}
 		else 
 		{
-			const emailSplitByAtCharacter: string[] = userEnteredEmail.split(atCharacter);
-			const emailCharactersAfterAtCharacter: string = emailSplitByAtCharacter[1];
+			const emailSplitByAtCharacter: string[] = 
+				userEnteredEmail.split(atCharacter);
+			const emailCharactersAfterAtCharacter: string = 
+				emailSplitByAtCharacter[1];
 
-			if(emailCharactersAfterAtCharacter === "") 
+			if (emailCharactersAfterAtCharacter === "") 
 			{
 				return this.returnAllEmailSuggestions(userEnteredEmail);
 			}
@@ -57,8 +59,7 @@ class EmailSuggestions implements EmailSuggestionsInterface {
 		}
 	}
 
-	private returnAllEmailSuggestions =
-	(userEnteredEmail: string): string[] => 
+	private returnAllEmailSuggestions = (userEnteredEmail: string): string[] =>
 	{
 		let validEmailSuggestions: string[] = [];
 		
@@ -84,8 +85,20 @@ class EmailSuggestions implements EmailSuggestionsInterface {
 			const currentEmailSuggestion: EmailSuggestion = this.emailSuggestions[i];
 			const currentEmailSuggestionAfterAtCharacter: string =
 				currentEmailSuggestion.returnEmailAfterAtCharacter();
-			const regexToMatch: RegExp = new RegExp(`^${userEnteredEmailAfterAtCharacter}`);
+			const regexToMatch: RegExp = new RegExp
+			(
+				`^${userEnteredEmailAfterAtCharacter}`
+			);
+
+			const userEmailMatchesSuggestedEmailExactly = 
+				userEnteredEmailAfterAtCharacter ===
+				currentEmailSuggestionAfterAtCharacter;
 			
+			if(userEmailMatchesSuggestedEmailExactly) 
+			{
+				continue;
+			}
+
 			if (currentEmailSuggestionAfterAtCharacter.match(regexToMatch))
 			{
 				const validEmailSuggestion = currentEmailSuggestion.returnFullEmail(
