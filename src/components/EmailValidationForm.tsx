@@ -1,7 +1,6 @@
 import React from "react";
 import Label from "./form/Label";
 import Input from "./form/Input";
-import { allKeyboardKeysRegex } from "../utility/Regex";
 import { atCharacter, xCharacter } from "../utility/String";
 import Button from "./form/Button";
 import EmailSuggestions from "./suggestions/EmailSuggestions";

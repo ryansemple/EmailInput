@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import EmailSuggestion from "./EmailSuggestion";
 import { emailAppearsToBeValid } from "../../utility/Language";
 import EmailSuggestions from "../../types/EmailSuggestions";
-import { allKeyboardKeysRegex } from "../../utility/Regex";
+import { doesEmailHaveInvalidCharacters } from "../../utility/Email";
 
 interface EmailSuggestionsProps {
 	email: string,
@@ -29,7 +29,8 @@ const EmailSuggestionsComponent = (props: EmailSuggestionsProps) =>
 	
 	useEffect(() => 
 	{
-		const emailContainsInvalidCharacters: boolean = !allKeyboardKeysRegex.test(email);
+		const emailContainsInvalidCharacters: boolean =
+		doesEmailHaveInvalidCharacters(email);
 		
 		if(emailContainsInvalidCharacters || !email)
 		{
