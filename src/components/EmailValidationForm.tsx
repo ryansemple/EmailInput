@@ -1,7 +1,7 @@
 import React from "react";
 import Label from "./form/Label";
 import Input from "./form/Input";
-import { atCharacter, xCharacter } from "../utility/String";
+import { xCharacter } from "../utility/String";
 import Button from "./form/Button";
 import EmailSuggestions from "./suggestions/EmailSuggestions";
 import ValidationMessage from "./ValidationMessage";
@@ -10,56 +10,8 @@ import clsx from "clsx";
 import { emailAppearsToBeValid } from "../utility/Language";
 import Validator from "../types/Validator";
 import { 
-	doesEmailHavePeriod,
-	emailHasNothingAfterAtCharacter,
-	doesEmailHaveExtension,
-	doesEmailHaveInvalidCharacters,
-	isFirstCharacterOfEmailValid,
-	emailDomainStartsWithAPeriod
+	emailValidators
 } from "../utility/Email";
-
-/**
- * The collection of validators that will each be ran. if the 
- * predicateMeansFailIfTrue function fails then that error will
- * be shown to the user and no further validators will be ran.
- * The order of this collection matters, the validators will be 
- * ran from top to bottom.
- */
-const validators: Validator[] =
-[
-	{ 
-		predicateMeansFailIfTrue: doesEmailHaveInvalidCharacters,
-		errorMessageIfFailed: "Email is not valid, it contains invalid characters."
-	},
-	{
-		predicateMeansFailIfTrue: (email: string) => !isFirstCharacterOfEmailValid(email),
-		errorMessageIfFailed: `First character of email is not valid, it should be alphanumeric`
-	},
-	{
-		predicateMeansFailIfTrue: (email: string) => !email.includes(atCharacter),
-		errorMessageIfFailed: `Email doesn't contain an '${atCharacter}' character`
-	},
-	{
-		predicateMeansFailIfTrue: (email: string) => email.split(atCharacter).length === 3,
-		errorMessageIfFailed: `Email can only contain one '${atCharacter}' character`
-	},
-	{
-		predicateMeansFailIfTrue: emailHasNothingAfterAtCharacter,
-		errorMessageIfFailed: `Email doesn't contain a domain name (name after the '${atCharacter}' character)`
-	},
-	{
-		predicateMeansFailIfTrue: emailDomainStartsWithAPeriod,
-		errorMessageIfFailed: `Email domain can not begin with a period`
-	},
-	{
-		predicateMeansFailIfTrue: (email: string) => !doesEmailHavePeriod(email),
-		errorMessageIfFailed: `Email doesn't have a period`
-	},
-	{
-		predicateMeansFailIfTrue: (email: string) => !doesEmailHaveExtension(email),
-		errorMessageIfFailed: `Email doesn't have an extension (eg: com, ca)`
-	}
-];
 
 interface EmailValidationFormProps {
 	setEmail: (email: string) => void,
@@ -98,9 +50,9 @@ const EmailValidationForm = (props: EmailValidationFormProps) =>
 	 */
 	const handleSettingEmailValidationMessage = (email: string): void => 
 	{
-		for (let i: number = 0; i < validators.length; i++)
+		for (let i: number = 0; i < emailValidators.length; i++)
 		{
-			const validator: Validator = validators[i];
+			const validator: Validator = emailValidators[i];
 
 			const validationFailed: boolean = validator
 				.predicateMeansFailIfTrue(email);

@@ -1,10 +1,11 @@
 import { 
 	emailHasNothingAfterAtCharacter,
-	doesEmailHavePeriod,
-	doesEmailHaveExtension,
-	doesEmailHaveAtCharacter,
-	doesEmailHaveInvalidCharacters,
-	isFirstCharacterOfEmailValid
+	emailHasPeriod,
+	emailHasExtension,
+	emailHasAtCharacter,
+	emailHasInvalidCharacters,
+	firstCharacterOfEmailIsValid,
+	emailDomainStartsWithAPeriod
 } from "../Email";
 
 test('emailHasNothingAfterAtCharacter should return true when the email has no characters after the at character.', () => {
@@ -23,82 +24,98 @@ test('emailHasNothingAfterAtCharacter should return false when the email has cha
 	expect(actualValue).toBe(false);
 });
 
-test('doesEmailHavePeriod should return true when the email has a period.', () => {
+test('emailHasPeriod should return true when the email has a period.', () => {
 	const email = "xyb2@yahoo.";
 
-	const actualValue: boolean = doesEmailHavePeriod(email);
+	const actualValue: boolean = emailHasPeriod(email);
 
 	expect(actualValue).toBe(true);
 });
 
-test('doesEmailHavePeriod should return false when the email does not have a period.', () => {
+test('emailHasPeriod should return false when the email does not have a period.', () => {
 	const email = "xyb2@yah";
 
-	const actualValue: boolean = doesEmailHavePeriod(email);
+	const actualValue: boolean = emailHasPeriod(email);
 
 	expect(actualValue).toBe(false);
 });
 
-test('doesEmailHaveExtension should return true when the email has an extension.', () => {
+test('emailHasExtension should return true when the email has an extension.', () => {
 	const email = "xyb2@yahoo.ca";
 
-	const actualValue: boolean = doesEmailHaveExtension(email);
+	const actualValue: boolean = emailHasExtension(email);
 
 	expect(actualValue).toBe(true);
 });
 
-test('doesEmailHaveExtension should return false when the email does not have an extension.', () => {
+test('emailHasExtension should return false when the email does not have an extension.', () => {
 	const email = "ure@gmail.";
 
-	const actualValue: boolean = doesEmailHaveExtension(email);
+	const actualValue: boolean = emailHasExtension(email);
 
 	expect(actualValue).toBe(false);
 });
 
-test('doesEmailHaveAtCharacter should return true when the email has an at character.', () => {
+test('emailHasAtCharacter should return true when the email has an at character.', () => {
 	const email = "uhhheg3@";
 
-	const actualValue: boolean = doesEmailHaveAtCharacter(email);
+	const actualValue: boolean = emailHasAtCharacter(email);
 
 	expect(actualValue).toBe(true);
 });
 
-test('doesEmailHaveAtCharacter should return false when the email does not have an at character.', () => {
+test('emailHasAtCharacter should return false when the email does not have an at character.', () => {
 	const email = "billy123";
 
-	const actualValue: boolean = doesEmailHaveAtCharacter(email);
+	const actualValue: boolean = emailHasAtCharacter(email);
 
 	expect(actualValue).toBe(false);
 });
 
-test('doesEmailHaveInvalidCharacters should return true when the email has invalid characters.', () => {
+test('emailHasInvalidCharacters should return true when the email has invalid characters.', () => {
 	const email = "ace👍";
 
-	const actualValue: boolean = doesEmailHaveInvalidCharacters(email);
+	const actualValue: boolean = emailHasInvalidCharacters(email);
 
 	expect(actualValue).toBe(true);
 });
 
-test('doesEmailHaveInvalidCharacters should return false when the email does not have invalid characters.', () => {
+test('emailHasInvalidCharacters should return false when the email does not have invalid characters.', () => {
 	const email = "great55+spam@gmail.com";
 
-	const actualValue: boolean = doesEmailHaveInvalidCharacters(email);
+	const actualValue: boolean = emailHasInvalidCharacters(email);
 
 	expect(actualValue).toBe(false);
 });
 
-test('isFirstCharacterOfEmailValid should return true when the first character of an email is alphanumeric.', () => {
+test('firstCharacterOfEmailIsValid should return true when the first character of an email is alphanumeric.', () => {
 	const email = "greg@yahoo.ca";
 
-	const actualValue: boolean = isFirstCharacterOfEmailValid(email);
+	const actualValue: boolean = firstCharacterOfEmailIsValid(email);
 
 	expect(actualValue).toBe(true);
 });
 
-test('isFirstCharacterOfEmailValid should return false when the first character of an email is not alphanumeric.', () => {
+test('firstCharacterOfEmailIsValid should return false when the first character of an email is not alphanumeric.', () => {
 	const email = "%gregyuuy+2@gmail.com";
 
-	const actualValue: boolean = isFirstCharacterOfEmailValid(email);
+	const actualValue: boolean = firstCharacterOfEmailIsValid(email);
+
+	expect(actualValue).toBe(false);
+});
+
+test('emailDomainStartsWithAPeriod should return true when the domain of an email begins with a period.', () => {
+	const email = "canada@.gmail.ca";
+
+	const actualValue: boolean = emailDomainStartsWithAPeriod(email);
+
+	expect(actualValue).toBe(true);
+});
+
+test('emailDomainStartsWithAPeriod should return false when the domain of an email does not begins with a period.', () => {
+	const email = "hhhh54@gmail.c";
+
+	const actualValue: boolean = emailDomainStartsWithAPeriod(email);
 
 	expect(actualValue).toBe(false);
 });

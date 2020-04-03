@@ -1,5 +1,9 @@
 import EmailSuggestion from "./EmailSuggestion";
-import { emailDomains, domainExtensions } from "../utility/Email";
+import { 
+	emailDomains, 
+	domainExtensions, 
+	returnIfEmailIsValid 
+} from "../utility/Email";
 import { atCharacter } from "../utility/String";
 
 interface EmailSuggestionsInterface {
@@ -89,9 +93,13 @@ class EmailSuggestions implements EmailSuggestionsInterface {
 		for (let i: number = 0; i < this.emailSuggestions.length; i++)
 		{
 			const currentEmailSuggestion: EmailSuggestion = this.emailSuggestions[i];
-			const validEmailSuggestion = currentEmailSuggestion
+			const emailSuggestion = currentEmailSuggestion
 				.returnFullEmail(userEnteredEmail);
-			validEmailSuggestions.push(validEmailSuggestion);
+
+			if (returnIfEmailIsValid(emailSuggestion))
+			{
+				validEmailSuggestions.push(emailSuggestion);
+			}
 		}
 
 		return validEmailSuggestions;
@@ -130,11 +138,14 @@ class EmailSuggestions implements EmailSuggestionsInterface {
 
 			if (currentEmailSuggestionAfterAtCharacter.match(regexToMatch))
 			{
-				const validEmailSuggestion = currentEmailSuggestion.returnFullEmail(
+				const emailSuggestion = currentEmailSuggestion.returnFullEmail(
 					userEnteredEmail
 				);
 
-				validEmailSuggestions.push(validEmailSuggestion);
+				if (returnIfEmailIsValid(emailSuggestion))
+				{
+					validEmailSuggestions.push(emailSuggestion);
+				}
 			}
 		}
 
