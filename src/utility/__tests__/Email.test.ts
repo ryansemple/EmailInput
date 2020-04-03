@@ -7,7 +7,8 @@ import {
 	firstCharacterOfEmailIsValid,
 	emailDomainStartsWithAPeriod,
 	emailUsernameHasTwoSuccessivePeriods,
-	returnIfEmailIsValid
+	returnIfEmailIsValid,
+	emailContainsMorethanOneAtCharacter
 } from "../Email";
 
 test("emailHasNothingAfterAtCharacter should return true when the email has no characters after the at character.", () => {
@@ -138,6 +139,23 @@ test("emailUsernameHasTwoSuccessivePeriods should return false when the email us
 	expect(actualValue).toBe(false);
 });
 
+test("emailContainsMorethanOneAtCharacter should return true when the email has more than one at character.", () => {
+	const email: string = "ker@go@outlook.com";
+
+	const actualValue: boolean = emailContainsMorethanOneAtCharacter(email);
+
+	expect(actualValue).toBe(true);
+});
+
+
+test("emailContainsMorethanOneAtCharacter should return false when the email does not have more than one at character.", () => {
+	const email: string = "megan33341@outlook.ca";
+
+	const actualValue: boolean = emailContainsMorethanOneAtCharacter(email);
+
+	expect(actualValue).toBe(false);
+});
+
 //Invalid emails from here: https://www.w3resource.com/javascript/form/email-validation.php
 test("returnIfEmailIsValid should return false for each of the invalid emails.", () => {
 	const invalidEmails: string[] = [
@@ -162,7 +180,8 @@ test("returnIfEmailIsValid should return true for each of the valid emails.", ()
 	const invalidEmails: string[] = [
 		"abc+23@gmail.com",
 		"gVDf.ee@yahoo.co.uk",
-		"333333@outlook.ca"
+		"333333@outlook.ca",
+		"jt@hotmail.ca"
 	];
 
 	for(let i: number = 0; i < invalidEmails.length; i++)

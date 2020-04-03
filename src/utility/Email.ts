@@ -19,7 +19,6 @@ export const domainExtensions: string[] =
 
 /**
  * Returns whether an email has nothing after its at character.
- * 
  * @param email - the email that will be checked.
  */
 export const emailHasNothingAfterAtCharacter = (email : string): boolean =>
@@ -29,7 +28,6 @@ export const emailHasNothingAfterAtCharacter = (email : string): boolean =>
 
 /**
  * Returns whether an email has a period.
- * 
  * @param email - the email that will be checked.
  */
 export const emailHasPeriod = (email : string): boolean =>
@@ -39,7 +37,6 @@ export const emailHasPeriod = (email : string): boolean =>
 
 /**
  * Returns whether an email has an extension.
- * 
  * @param email - the email that will be checked.
  */
 export const emailHasExtension = (email : string): boolean =>
@@ -53,7 +50,6 @@ export const emailHasExtension = (email : string): boolean =>
 
 /**
  * Returns whether an email has an at character.
- * 
  * @param email - the email that will be checked.
  */
 export const emailHasAtCharacter = (email : string) : boolean =>
@@ -64,7 +60,6 @@ export const emailHasAtCharacter = (email : string) : boolean =>
 
 /**
  * Returns whether an email has invalid characters.
- * 
  * @param email - the email that will be checked.
  */
 export const emailHasInvalidCharacters = (email: string): boolean =>
@@ -78,7 +73,6 @@ export const emailHasInvalidCharacters = (email: string): boolean =>
 /**
  * Returns whether the first character of an email is valid.
  * A valid first character must be alphanumeric.
- * 
  * @param email - the email that will be checked.
  */
 export const firstCharacterOfEmailIsValid = (email: string): boolean => 
@@ -90,7 +84,6 @@ export const firstCharacterOfEmailIsValid = (email: string): boolean =>
 
 /**
  * Returns whether the email's domain begins with a period.
- * 
  * @param email - the email that will be checked.
  */
 export const emailDomainStartsWithAPeriod = (email: string): boolean =>
@@ -101,13 +94,21 @@ export const emailDomainStartsWithAPeriod = (email: string): boolean =>
 
 /**
  * Returns whether an email username has two successive periods.
- * 
  * @param email - the email that will be checked.
  */
 export const emailUsernameHasTwoSuccessivePeriods = (email: string): boolean =>
 {
 	const username = email.split(atCharacter)[0];
 	return username.includes("..");
+}
+
+/**
+ * Returns whether an email an email as more than one at character.
+ * @param email - the email that will be checked.
+ */
+export const emailContainsMorethanOneAtCharacter = (email: string): boolean =>
+{
+	return email.split(atCharacter).length >= 3;
 }
 
 /**
@@ -136,7 +137,7 @@ export const emailValidators: Validator[] =
 		errorMessageIfFailed: `Email doesn't contain an '${atCharacter}' character`
 	},
 	{
-		predicateMeansFailIfTrue: (email: string) => email.split(atCharacter).length === 3,
+		predicateMeansFailIfTrue: emailContainsMorethanOneAtCharacter,
 		errorMessageIfFailed: `Email can only contain one '${atCharacter}' character`
 	},
 	{
@@ -183,7 +184,6 @@ export const returnIfEmailIsValid = (email: string): boolean =>
 
 /**
  * Returns all characters after the first at character.
- * 
  * @param email - the email that will be checked.
  */
 const returnCharactersAfterFirstAtCharacter = (email: string): string => 
