@@ -7,9 +7,21 @@ interface EmailSuggestionsInterface {
 	returnValidEmailSuggestions: (userEnteredEmail: string) => string[]
 }
 
+/**
+ * Class that has is used to keep a collection of notications
+ * and provides some functions for returning subsets of the
+ * notifications collection.
+ * 
+ * @class EmailSuggestions
+ * @implements {EmailSuggestionsInterface}
+ */
 class EmailSuggestions implements EmailSuggestionsInterface {
 	public readonly emailSuggestions: EmailSuggestion[];
 	
+	/**
+	 * Sets the emailSuggestions property to be all possible 
+	 * combinations of the email domains and extensions.
+	 */
 	constructor()
 	{ 
 		let emailSuggestions: EmailSuggestion[] = [];
@@ -32,6 +44,11 @@ class EmailSuggestions implements EmailSuggestionsInterface {
 		this.emailSuggestions = emailSuggestions;
 	}
 
+	/**
+	 * Returns all valid email suggestions based on the email the user entered.
+	 * 
+	 * @param {string} userEnteredEmail - the email that the user has entered.
+	 */
 	public returnValidEmailSuggestions = (userEnteredEmail: string): string[] =>
 	{
 		if (!userEnteredEmail.includes(atCharacter)) 
@@ -59,6 +76,12 @@ class EmailSuggestions implements EmailSuggestionsInterface {
 		}
 	}
 
+	/**
+	 * Returns all unfiltered email suggestions based on the email 
+	 * the user entered.
+	 *
+	 * @param {string} userEnteredEmail - the email that the user has entered.
+	 */
 	private returnAllEmailSuggestions = (userEnteredEmail: string): string[] =>
 	{
 		let validEmailSuggestions: string[] = [];
@@ -74,8 +97,18 @@ class EmailSuggestions implements EmailSuggestionsInterface {
 		return validEmailSuggestions;
 	}
 
-	private returnFitleredEmailSuggestions =
-	(userEnteredEmail: string, userEnteredEmailAfterAtCharacter: string) : string[] => 
+	/**
+	 * Returns all email suggestions filtered by the characters the user
+	 * entered afer the at character.
+	 *
+	 * @param {string} userEnteredEmail - the email that the user has entered.
+	 * @param {string} userEnteredEmailAfterAtCharacter - the characters after 
+	 * the at character in the user entered email.
+	 */
+	private returnFitleredEmailSuggestions = (
+		userEnteredEmail: string, 
+		userEnteredEmailAfterAtCharacter: string
+	) : string[] => 
 	{
 		let validEmailSuggestions: string[] = [];
 

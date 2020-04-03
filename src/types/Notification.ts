@@ -9,7 +9,7 @@ interface NotificationInterface extends ObjectWithId {
 }
 
 /**
- * Restricts the way a Notification can be created
+ * Class that restricts the way a Notification can be created
  * by encapsulating the logic for creating a new id so that it will
  * always be a new uuid and making the properties readonly so that
  * they can not be modified after the class has been constructed.
