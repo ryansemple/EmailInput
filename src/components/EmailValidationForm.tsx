@@ -11,42 +11,50 @@ import clsx from "clsx";
 import { emailAppearsToBeValid } from "../utility/Language";
 import Validator from "../types/Validator";
 import { 
-	doesEmailHaveDomain,
-	doesEmailHaveAtCharacter
+	doesEmailHavePeriod,
+	emailHasNothingAfterAtCharacter,
+	doesEmailHaveExtension,
+	doesEmailHaveInvalidCharacters
 } from "../utility/Email";
 
 /**
- * The collection of validation rules that need to pass in order
- * for the client side to allow the email to be submitted to the
- * API for the Kickbox validation to occur. The order of this
- * collection matters, the Validators will be ran from top to bottom.
+ * The collection of validators that will each be ran. if the 
+ * predicateMeansFailIfTrue function fails then that error will
+ * be shown to the user and no further validators will be ran.
+ * The order of this collection matters, the validators will be 
+ * ran from top to bottom.
  */
-const validationRules: Validator[] = 
+const validators: Validator[] =
 [
-	{
-		validationPredicateToPass: (email: string) => allKeyboardKeysRegex.test(email),
-		errorMessageIfFailed: "Email is not valid. only characters a-z, A-Z, 0-1 and !#$%&'*+-/=?^_`{|}~ are allowed."
+	// {
+	// 	predicateMeansFailIfTrue: (email: string) => !allKeyboardKeysRegex.test(email),
+	// 	errorMessageIfFailed: "Email is not valid. only characters a-z, A-Z, 0-1 and !#$%&'*+-/=?^_`{|}~ are allowed."
+	// },
+	{ 
+		predicateMeansFailIfTrue: doesEmailHaveInvalidCharacters,
+		errorMessageIfFailed: "Email is not valid, it contains invalid characters."
 	},
 	{
-		validationPredicateToPass: (email: string) => email.includes(atCharacter),
-		errorMessageIfFailed: `Email doesn't contain an '${atCharacter}' symbol`
+		predicateMeansFailIfTrue: (email: string) => !email.includes(atCharacter),
+		errorMessageIfFailed: `Email doesn't contain an '${atCharacter}' character`
 	},
 	{
-		validationPredicateToPass: (email: string) => email.split(atCharacter).length === 2,
-		errorMessageIfFailed: `Email can only contain one '${atCharacter}' symbol`
+		predicateMeansFailIfTrue: (email: string) => email.split(atCharacter).length === 3,
+		errorMessageIfFailed: `Email can only contain one '${atCharacter}' character`
 	},
 	{
-		validationPredicateToPass: (email: string) => doesEmailHaveAtCharacter(email),
-		errorMessageIfFailed: `Email doesn't contain a domain name (name after the '${atCharacter}' symbol)`
+		//predicateMeansFailIfTrue: (email: string) => emailHasNothingAfterAtCharacter(email),
+		predicateMeansFailIfTrue: emailHasNothingAfterAtCharacter,
+		errorMessageIfFailed: `Email doesn't contain a domain name (name after the '${atCharacter}' character)`
 	},
 	{
-		validationPredicateToPass: (email: string) => doesEmailHaveDomain(email),
-		errorMessageIfFailed: `2 Email doesn't contain a domain name (name after the '${atCharacter}' symbol)`
+		predicateMeansFailIfTrue: (email: string) => !doesEmailHavePeriod(email),
+		errorMessageIfFailed: `Email doesn't have a '.' character`
+	},
+	{
+		predicateMeansFailIfTrue: (email: string) => !doesEmailHaveExtension(email),
+		errorMessageIfFailed: `Email doesn't have an extension (eg: com, ca)`
 	}
-	// ,{
-	// 	validationPredicateToPass: (email: string) => isDomainInEmail(email),
-	// 	errorMessageIfFailed: "Email doesn't contain a domain"
-	// }
 ];
 
 interface EmailValidationFormProps {
@@ -86,14 +94,14 @@ const EmailValidationForm = (props: EmailValidationFormProps) =>
 	 */
 	const handleSettingEmailValidationMessage = (email: string): void => 
 	{
-		for (let i: number = 0; i < validationRules.length; i++)
+		for (let i: number = 0; i < validators.length; i++)
 		{
-			const validationRule: Validator = validationRules[i];
+			const validationRule: Validator = validators[i];
 
-			const validationRulePassed: boolean = validationRule
-				.validationPredicateToPass(email);
+			const validationFailed: boolean = validationRule
+				.predicateMeansFailIfTrue(email);
 
-			if (!validationRulePassed)
+			if (validationFailed)
 			{
 				setEmailIsValid(false);
 				setEmailValidationMessage(validationRule.errorMessageIfFailed);

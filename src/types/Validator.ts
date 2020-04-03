@@ -1,5 +1,5 @@
 interface Validator {
-	validationPredicateToPass: (email: string) => boolean
+	predicateMeansFailIfTrue: (email: string) => boolean
 	errorMessageIfFailed: string;
 }
 
