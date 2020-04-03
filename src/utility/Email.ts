@@ -24,7 +24,7 @@ export const domainExtensions: string[] =
  */
 export const emailHasNothingAfterAtCharacter = (email : string): boolean =>
 {
-	return email.split(atCharacter)[1] === "";
+	return returnCharactersAfterFirstAtCharacter(email) === "";
 }
 
 /**
@@ -34,7 +34,7 @@ export const emailHasNothingAfterAtCharacter = (email : string): boolean =>
  */
 export const emailHasPeriod = (email : string): boolean =>
 {
-	return email.split(atCharacter)[1].includes(".");
+	return returnCharactersAfterFirstAtCharacter(email).includes(".");
 }
 
 /**
@@ -44,7 +44,8 @@ export const emailHasPeriod = (email : string): boolean =>
  */
 export const emailHasExtension = (email : string): boolean =>
 {
-	const charactersAfterAtCharacter: string = email.split(atCharacter)[1];	
+	const charactersAfterAtCharacter: string = 
+		returnCharactersAfterFirstAtCharacter(email);	
 	const charactersSplitByPeriod: string[] = charactersAfterAtCharacter.split(".");
 	const hasCharactersAfterPeriod: boolean = charactersSplitByPeriod[1] !== "";
 	return hasCharactersAfterPeriod;
@@ -94,8 +95,19 @@ export const firstCharacterOfEmailIsValid = (email: string): boolean =>
  */
 export const emailDomainStartsWithAPeriod = (email: string): boolean =>
 {
-	const domain: string = email.split(atCharacter)[1];
+	const domain: string = returnCharactersAfterFirstAtCharacter(email);
 	return domain[0] === ".";
+}
+
+/**
+ * Returns whether an email username has two successive periods.
+ * 
+ * @param email - the email that will be checked.
+ */
+export const emailUsernameHasTwoSuccessivePeriods = (email: string): boolean =>
+{
+	const username = email.split(atCharacter)[0];
+	return username.includes("..");
 }
 
 /**
@@ -114,6 +126,10 @@ export const emailValidators: Validator[] =
 	{
 		predicateMeansFailIfTrue: (email: string) => !firstCharacterOfEmailIsValid(email),
 		errorMessageIfFailed: `First character of email is not valid, it should be alphanumeric`
+	},
+	{
+		predicateMeansFailIfTrue: emailUsernameHasTwoSuccessivePeriods,
+		errorMessageIfFailed: `Email username (part before the @ character) can not contain two successive periods`
 	},
 	{
 		predicateMeansFailIfTrue: (email: string) => !email.includes(atCharacter),
@@ -163,4 +179,14 @@ export const returnIfEmailIsValid = (email: string): boolean =>
 	}
 
 	return true;
+}
+
+/**
+ * Returns all characters after the first at character.
+ * 
+ * @param email - the email that will be checked.
+ */
+const returnCharactersAfterFirstAtCharacter = (email: string): string => 
+{
+	return email.split(atCharacter)[1];
 }
