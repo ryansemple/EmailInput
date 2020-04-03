@@ -12,7 +12,7 @@ import { emailAppearsToBeValid } from "../utility/Language";
 import Validator from "../types/Validator";
 import { 
 	doesEmailHaveDomain,
-	isDomainInEmail
+	doesEmailHaveAtCharacter
 } from "../utility/Email";
 
 /**
@@ -32,17 +32,21 @@ const validationRules: Validator[] =
 		errorMessageIfFailed: `Email doesn't contain an '${atCharacter}' symbol`
 	},
 	{
-		validationPredicateToPass: (email: string) => doesEmailHaveDomain(email),
-		errorMessageIfFailed: `Email doesn't contain a domain name (name after the '${atCharacter}' symbol)`
-	},
-	{
 		validationPredicateToPass: (email: string) => email.split(atCharacter).length === 2,
 		errorMessageIfFailed: `Email can only contain one '${atCharacter}' symbol`
 	},
 	{
-		validationPredicateToPass: (email: string) => isDomainInEmail(email),
-		errorMessageIfFailed: "Email doesn't contain a domain"
+		validationPredicateToPass: (email: string) => doesEmailHaveAtCharacter(email),
+		errorMessageIfFailed: `Email doesn't contain a domain name (name after the '${atCharacter}' symbol)`
+	},
+	{
+		validationPredicateToPass: (email: string) => doesEmailHaveDomain(email),
+		errorMessageIfFailed: `2 Email doesn't contain a domain name (name after the '${atCharacter}' symbol)`
 	}
+	// ,{
+	// 	validationPredicateToPass: (email: string) => isDomainInEmail(email),
+	// 	errorMessageIfFailed: "Email doesn't contain a domain"
+	// }
 ];
 
 interface EmailValidationFormProps {

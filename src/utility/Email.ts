@@ -21,8 +21,8 @@ export const doesEmailHaveDomain = (email : string): boolean =>
 	return email.split(atCharacter)[1].includes(".");
 }
 
-export const isDomainInEmail = (email : string) : boolean =>
+export const doesEmailHaveAtCharacter = (email : string) : boolean =>
 {
-	const emailSplitOnAtCharacter : string[] = email.split(atCharacter);
-	return emailSplitOnAtCharacter.length >= 2;
+	const emailSplitByAtCharacter : string[] = email.split(atCharacter);
+	return emailSplitByAtCharacter.length >= 2;
 }

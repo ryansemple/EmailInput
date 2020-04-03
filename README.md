@@ -32,6 +32,10 @@ need to clutter the code with lots of unnecessary comments.
 
 •I've included some tests, found in the "__tests__" folders.
 
+•I tried to keep the files small and focused to maximize readability.
+All files are less than 200 lines long with the exception of "site.scss"
+which is slightly longer.
+
 ## Available Scripts
 
 ### `npm start`
