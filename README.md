@@ -23,11 +23,11 @@ double dashes and underscores, just single) and also using snake
 casing for helper classes (like "margin_bottom_medium", "horizontal_center_flex") 
 that don't belong to specific components.
 
-•This app is responsive from desktop size down to the standard 
+•This app is responsive from desktop size down to the old 
 iPhone dimensions of 320 x 480 pixels.
 
 •I've included some comments but I haven't gone overboard 
-with them, I try to make the naming self explanatory so I don't 
+with them, I try to make the naming self explanatory so I don't
 need to clutter the code with lots of unnecessary comments.
 
 •I've included some tests, found in the "__tests__" folders.
@@ -42,12 +42,17 @@ valid in the future.
 All files are less than 200 lines long with the exception of "site.scss"
 which is slightly longer.
 
-## Available Scripts
+## Scripts
+
+### `npm i`
+
+Installs all needed dependencies. This needs to be ran first.
 
 ### `npm start`
 
 Starts the app in development mode, also starts the server that 
-will be used to make calls to the Kickbox API.
+will be used to make calls to the Kickbox API when the "Verify"
+button is clicked.
 
 ### `npm run test`
 
