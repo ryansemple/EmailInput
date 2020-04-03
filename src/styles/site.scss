@@ -105,16 +105,26 @@ body {
 	padding: $button-padding;
 	border-radius: $box-border-radius;
 	cursor: pointer;
+	transition: $default-transition-duration opacity $default-transition-timing,
+		$default-transition-duration background-color $default-transition-timing;
 
 	&:disabled {
 		opacity: $disabled-opacity;
 		cursor: not-allowed;
+	}
+
+	&:hover:enabled {
+		background-color: darken($brand-orange, $lightness-delta);
 	}
 }
 
 .Button-Clear {
 	background-color: $border-grey;
 	font-size: 1.625rem;
+
+	&:hover:enabled {
+		background-color: darken($border-grey, $lightness-delta);
+	}
 }
 
 /* Button -------------------------------------*/
@@ -171,6 +181,7 @@ body {
 	text-decoration: underline;
 	color: $link-blue;
 	background-color: $off-white;
+	transition: $default-transition-duration background-color $default-transition-timing;
 	
 	&:hover {
 		background-color: darken($off-white, $lightness-delta);
