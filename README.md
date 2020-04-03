@@ -32,6 +32,12 @@ need to clutter the code with lots of unnecessary comments.
 
 •I've included some tests, found in the "__tests__" folders.
 
+•You can test the emails from the following 
+([source](https://www.w3resource.com/javascript/form/email-validation.php)) and check that each email is invalid. Except for this email:
+"mysite123@gmail.b", which I decided to not set as invalid because
+although the "b" top level domain is invalid now it could be
+valid in the future.
+
 •I tried to keep the files small and focused to maximize readability.
 All files are less than 200 lines long with the exception of "site.scss"
 which is slightly longer.
