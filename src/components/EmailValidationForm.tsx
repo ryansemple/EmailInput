@@ -13,7 +13,9 @@ import {
 	doesEmailHavePeriod,
 	emailHasNothingAfterAtCharacter,
 	doesEmailHaveExtension,
-	doesEmailHaveInvalidCharacters
+	doesEmailHaveInvalidCharacters,
+	isFirstCharacterOfEmailValid,
+	emailDomainStartsWithAPeriod
 } from "../utility/Email";
 
 /**
@@ -30,6 +32,10 @@ const validators: Validator[] =
 		errorMessageIfFailed: "Email is not valid, it contains invalid characters."
 	},
 	{
+		predicateMeansFailIfTrue: (email: string) => !isFirstCharacterOfEmailValid(email),
+		errorMessageIfFailed: `First character of email is not valid, it should be alphanumeric`
+	},
+	{
 		predicateMeansFailIfTrue: (email: string) => !email.includes(atCharacter),
 		errorMessageIfFailed: `Email doesn't contain an '${atCharacter}' character`
 	},
@@ -42,8 +48,12 @@ const validators: Validator[] =
 		errorMessageIfFailed: `Email doesn't contain a domain name (name after the '${atCharacter}' character)`
 	},
 	{
+		predicateMeansFailIfTrue: emailDomainStartsWithAPeriod,
+		errorMessageIfFailed: `Email domain can not begin with a period`
+	},
+	{
 		predicateMeansFailIfTrue: (email: string) => !doesEmailHavePeriod(email),
-		errorMessageIfFailed: `Email doesn't have a '.' character`
+		errorMessageIfFailed: `Email doesn't have a period`
 	},
 	{
 		predicateMeansFailIfTrue: (email: string) => !doesEmailHaveExtension(email),
@@ -90,15 +100,15 @@ const EmailValidationForm = (props: EmailValidationFormProps) =>
 	{
 		for (let i: number = 0; i < validators.length; i++)
 		{
-			const validationRule: Validator = validators[i];
+			const validator: Validator = validators[i];
 
-			const validationFailed: boolean = validationRule
+			const validationFailed: boolean = validator
 				.predicateMeansFailIfTrue(email);
 
 			if (validationFailed)
 			{
 				setEmailIsValid(false);
-				setEmailValidationMessage(validationRule.errorMessageIfFailed);
+				setEmailValidationMessage(validator.errorMessageIfFailed);
 				return;
 			}
 		}

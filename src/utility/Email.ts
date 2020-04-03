@@ -23,7 +23,6 @@ export const domainExtensions: string[] =
  */
 export const emailHasNothingAfterAtCharacter = (email : string): boolean =>
 {
-	console.log(`AAAA ${email.split(atCharacter)[1]}`);
 	return email.split(atCharacter)[1] === "";
 }
 
@@ -57,7 +56,7 @@ export const doesEmailHaveExtension = (email : string): boolean =>
  */
 export const doesEmailHaveAtCharacter = (email : string) : boolean =>
 {
-	const emailSplitByAtCharacter : string[] = email.split(atCharacter);
+	const emailSplitByAtCharacter: string[] = email.split(atCharacter);
 	return emailSplitByAtCharacter.length >= 2;
 }
 
@@ -68,8 +67,28 @@ export const doesEmailHaveAtCharacter = (email : string) : boolean =>
  */
 export const doesEmailHaveInvalidCharacters = (email: string): boolean =>
 {
-	const validEmailCharactersRegex:  RegExp = 
+	const validEmailCharactersRegex: RegExp = 
 		new RegExp(/^[a-zA-Z0-9~`!@#$%^&*_\-+={}|"'.?/]*$/);
 
 	return !validEmailCharactersRegex.test(email);
+}
+
+/**
+ * Returns whether the first character of an email is valid.
+ * A valid first character must be alphanumeric.
+ * 
+ * @param email - the email that will be checked.
+ */
+export const isFirstCharacterOfEmailValid = (email: string): boolean => 
+{
+	const alphaNumericRegex: RegExp = new RegExp(/^[a-z0-9]+$/i);
+	const firstCharacterOfEmail: string = email[0];
+	return alphaNumericRegex.test(firstCharacterOfEmail);
+}
+
+export const emailDomainStartsWithAPeriod = (email: string): boolean =>
+{
+	const domain: string = email.split(atCharacter)[1];
+	debugger
+	return domain[0] === ".";
 }
