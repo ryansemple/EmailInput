@@ -26,10 +26,6 @@ import {
  */
 const validators: Validator[] =
 [
-	// {
-	// 	predicateMeansFailIfTrue: (email: string) => !allKeyboardKeysRegex.test(email),
-	// 	errorMessageIfFailed: "Email is not valid. only characters a-z, A-Z, 0-1 and !#$%&'*+-/=?^_`{|}~ are allowed."
-	// },
 	{ 
 		predicateMeansFailIfTrue: doesEmailHaveInvalidCharacters,
 		errorMessageIfFailed: "Email is not valid, it contains invalid characters."
@@ -43,7 +39,6 @@ const validators: Validator[] =
 		errorMessageIfFailed: `Email can only contain one '${atCharacter}' character`
 	},
 	{
-		//predicateMeansFailIfTrue: (email: string) => emailHasNothingAfterAtCharacter(email),
 		predicateMeansFailIfTrue: emailHasNothingAfterAtCharacter,
 		errorMessageIfFailed: `Email doesn't contain a domain name (name after the '${atCharacter}' character)`
 	},
