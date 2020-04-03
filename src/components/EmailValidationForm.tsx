@@ -2,7 +2,7 @@ import React from "react";
 import Label from "./form/Label";
 import Input from "./form/Input";
 import { allKeyboardKeysRegex } from "../utility/Regex";
-import { atCharacter } from "../utility/String";
+import { atCharacter, xCharacter } from "../utility/String";
 import Button from "./form/Button";
 import EmailSuggestions from "./suggestions/EmailSuggestions";
 import ValidationMessage from "./ValidationMessage";
@@ -10,18 +10,17 @@ import { ValidationType } from "../types/ValidationType";
 import clsx from "clsx";
 import { emailAppearsToBeValid } from "../utility/Language";
 import Validator from "../types/Validator";
+import { 
+	doesEmailHaveDomain,
+	isDomainInEmail
+} from "../utility/Email";
 
-const doesEmailHaveDomain = (email : string): boolean =>
-{
-	return email.split(atCharacter)[1].includes(".");
-}
-
-const isDomainInEmail = (email : string) : boolean =>
-{
-	const emailSplitOnAtCharacter : string[] = email.split(atCharacter);
-	return emailSplitOnAtCharacter.length >= 2;
-}
-
+/**
+ * The collection of validation rules that need to pass in order
+ * for the client side to allow the email to be submitted to the
+ * API for the Kickbox validation to occur. The order of this
+ * collection matters, the Validators will be ran from top to bottom.
+ */
 const validationRules: Validator[] = 
 [
 	{
@@ -48,7 +47,7 @@ const validationRules: Validator[] =
 
 interface EmailValidationFormProps {
 	setEmail: (email: string) => void,
-	setEmailValidationMessage: (emailMessage: string) => void,
+	setEmailValidationMessage: (emailValidationMessage: string) => void,
 	email: string,
 	setEmailIsValid: (emailIsValid: boolean) => void,
 	emailIsValid: boolean,
@@ -57,6 +56,11 @@ interface EmailValidationFormProps {
 	resetEmail: () => void
 }
 
+/**
+ * Renders the form elements for the email validation form and
+ * also the email suggestinos and validation message below the
+ * form elements.
+ */
 const EmailValidationForm = (props: EmailValidationFormProps) => 
 {
 	const { 
@@ -70,7 +74,13 @@ const EmailValidationForm = (props: EmailValidationFormProps) =>
 		className
 	} = props;
 	
-	const handleSettingEmailMessage = (email: string) => 
+	/**
+	 * sets the email validation message depending on the email
+	 * entered by the user.
+	 * 
+	 * @param email - the email entered by the user.
+	 */
+	const handleSettingEmailValidationMessage = (email: string): void => 
 	{
 		for (let i: number = 0; i < validationRules.length; i++)
 		{
@@ -92,13 +102,20 @@ const EmailValidationForm = (props: EmailValidationFormProps) =>
 		setEmailValidationMessage(emailAppearsToBeValid);
 	}
 	
-	const emailChanged = (email: string): void => 
+	/**
+	 * handles setting the email state property when the user
+	 * has typed in the email input and calls the function
+	 * that sets the email validation message.
+	 * 
+	 * @param email - the user entered email.
+	 */
+	const emailInputOnChange = (email: string): void => 
 	{		
 		setEmail(email);
 
 		if (email)
 		{
-			handleSettingEmailMessage(email);
+			handleSettingEmailValidationMessage(email);
 		} 
 		else 
 		{
@@ -107,7 +124,7 @@ const EmailValidationForm = (props: EmailValidationFormProps) =>
 		}	
 	}
 	
-	const inputName: string = "EmailValidator";
+	const inputName: string = "EmailInput";
 	const validationType: ValidationType = emailIsValid ?
 	ValidationType.Success :
 	ValidationType.Error;
@@ -122,13 +139,13 @@ const EmailValidationForm = (props: EmailValidationFormProps) =>
 			<div className="relative">
 				<Input
 					className="block full_width"
-					onChange={emailChanged}
+					onChange={emailInputOnChange}
 					value={email}
 					name={inputName}
 				/>
 				<Button 
-					onClick={() => { resetEmail(); }}
-					text="×"
+					onClick={() => { resetEmail() }}
+					text={xCharacter}
 					className="Button-Clear absolute"
 					notDisabledTooltipTitle="Clear text input"
 					style={{
@@ -145,7 +162,7 @@ const EmailValidationForm = (props: EmailValidationFormProps) =>
 				setEmail={(email: string) => setEmail(email)}
 				setEmailIsValid={(emailIsValid: boolean) => setEmailIsValid(emailIsValid)}
 				setEmailValidationMessage={
-					(emailMessage: string) => setEmailValidationMessage(emailMessage)
+					(emailValidationMessage: string) => setEmailValidationMessage(emailValidationMessage)
 				}
 			/>
 			<ValidationMessage

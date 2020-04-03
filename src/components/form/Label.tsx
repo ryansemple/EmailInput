@@ -13,7 +13,7 @@ interface LabelProps {
 const Label = (props: LabelProps) => (
 	<label
 		htmlFor={props.htmlFor}
-		className={clsx("Label", props.className && props.className)}>
+		className={clsx("Label", props.className)}>
 		{props.text}
 	</label>
 )

@@ -28,7 +28,7 @@ exports[`Renders App component correctly. 1`] = `
           >
             <label
               class="Label block"
-              for="EmailValidator"
+              for="EmailInput"
             >
               Enter Email:
             </label>
@@ -37,7 +37,7 @@ exports[`Renders App component correctly. 1`] = `
             >
               <input
                 class="Input block full_width"
-                name="EmailValidator"
+                name="EmailInput"
                 value=""
               />
               <button

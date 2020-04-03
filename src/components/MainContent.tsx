@@ -95,7 +95,9 @@ const MainContent = () =>
 					<EmailValidationForm
 						setEmail={(email: string) => setEmail(email)}
 						email={email}
-						setEmailValidationMessage={(emailMessage: string) => setEmailValidationMessage(emailMessage)}
+						setEmailValidationMessage={
+							(emailValidationMessage: string) => setEmailValidationMessage(emailValidationMessage)
+						}
 						setEmailIsValid={(emailIsValid: boolean) => setEmailIsValid(emailIsValid)}
 						emailIsValid={emailIsValid}
 						emailValidationMessage={emailValidationMessage}

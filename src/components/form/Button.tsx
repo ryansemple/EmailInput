@@ -17,12 +17,7 @@ interface ButtonProps {
 const Button = (props: ButtonProps) => (
 	<button
 		type="button"
-		className={
-			clsx(
-				props.className && props.className,
-				"Button"
-			)
-		}
+		className={clsx(props.className, "Button")}
 		title={
 			props.disabled ? 
 			props.disabledTooltipTitle : 
