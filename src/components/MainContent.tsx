@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import EmailValidationForm from "./EmailValidationForm";
 import Label from "./form/Label";
 import axios, { AxiosError } from "axios";
-import { KickBoxResponse } from "../types/Kickbox";
+import { KickBoxResponse, EmailReasonType } from "../types/Kickbox";
 import { isNetworkError } from "../utility/Network";
 import Notification from "../types/Notification";
 import ValidationType from "../types/ValidationType";
@@ -37,13 +37,16 @@ const MainContent = () =>
 		)
 		.then((response: KickBoxResponse) =>
 		{
-			const successfullySent: boolean = response.data.success;	
+			const successfullySent: boolean = response.data.success;
+			const emailCouldBeDeliveredTo: boolean = successfullySent &&
+			response.data.reason === EmailReasonType.accepted_email;
+
 			let notification: Notification;
 
-			if(!successfullySent)
+			if(!emailCouldBeDeliveredTo)
 			{
 				notification = new Notification(
-					`Email could not be delivered to: ${response.data.reason}.`,
+					`Email could not be delivered to, it is invalid.`,
 					ValidationType.Error
 				);
 			} 

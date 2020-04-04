@@ -42,6 +42,9 @@ valid in the future.
 All files are less than 200 lines long with the exception of "site.scss"
 which is slightly longer.
 
+•To trigger an invalid email from Kickbox in sandbox mode,
+enter in the email "rejected-email@example.com" and click "Verify".
+
 ## Scripts
 
 ### `npm i`
