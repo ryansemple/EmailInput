@@ -6,6 +6,11 @@ to note about it:
 •This app was bootstrapped with Create React App 
 ([Link](https://github.com/facebook/create-react-app)).
 
+•I'm using a production Kickbox API key, so each time you send a submission
+by clicking the "Verify" button it will use a credit on my account.
+If you want to do extensive testing you can switch to using to the
+"kickboxAPIKeySandbox" variable for the API key in the server.js file.
+
 •For styles, I'm using sass. The majority of the styles 
 are defined in one file called "site.scss" with these exceptions: 
 "reset.scss" is a regular CSS reset, "sass.scss" is for sass variables 
