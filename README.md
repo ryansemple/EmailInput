@@ -1,7 +1,6 @@
 ## Introduction
 
-Thank you for checking out my app submission. There's a few things 
-to note about it:
+A few notes about this project:
 
 •This app was bootstrapped with Create React App 
 ([Link](https://github.com/facebook/create-react-app)).
